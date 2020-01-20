@@ -5541,6 +5541,7 @@ function setAttachOnLoadSB(attachFileId) {
 
                smallImageBE.style.display = 'block';
                smallImageBE.src =  "data:image/png;base64," + attachmentData;
+               updateAttachment = "data:image/jpeg;base64," + attachmentData;
                resetImageData();
 
                requestRunning = false;
