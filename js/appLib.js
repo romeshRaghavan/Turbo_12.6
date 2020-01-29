@@ -187,7 +187,7 @@ function arrayRemove(arr, value) {
 
         // ****************     Approval Table      ***************** //
 
-         t.executeSql("CREATE TABLE IF NOT EXISTS BEHeader ( busExpHeaderId INTEGER ,busExpNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT)");
+         t.executeSql("CREATE TABLE IF NOT EXISTS BEHeader ( busExpHeaderId INTEGER ,busExpNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT,query TEXT,queryId INTEGER)");
          t.executeSql("CREATE TABLE IF NOT EXISTS BEDetails (busExpDetailId INTEGER ,busExpHeaId INTEGER , expNameId INTEGER REFERENCES expNameMst(expNameId), expName  TEXT,expDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT, perUnit INTEGER,fromLocation TEXT,toLocation TEXT,convertedAmt DOUBLE ,expAttachment BLOB)");
 
      });
@@ -4752,7 +4752,7 @@ function arrayRemove(arr, value) {
 
      //  My Expense Pages
 
-     if(statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D'){
+     if(statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q'){
          var headerBackBtn = defaultPagePath + 'backbtnPage.html';
          var pageRef = defaultPagePath + 'viewApproverPastVouchers.html';
          appPageHistory.push(pageRef);
@@ -4784,6 +4784,7 @@ function arrayRemove(arr, value) {
                  });
 
                  if (data.Status == 'Success') {
+                     
                      var claimExpArray = data.expenseDetails;
 
                      mydb.transaction(function(t) {
@@ -4807,14 +4808,16 @@ function arrayRemove(arr, value) {
                                  var currentOwnerName = headArray.currentOwnerName;
                                  var rejectionComments = headArray.rejectionComments;
                                  var createdById = headArray.createdById;
-                                 var creatorName =  headArray.creatorName
+                                 var creatorName =  headArray.creatorName;
+                                 var query =  headArray.query;
+                                 var queryId =  headArray.queryId;
 
-                                 t.executeSql("INSERT INTO BEHeader (busExpHeaderId ,busExpNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [busExpHeaderId, busExpNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments]);
+                                 t.executeSql("INSERT INTO BEHeader (busExpHeaderId ,busExpNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments,query,queryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [busExpHeaderId, busExpNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , query ,queryId]);
 
                              }
                          }
                          requestRunning = false;
-                         if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
+                         if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
                              displayPastVoucherPage(data.Status);
                          } else {
                              displayApprovalPage(data.Status);
@@ -4824,14 +4827,14 @@ function arrayRemove(arr, value) {
 
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
                          displayPastVoucherPage(data.Status);
                      } else {
                          displayApprovalPage(data.Status);
                      }
                  } else {
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' ||statusOfVoucher == 'Q') {
                          displayPastVoucherPage(data.Status);
                      } else {
                          displayApprovalPage(data.Status);
@@ -4911,6 +4914,8 @@ function arrayRemove(arr, value) {
                              pendingAt = 'Payment Desk'
                          }  else if(row.vocherStatus == 'D'){
                              statusForEdit = 'Draft';
+                         }  else if(row.vocherStatus == 'Q'){
+                             statusForEdit = 'In Queries';
                          }
 
                          if(enableDivBasedOnStatus == "A"){
@@ -4996,6 +5001,9 @@ function arrayRemove(arr, value) {
                         }
                          if(arrayOfCount[i].includes("R") && document.getElementById('sendBackCount') != null){
                             document.getElementById("sendBackCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+                          if(arrayOfCount[i].includes("Q") && document.getElementById('queryCount') != null){
+                            document.getElementById("queryCount").innerHTML = arrayOfCount[i].match(/\d+/);
                         }
 
                      }
@@ -5147,12 +5155,12 @@ function arrayRemove(arr, value) {
      mydb.transaction(function(t) {
 
          t.executeSql('SELECT * FROM BEHeader where busExpHeaderId = ' + busExpHeaderId, [],
-             function(transaction, result) {
+             function(transaction, result) {``
                  if (result != null && result.rows != null) {
                      j('#voucherDetailsTab').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
-
+                        
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
                          } else if (row.vocherStatus == 'P') {
@@ -5164,6 +5172,8 @@ function arrayRemove(arr, value) {
                              pendingAt = 'Payment Desk'
                          }  else if (row.vocherStatus == 'D') {
                              statusForEdit = 'Draft';
+                         }  else if (row.vocherStatus == 'Q') {
+                             statusForEdit = 'In Queries';
                          }
 
                         if(enableDivBasedOnStatus == "A"){
@@ -5266,6 +5276,24 @@ function arrayRemove(arr, value) {
                                  }
                             });
                         }
+                        var empId = window.localStorage.getItem("EmployeeId");
+                            
+                        if(statusForEdit == 'In Queries'  && (empId==row.createdById)){
+                            
+                            var ids = row.busExpHeaderId+'&'+row.queryId;
+                       
+                            buttonValue =   
+                                            "<br>"
+                                            +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
+                                            +"<br>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div>"
+                                            +"<div><br>"
+                                            +"<button type='button' id = 'QueryBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalQuery'>Reply</button>"
+                                            ;
+
+                             j('#buttonsAttached').append(buttonValue);
+                            
+                            }
 
                      }
                  }
@@ -5286,7 +5314,8 @@ function rejectVoucher(){
 
         var jsonToBeSendForApproval = new Object();
         jsonToBeSendForApproval["processId"] = '1';
-        jsonToBeSendForApproval["headerList"] = busExpHeaderId;
+        jsonToBeSendForApproval["headerList"] = 
+            
         jsonToBeSendForApproval["employeeId"] = window.localStorage.getItem("EmployeeId");
         jsonToBeSendForApproval["buttonStatus"] = "R";
         jsonToBeSendForApproval["rejectionComment"] = comment;
@@ -5541,7 +5570,6 @@ function setAttachOnLoadSB(attachFileId) {
 
                smallImageBE.style.display = 'block';
                smallImageBE.src =  "data:image/png;base64," + attachmentData;
-               updateAttachment = "data:image/jpeg;base64," + attachmentData;
                resetImageData();
 
                requestRunning = false;
@@ -5937,3 +5965,57 @@ function getPrimaryExpenseIdSB(expMstId) {
 
  }
   //***************************** Agile Merging -- End *******************************************************//
+//********************************Query BE COde Added****************************************************//
+
+function queryAnwser(){
+    var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+    var pageRefSuccess = defaultPagePath + 'success.html';
+    var querBEId = j("#QueryBtn").data('id');
+    var beQueryId = querBEId.split("&");
+    var busExpHeaderId = beQueryId[0];
+    var queryId = beQueryId[1];
+    var comment = j.trim(j("#queryRply").val());
+    var data = fileTempGalleryBEQ;
+
+    if(comment != ""){
+
+        var jsonToBeSendForQuery = new Object();
+        jsonToBeSendForQuery["processId"] = '1';
+        jsonToBeSendForQuery["busExpHeaderId"] = busExpHeaderId;
+        jsonToBeSendForQuery["queryId"] = queryId;
+        jsonToBeSendForQuery["employeeId"] = window.localStorage.getItem("EmployeeId");
+        jsonToBeSendForQuery["queryAnswer"] = comment;
+        jsonToBeSendForQuery["imageData"] = data;
+        j('#loading_Cat').show();
+
+        j.ajax({
+            url: window.localStorage.getItem("urlPath") + "SaveQueryFromMobile",
+            type: 'POST',
+            dataType: 'json',
+            crossDomain: true,
+            data: JSON.stringify(jsonToBeSendForQuery),
+            success: function(data) {
+              
+                if (data.Status == "Success") { 
+                   
+                     successMessage = "Query Answered Successfully";
+                     
+                     requestRunning = false;
+                     j('#loading_Cat').hide();
+                     j('#mainHeader').load(headerBackBtn);
+                     j('#mainContainer').load(pageRefSuccess);
+                } else {
+                     j('#loading_Cat').hide();
+                    successMessage = "Error: Oops something is wrong, Please Contact System Administer";
+                    requestRunning = false;
+                }
+            },
+            error: function(data) {
+                 j('#loading_Cat').hide();
+                requestRunning = false;
+            }
+        });
+    }else{
+        alert("Please enter Query Answer");
+    }
+}

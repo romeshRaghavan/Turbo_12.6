@@ -5,7 +5,7 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'http://1.255.255.99:8081/NexstepWebService/mobileLinkResolver.service';
 var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
@@ -26,6 +26,7 @@ var fileTempCameraBE = "";
 var fileTempCameraTS = "";
 var fileTempGalleryBE = "";
 var fileTempGalleryTS = "";
+var fileTempGalleryBEQ = "";
 var mapToCalcERAmt = new Map();
 var requestRunning = false;
 var flagForUnitEnable = false;
@@ -2113,7 +2114,6 @@ function hideImageBlock(){
     }
 }
 
-
 function resetUpdateImage(){
     updateAttachment = "";
 }
@@ -2162,6 +2162,9 @@ function onPhotoURISuccess(imageURI) {
 
         smallImageTS.src = "data:image/jpeg;base64," + imageURI;
         fileTempCameraTS = "";
+    } else if(voucherType == 'BEQ'){
+        
+        fileTempGalleryBEQ = "data:image/jpeg;base64," + imageURI;
     }
 
 }
