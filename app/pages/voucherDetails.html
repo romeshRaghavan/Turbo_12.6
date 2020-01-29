@@ -287,6 +287,28 @@
                                 </div>
                         </div>
                 </div>
+    <div class="modal fade" id="myModalQuery">
+                        <div class="modal-dialogsend">
+                                <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                          <h4 class="modal-title">Query Reply</h4>
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                          <textarea style="width:100%;" rows = "6" maxlength = "250" id="queryRply"></textarea>
+                                        </div>
+                                <img src="images/camera.png" onclick="capturePhoto(0,'BE');" width="15%" height="15%">
+                                <img src="images/gallery.png" onclick="getPhoto(pictureSource.PHOTOLIBRARY,0,'BE');" width="15%" height="15%">
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                          <button type="button" style="justify-content: center;" class="btn btn-primary" data-dismiss="modal" onclick="queryAnwser();">Send</button>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
   <div style="display:none" id="loading_Cat">
     <div class= "loader " style="color:teal"></div>
 </div>
