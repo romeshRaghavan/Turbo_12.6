@@ -206,14 +206,32 @@
                     <h5 lang="en">Add Expense Claims</h5>
                 </label>
             </div>
-            <div id="CategoryTrRoleID" class="allcats">
+                <div class="allcats">
+                  <div onclick="TRTSAllViews()" class="kebab" style="float:right;">
+                    <figure></figure>
+                    <figure class="middle"></figure>
+                    <figure></figure>
+                  </div>
+                </ul>
+                <span class="claimicon"><i class="fa fa-plane" aria-hidden="true"></i></span>
+                <label lang="en" onclick="createTravelMain();" style="width:90%;">
+                    Travel Management
+                    <h5 lang="en">Add Travel Requests, Travel Settelments </h5>
+                </label>
+            </div>
+            <!-- <div id="CategoryTrRoleID" class="allcats">
+                <div onclick="pastVoucherViews()" class="kebab" style="float:right;">
+                    <figure></figure>
+                    <figure class="middle"></figure>
+                    <figure></figure>
+                  </div>
                 <span class="claimicon"><i class="fa fa-plane" aria-hidden="true"></i>
                 </span>
                 <label  lang="en" onclick="createTravelMain();" style="" for="ac-2">
                     Travel Management
                     <h5 lang="en">Add Travel Requests, Travel Settelments </h5>
                 </label>
-            </div>
+            </div> -->
             <div class="allcats" style="display: none;">
                 <span class="claimicongift"><i class="fa fa-briefcase" aria-hidden="true"></i> </span>
                 <label lang="en" onclick="createWallet();" style="" for="ac-2">
@@ -236,7 +254,7 @@
 
 <script type="text/javascript">
     fetchCountForMyApproval('A');
-    if(window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") =< 12.2){
+    if(window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.2){
         document.getElementById('approver').style.display = 'none';
         $('.kebab').hide();
     }

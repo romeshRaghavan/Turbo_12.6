@@ -1,0 +1,174 @@
+ <script type="text/javascript">
+        var lang = new Lang();
+        lang.dynamic('th', 'js/langpack/th.json');
+        lang.dynamic('ru','js/langpack/russian.json');
+        lang.dynamic('ae','js/langpack/arabic.json');
+        lang.dynamic('tamil','js/langpack/tamil.json');
+        lang.dynamic('hindi','js/langpack/hindi.json');
+        lang.dynamic('ka','js/langpack/kannada.json');
+        lang.dynamic('sd','js/langpack/swidish.json');
+        lang.dynamic('vt','js/langpack/vietnam.json');
+        lang.init({
+            defaultLang: 'en'
+        });
+</script>
+<style>
+.ac-containerPast label {
+    padding: 9px 6px 15px 39px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    color: #000;
+    line-height: none;
+    font-size: 18px;
+    height: 50px;
+    font-weight: 400;
+}
+
+.ac-containerPast label {
+    padding: 0px 6px 15px 5px;
+}
+
+.modal-body span {
+    display: contents;
+}
+
+.ac-containerPast label {
+    padding: 0px 6px 15px 5px;
+}
+
+.badge {
+    padding: 10px 12px;
+    font-size: 14px;
+    top: 8px;
+    border-radius: 50%;
+    background-color: #0f97b2;
+    color: white;
+    float: right;
+}
+
+.notify {
+    width: 100%;
+}
+
+
+</style>
+
+<body style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
+<div id="tabs" class="resp-tabs-list">
+  <ul>
+    <li><a href="#tabs-1" >Travel Request</a></li>
+    <li><a href="#tabs-2">Travel Settelment</a></li>
+  </ul>
+  <div id="tabs-1">
+ <section class="ac-containerPast">
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/pending.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewTravelVoucherHeaders('D');" style="padding-top: 15px;" for="ac-2">
+                   Draft Expenses
+                    <div class="badge" style="margin-top: -8px;" id="draftCount" ></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/pending.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewTravelVoucherHeaders('P');" style="padding-top: 15px;" for="ac-2">
+                   Pending Expenses
+                    <div class="badge" style="margin-top: -8px;" id="pendingCount" ></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/approved.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewTravelVoucherHeaders('U');" style="padding-top: 15px;" for="ac-2">
+                   Approved Unpaid Expenses
+                    <div class="badge"  style="margin-top: -8px;" id="approvedUnpaidCount"></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/appPaid.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewTravelVoucherHeaders('F');" style="padding-top: 15px;" for="ac-2">
+                   Approved Paid Expenses
+                    <div class="badge"  style="margin-top: -8px;" id="approvedPaidCount"></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/sendBack.png" style="width: 25px;height: 25px;margin-left: 2px;margin-top: 15px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewTravelVoucherHeaders('R');" style="padding-top: 15px;" for="ac-2">
+                   Sent Back Expenses
+                   <div class="badge"  style="margin-top: -8px;" id="sendBackCount"></div>
+                </label>
+            </div>
+           <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/pending.png" style="width: 25px;height: 25px;margin-left: 2px;margin-top: 15px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewTravelVoucherHeaders('Q');" style="padding-top: 15px;" for="ac-2">
+                   In Queries
+                   <div class="badge"  style="margin-top: -8px;" id="queryCount"></div>
+                </label>
+            </div>
+       </section>
+  </div>
+   <div id="tabs-2">
+ <section class="ac-containerPast">
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/pending.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewSettelmentVoucherHeaders('D');" style="padding-top: 15px;" for="ac-2">
+                   Draft Expenses
+                    <div class="badge" style="margin-top: -8px;" id="draftCount" ></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/pending.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewSettelmentVoucherHeaders('P');" style="padding-top: 15px;" for="ac-2">
+                   Pending Expenses
+                    <div class="badge" style="margin-top: -8px;" id="pendingCount" ></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/approved.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewSettelmentVoucherHeaders('U');" style="padding-top: 15px;" for="ac-2">
+                   Approved Unpaid Expenses
+                    <div class="badge"  style="margin-top: -8px;" id="approvedUnpaidCount"></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/appPaid.png" style="width: 25px;height: 25px;margin-top: 13px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewSettelmentVoucherHeaders('F');" style="padding-top: 15px;" for="ac-2">
+                   Approved Paid Expenses
+                    <div class="badge"  style="margin-top: -8px;" id="approvedPaidCount"></div>
+                </label>
+            </div>
+            <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/sendBack.png" style="width: 25px;height: 25px;margin-left: 2px;margin-top: 15px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewSettelmentVoucherHeaders('R');" style="padding-top: 15px;" for="ac-2">
+                   Sent Back Expenses
+                   <div class="badge"  style="margin-top: -8px;" id="sendBackCount"></div>
+                </label>
+            </div>
+           <div id="" class="allcats" style="display: flex;padding: 5px;">
+                <span class="claimicon"><img src="images/pending.png" style="width: 25px;height: 25px;margin-left: 2px;margin-top: 15px;">
+                </span>
+                <label class="notify" lang="en" onclick="viewSettelmentVoucherHeaders('Q');" style="padding-top: 15px;" for="ac-2">
+                   In Queries
+                   <div class="badge"  style="margin-top: -8px;" id="queryCount"></div>
+                </label>
+            </div>
+       </section>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+      $( function() {
+    $( "#tabs" ).tabs();
+  } );
+
+</script>
