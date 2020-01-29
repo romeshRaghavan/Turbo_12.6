@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'http://1.255.255.99:8081/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -142,8 +142,8 @@ function commanLogin() {
     var domainName = userNameValue.split('@')[1];
     var jsonToDomainNameSend = new Object();
     jsonToDomainNameSend["userName"] = domainName;
-    jsonToDomainNameSend["mobilePlatform"] = device.platform;
-    //jsonToDomainNameSend["mobilePlatform"] = "Android";
+    //jsonToDomainNameSend["mobilePlatform"] = device.platform;
+    jsonToDomainNameSend["mobilePlatform"] = "Android";
     jsonToDomainNameSend["appType"] = "NEXGEN_EXPENZING_TNE_APP";
     //var res=JSON.stringify(jsonToDomainNameSend);
     var requestPath = WebServicePath;
@@ -2258,10 +2258,12 @@ function oprationOnWallet() {
 }
 
 function hideTRIcons() {
+      if (document.getElementById('businessExpenseTab') != null) {
     if (window.localStorage.getItem("TrRole") == "true") {
         document.getElementById('CategoryTrRoleID').style.display = "block";
     } else {
         document.getElementById('CategoryTrRoleID').style.display = "none";
+    }
     }
 }
 
@@ -3648,7 +3650,7 @@ function editBusiExpMain(expPrimaryId) {
             jsonFindBE["wayPoint"] = j(this).find('td.wayPoint').text();
             jsonFindBE["amount"] = j(this).find('td.expAmt1').text();
             jsonFindBE["currencyId"] = j(this).find('td.currencyId').text();
-            jsonFindBE["perUnitException"] = j(this).find('td.isEntitlementExceeded').text();
+            jsonFindBE["isEntitlementExceeded"] = j(this).find('td.isEntitlementExceeded').text();
 
             var dataURL = j(this).find('td.busAttachment').text();
 
