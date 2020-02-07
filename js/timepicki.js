@@ -247,7 +247,7 @@
 					ti = d.getHours();
 					mi = d.getMinutes();
 					mer = "AM";
-					if (12 < ti  && settings.show_meridian) {
+					if (12 <= ti  && settings.show_meridian) {
 						ti -= 12;
 						mer = "PM";
 					}
