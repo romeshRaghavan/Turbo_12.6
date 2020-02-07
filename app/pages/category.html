@@ -27,16 +27,8 @@
 
 <body style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
    
-  
-    <script>
-        var kebab = document.querySelector('.kebab'),
-    middle = document.querySelector('.middle'),
-    cross = document.querySelector('.cross'),
-    viewPastVoucherDropdown = document.querySelector('.viewPastVoucherDropdown');
 
-    </script>
-
-    <style>
+ <style>
 
 .kebab {
     cursor: pointer;
@@ -53,76 +45,6 @@
     border-radius: 5px;
     background: #00bcd4;
     margin: 3px 0;
-}
-
-.middle {
-    transition: all 0.25s cubic-bezier(0.72, 1.2, 0.71, 0.72);
-    transform: scale(1);
-    position: relative;
-    box-shadow: 0 0.1px 0.1px 0 rgba(0, 0, 0, 0.16), 0 0.1px 0.3px 0 rgba(0, 0, 0, 0.12);
-    -webkit-filter: blur(0.1px);
-    filter: blur(0.1px);
-}
-.cross {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    margin-top: -1px;
-    font-family: "Nunito", sans-serif;
-    color: white;
-    transition: all 0.2s cubic-bezier(0.72, 1.2, 0.71, 0.72);
-    font-size: 22px;
-    -moz-user-select: none;
-}
-
-.viewPastVoucherDropdown {
-    position: absolute;
-    right: 0;
-    top: 3em;
-    transition: all 0.25s ease-out;
-    transform: scale(0);
-    transform-origin: 100% 0;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
-}
-
-.viewPastVoucherDropdown li {
-
-    display: block;
-    width: 100%;
-
-}
-
-.viewPastVoucherDropdown.active {
-    transform: scale(1);
-    transition: all 0.25s cubic-bezier(0.5, 1.8, 0.9, 0.8);
-    background: powderblue;
-    z-index: 999;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
-}
-
-.cross.active {
-    transform: translate(-50%, -50%) scale(1);
-    transition: all 0.15s cubic-bezier(0.32, 2.04, 0.85, 0.54);
-}
-
-.middle.active {
-    transform: scale(4.5);
-    transition: all 0.25s cubic-bezier(0.32, 2.04, 0.85, 0.54);
-    box-shadow: 0 0.1px 0.1px 0 rgba(0, 0, 0, 0.16), 0 0.1px 0.3px 0 rgba(0, 0, 0, 0.12);
-}
-
-.viewPastVoucherDropdown li a {
-    width: 100%;
-    padding: 1em 18px;
-    display: inline-block;
-    white-space: pre;
-    box-sizing: border-box;
-}
-
-.viewPastVoucherDropdown a, li {
-    text-decoration: none;
-    font-weight: 700;
 }
 
 .notification {
@@ -172,20 +94,6 @@
 }
 
 </style>
-<!--   <div id="jssor_1" style="position:inherit;margin:0 auto;top:5px;left:0px;width:1200px;height:577px;overflow:hidden;visibility:hidden;">
- -->        <!-- Loading Screen -->
-
-<!-- <div class="col-md-6"  style="padding-right: 5px;padding-left: 5px;">
-    <div class="column">
-        <div class="card" id="grad1" lang="en" onclick="viewVoucherHeaders('A');">
-                <h3 style="font-size: 24px;text-align: left;color: aliceblue;"> My Approval </h3>
-                
-                <h3 id="count" style="font-size: 30px;text-align: left;color: aliceblue;"></h3>
-                <span style="text-align: right;display: inline-block;margin-left: 100px;"><img src = "images/submit.png" alt="Employee Profile Picture" style="border-radius: 50%;margin-top: -80px;" height="40%" width="40%"></span>
-         </div>
-    </div>
-</div> -->
-
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
             <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
@@ -207,7 +115,7 @@
                 </label>
             </div>
                 <div class="allcats">
-                  <div onclick="TRTSAllViews()" class="kebab" style="float:right;">
+                  <div onclick="TRTSAllViews()" id = "TRkebab" class="kebab" style="float:right;">
                     <figure></figure>
                     <figure class="middle"></figure>
                     <figure></figure>
@@ -219,19 +127,6 @@
                     <h5 lang="en">Add Travel Requests, Travel Settelments </h5>
                 </label>
             </div>
-            <!-- <div id="CategoryTrRoleID" class="allcats">
-                <div onclick="pastVoucherViews()" class="kebab" style="float:right;">
-                    <figure></figure>
-                    <figure class="middle"></figure>
-                    <figure></figure>
-                  </div>
-                <span class="claimicon"><i class="fa fa-plane" aria-hidden="true"></i>
-                </span>
-                <label  lang="en" onclick="createTravelMain();" style="" for="ac-2">
-                    Travel Management
-                    <h5 lang="en">Add Travel Requests, Travel Settelments </h5>
-                </label>
-            </div> -->
             <div class="allcats" style="display: none;">
                 <span class="claimicongift"><i class="fa fa-briefcase" aria-hidden="true"></i> </span>
                 <label lang="en" onclick="createWallet();" style="" for="ac-2">
@@ -247,7 +142,15 @@
                     <h5 lang="en">Approve / Send Back Claims</h5>
                 </label>
             </div>
-            
+             <div id="query" class="allcats" >
+                <span class="claimicon"><i class="fa fas fa-comments" style="font-size: 30px;color: darkcyan;" aria-hidden="true"></i>
+                </span>
+                <label lang="en" onclick="viewVoucherHeaders('Q');" style="" for="ac-2">
+                    Queries
+                    <div class="badge" id="queryCount" style="margin-top: 5px;"></div>
+                    <h5 lang="en"></h5>
+                </label>
+            </div>
          </section>
     </div>
 </body>
@@ -257,5 +160,9 @@
     if(window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.2){
         document.getElementById('approver').style.display = 'none';
         $('.kebab').hide();
+    }
+     if(window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.3){
+        $('#TRkebab').hide();
+        document.getElementById('query').style.display = 'none';
     }
 </script>
