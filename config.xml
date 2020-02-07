@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-    <widget id="com.phonegap.tne.expenzingturbotnev12" version="12.3.3" android-versionCode="106" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <widget id="com.phonegap.tne.expenzingturbotnev12" version="12.2.3" android-versionCode="106" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
         <!--widget id="com.expenzing.expenzing" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0"-->
-        <name>Expenzing Dev App</name>
+        <name>Expenzing | Travel & Expense Mgmt</name>
         <description>
             Expenzing Application
         </description>
         <author email="tech@expenzing.com" href="http://www.expenzing.com">
             Team Expenzing
         </author>
-       <content src="index.html" />
+        <content src="index.html" />
         <preference name="permissions" value="none" />
         <preference name="orientation" value="portrait" />
         <preference name="target-device" value="universal" />
@@ -24,8 +24,8 @@
         <preference name="disable-cursor" value="false" />
         <preference name="android-minSdkVersion" value="14" />
         <preference name="android-maxSdkVersion" value="29" />
-        <preference name="android-targetSdkVersion" value="28" />
-        <preference name='phonegap-version' value='cli-7.1.0' />
+        <preference name="android-targetSdkVersion" value="26" />
+        <preference name='phonegap-version' value='cli-7.0.1' />
         <preference name="android-installLocation" value="auto" />
 
         <feature name="http://api.phonegap.com/1.0/device" />
@@ -45,7 +45,7 @@
         <variable name="NSLocationAlwaysUsageDescription" value="App requires access to the photo library" />
         <variable name=" NSLocationWhenInUseUsageDescription" value="App requires access to the photo library" />
         
-<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
     <string>This enables use of camera to attach receipt for expense submission</string>
     </edit-config>
     
@@ -60,6 +60,7 @@
     <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
     <string>This enables access to gallery to fetches receipt stored for expense</string>
     </edit-config>
+
 
         <gap:plugin name="cordova-plugin-media-capture" source="npm" />
         <gap:plugin name="cordova-plugin-console" source="npm" />
@@ -80,16 +81,14 @@
        
 
         <icon src="icon.png" />
-	    
-      <icon src="res/icon/ios/icon-1024.png" width="1024" height="1024" />
-
+      
         <icon gap:platform="ios" height="57" src="res/icon/ios/icon-57.png" width="57" />
         <icon gap:platform="ios" height="120" src="res/icon/ios/icon-120.png" width="120" />
         <icon gap:platform="ios" height="76" src="res/icon/ios/icon-76.png" width="76" />
         <icon gap:platform="ios" height="152" src="res/icon/ios/icon-152.png" width="152" />
         <icon gap:platform="ios" height="114" src="res/icon/ios/icon-57-2x.png" width="114" />
         <icon gap:platform="ios" height="144" src="res/icon/ios/icon-72-2x.png" width="144" />
-        <icon gap:platform="ios" height="1024" src="res/icon/ios/icon-1024.png" width="1024" />
+        <icon gap:platform="ios" height="1024" src="res/icon/ios/icon1024.png" width="1024" />
         <icon gap:platform="ios" height="40" src="res/icon/ios/icon-40.png" width="40" />
         <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="www/res/screen/android/screen-ldpi-portrait.png" />
         <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="www/res/screen/android/screen-mdpi-portrait.png" />
