@@ -1,0 +1,33 @@
+<script>
+    operationsOnSMS();
+    hideMultilanguage();
+</script>
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<div class="topfixednavigate">
+    <img src="images/left-arrow.png" width="15px" height="25px" onclick="goBack();" />
+    <img class="expenzingImg" src="images/Expenzing_Square.png" onclick="goBack();" />
+    <img class="selectionDeleteBEBtns" width="35px" height="25px" src="images/delete_new.png" id="discard">
+    <img class="selectionSynchBEBtns" width="35px" height="25px" src="images/createnew.png" id="saveSMS">
+    <H4 id="headerId" class="headerposition"></H4>
+
+    <span style="font-size:30px;cursor:pointer;position: absolute;left: auto;top: inherit;right: inherit;padding-right: 16px;padding-top: 10px;" align="right" onclick="openNav();"><img src="css/cssimages/nav-icon.png" width="30px" height="25px"/></span>
+    <div lang="en" style="display:none" id="syncSuccessMsg" class="displaysynctext">
+        Expenses synchronized successfully.
+    </div>
+    <div lang="en" style="display:none" id="syncFailureMsg" class="displaysynctext">
+        Expenses not synchronized successfully.
+    </div>
+</div>

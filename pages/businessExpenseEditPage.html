@@ -1,0 +1,200 @@
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<div class="deals">
+    <div class="sap_tabs">
+        <div id="horizontalTab" style="display: block;">
+            <ul id="tab" class="resp-tabs-list" style="display: none;">
+                <li lang="en" class="active" class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab"> Add Expense</li>
+                <li lang="en" id="CategoryEAId" class="resp-tab-item " aria-controls="tab_item-1" role="tab"> Request Advance</li>
+                <li lang="en" class="resp-tab-item" aria-controls="tab_item-2" role="tab">Submit Expense</li>
+            </ul>
+            <div class="resp-tabs-container">
+
+                <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                    <div class="modal-body clearfix">
+                        <div class="row">
+                            <div class="col-lg-12 clearfix addanexpense">
+                                <h1 lang="en">Edit Business Expense</h1>
+                                <div class="expenseform clearfix" data-role="page" id="page1">
+                                    <ul style="">
+                                        <li>
+                                            <div role="main" class="ui-content">
+                                                <input lang="en" id="expDate" type="text" class="span2 dp1" placeholder="Date" readonly="readonly">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <input lang="en" placeholder="Expense Type" id="accountHead" type="text" style="width: 98%">
+                                        </li>
+                                        <li>
+                                            <input lang="en" placeholder="Expense Name" id="expenseName" type="text" style="width: 98%">
+                                        </li>
+
+                                        <div>
+                                            <li>
+                                                <input lang="en" id="ratePerUnit" type="hidden" style="width: 98%">
+                                            </li>
+                                        </div>
+
+                                        <li>
+
+                                            <input lang="en" id="expFromLoc" type="text" style="width: 49%" placeholder="From Location" onkeyup="attachQueryValues(1);resetUnit();" onchange="resetUnit();" onblur="setNarration();">
+                                            <div id="json-datalist" class="dropdown-content" style="display:none;">
+
+                                            </div>
+
+                                            <input lang="en" id="expToLoc" list="json-datalist1" type="text" style="width: 49%" placeholder="To Location" onchange="resetUnit();" onkeyup="attachQueryValues(2);resetUnit();" onblur="setNarration();">
+                                            <div id="json-datalist1" class="dropdown-content" style="display:none;">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <input lang="en" id="expNarration" type="text" placeholder="Enter Expense Narration">
+                                        </li>
+
+                                        <li>
+                                            <p><font lang="en" face="verdana" size="1" color="green">Unit is no. of persons/Kms/meals etc.</font></p>
+                                            <input lang="en" id="expUnit" type="tel" style="width: 22%" placeholder="Units" onkeyup="calculatePerUnit();">
+                                            <input id="wayPointunitValue" value="" readonly="readonly" type="hidden">
+                                            <input lang="en" id="expAmt" type="text" style="width: 38%" placeholder="Amount" onkeyup="validate(); checkPerUnitExceptionStatusForBEAtLineLevel();checkAmount();">
+                                            <input id="currency" type="hidden" style="width: 33%">
+                                            <p id="errorMsgArea"><span id="errorSpan"></span></p>
+                                        </li>
+                                        <div>
+
+                                            <input id="busExpDetailId" style="display:none;" type="hidden" style="width: 33%">
+
+                                            <li style="text-align:left;">
+                                                <ul>
+                                                    <img src="images/camera.png" onclick="capturePhoto(0,'BE');" width="15%" height="15%">
+                                                    <img src="images/gallery.png" onclick="getPhoto(pictureSource.PHOTOLIBRARY,0,'BE');" width="15%" height="15%">
+                                                    <a id="mapLink" href="#openModal" style="" onclick="viewMap();">
+                                                        <img src="images/google_map_icon.jpg" width="10%" height="10%" onload="loadImage();" id="mapImage" style="display : none;">
+                                                    </a>
+                                                    <img style="display:none;width:40%;height:100px;align:right;" id="smallImageBE" src="" />
+                                                    <input style="display:none;" type="file" id="imageBE" />
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <p id="errorMsgAreaForAttachment"><span id="errorSpanForAttachment"></span></p>
+                                            </li>
+                                        </div>
+
+                                        <div lang="en" style="display:none" id="displayText" class="displayTextCSS">
+                                            Expenses added successfully.
+                                        </div>
+                                        <div class="savesyncwrapper">
+                                            <button lang="en" class="btn btn-primary btn-lg expbusinessbtn" onclick="updateBusinessDetails(busExpDetailId);">Update</button>
+                                            <button lang="en" class="btn btn-primary btn-lg expbusinessbtn" onclick="goBack();">Cancel</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            hideEAIcons();
+                            onloadExpenseElement();
+
+                            var currentMonth;
+                            var currentDate;
+                            var currentYear;
+                            $(function() {
+                                var date = new Date();
+                                currentMonth = date.getMonth();
+                                currentDate = date.getDate();
+                                currentYear = date.getFullYear();
+                                $('#expDate').datepicker({
+                                    maxDate: new Date(currentYear, currentMonth, currentDate)
+                                });
+                            });
+                            currentMonth = currentMonth + 1;
+                            if (currentDate < 10) {
+                                currentDate = '0' + currentDate
+                            }
+                            if (currentMonth < 10) {
+                                currentMonth = '0' + currentMonth
+                            }
+
+                            j("#accountHead").change(function() {
+                                getExpenseNamesBasedOnAccountHead();
+                            });
+                            j("#expenseName").change(function() {
+                                getPerUnitBasedOnExpense();
+                            });
+
+                            function validate() {
+                                var field = document.getElementById("expAmt");
+                                if (field.value.length > 8) {
+                                    field.value = field.value.substring(0, 8);
+                                    alert(window.lang.translate('Amount cannot be greater than 99999999.99'));
+                                    field.value = '';
+                                    return false;
+                                }
+                            }
+                        </script>
+                    </div>
+
+                    <div id="openModal" class="modalDialog" style="display:none;">
+                        <div>
+                            <a href="#close" onclick="closeMap();" title="Close" style="color: black;font-size: 16px;background-color: white;" class="close">X</a>
+                            <div lang="en" id="map" style="width: auto;height: 370px;position: relative;overflow: hidden;text-align: center;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                <div>
+                    <div id="helpimage" class="Row">
+                    </div>
+                    <div id="BE" class="modal-body clearfix">
+                        <div class="row" style="">
+                            <div class="col-lg-12 clearfix allexpebtn" id="box">
+                                <h1 lang="en">Select Business Expense</h1>
+                            </div>
+                            <div class="col-lg-12 clearfix expsync">
+                                <div style="display:none" id="displayError" class="displayTextError">
+                                    <span lang="en" id="errorMsg"></span>
+                                </div>
+                                <div class="form-group">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <script>
+                    // fetchBusiEmpAdv();
+                </script>
+
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#horizontalTab').easyResponsiveTabs({
+                    type: 'default', //Types: default, vertical, accordion           
+                    width: 'auto', //auto or any width like 600px
+                    fit: true // 100% fit in a container
+                });
+            });
+
+            var n = $("#tab li:visible").length;
+            var w = (100 / n);
+            var x = w - 1;
+            $("#tab li").width(x + '%');
+        </script>
+    </div>
+</div>
+<div style="display:none" id="loading_Cat">
+    <div class="loader " style="color:teal"></div>
+</div>
+</div>

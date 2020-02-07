@@ -1,0 +1,63 @@
+<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
+<script src="js/msdropdown/jquery.dd.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/msdropdown/flags.css" />
+<div class="modal-body clearfix" style=" background-color: white;height: 500px;">
+    <div class="row">
+        <div class="">
+            <div>
+
+                <div style="text-align:center;">
+                    <div class="col-lg-12 clearfix allexpebtn" style="padding-top: 55px;">
+                        <h1 lang="en">Language</h1>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;padding-bottom: 15px;">
+
+                <select name="countries" id="countries" style="width:70%;">
+                    <option value='en' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag us" data-title="English">English</option>
+                    <option value='ae' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag ae" data-title="United Arab Emirates">Arabic</option>
+                    <option value='ru' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag ru" data-title="Russian">Russian</option>
+                    <option value='tamil' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag in" data-title="India_tamil">India(Tamil)</option>
+                    <option value='hindi' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag in" data-title="India_hindi">India(Hindi)</option>
+                    <option value='ka' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag in" data-title="India_kannada">India(Kannada)</option>
+                    <option value='sd' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag se" data-title="Swedish">Swedish</option>
+                    <option value='vt' data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag vn" data-title="Vietnam">Vietnam</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<script>
+    j(document).ready(function() {
+        j("#countries").msDropdown();
+        var val = window.localStorage.getItem("localLanguage");
+        var oDropdown = j("#countries").msDropdown().data("dd");
+        if (oDropdown) {
+            oDropdown.set("value", val);
+        }
+
+        j("#countries").change(function() {
+            var oDropdown = j("#countries").msDropdown().data("dd");
+            var lang = oDropdown.get("value");
+            var selectedIndex = $("#countries").val();
+            window.localStorage.setItem("localLanguage", selectedIndex);
+            window.lang.change(lang);
+        });
+
+    });
+</script>

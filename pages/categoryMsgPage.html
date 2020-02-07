@@ -1,0 +1,205 @@
+<script>
+    var headerValue = headerMsg;
+    document.getElementById("headerId").innerHTML = headerValue;
+    //hideTRMenus();
+    //hideEAMenus(); 
+    hideMultilanguage();
+</script>
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+
+    lang.init({
+        defaultLang: 'en'
+    });
+
+</script>
+<style>
+
+   .w3-animate-left {
+    position:relative;
+    animation:animateleft 0.4s; }
+@keyframes animateleft {
+from { 
+    left:-300px;
+    opacity:0;
+} to
+{
+    left:0;
+    opacity:1;
+}
+}
+
+   
+    .w3-btn,
+    .w3-button {
+        border: none;
+        display: inline-block;
+        padding: 8px 16px;
+        vertical-align: middle;
+        overflow: hidden;
+        text-decoration: none;
+        color: black;
+        background-color: inherit;
+        text-align: center;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+   
+    .w3-ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+   
+    .w3-ul li {
+        padding: 8px 16px;
+        border-bottom: 1px solid #ddd;
+    }
+   
+    .w3-ul li:last-child {
+        border-bottom: none;
+    }
+   
+    .w3-sidebar {
+        height: 100%;
+        width: 250px;
+        background-color: #f2f2f2;
+        position: fixed!important;
+        overflow: auto;
+    }
+    
+    .fa {
+        font-size:20px;
+}
+   
+    .w3-bar-block .w3-bar-item {
+        width: 100%;
+        display: block;
+        padding: 17px 15px;
+        text-align: left;
+        border: none;
+        white-space: normal;
+        float: none;
+        outline: 0;
+    }
+   
+    .w3-bar-block.w3-center .w3-bar-item {
+        text-align: center;
+    }
+   
+    .w3-block {
+        display: block;
+        width: 100%;
+    }
+   
+    .w3-overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+    }
+   
+    .w3-opacity,
+    .w3-hover-opacity:hover {
+        opacity: 0.60;
+    }
+   
+    .w3-opacity-off,
+    .w3-hover-opacity-off:hover {
+        opacity: 1;
+    }
+   
+    .w3-opacity-max {
+        opacity: 0.25;
+    }
+   
+    .w3-opacity-min {
+        opacity: 0.75;
+    }
+   
+    .w3-bar-block:hover
+    .w3-bar-item::hover {
+    background-color: #b6d8db;
+    }
+
+</style>
+
+<div class="topfixednavigate">
+    <img class="expenzingMainImg" src="images/Expenzing_Square.png" />
+    <center>
+        <H4 id="headerId" class="headerposition"></H4>
+    </center>
+
+    <!-- Sidebar -->
+    <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:40" id="mySidebar">
+   
+        <button class="w3-bar-item w3-button w3-large" onclick="w3_close()" id="grad1">
+        <div class="">
+        <img src="images/profilepic.jpg" id = "sideNavProfilePreview"  style="border-radius:65px;width: 20%;display: block;"></div>
+        <br>
+        <label id="empName"  style="color: aliceblue;" class=""></label>
+        </button>
+        <a href="#" class="w3-bar-item w3-button" onclick="showProfile()"><i class="fa fa-user-circle-o"></i>
+            <label style="margin-left:15px;">Profile</label>
+        </a>
+
+        <a href="#" class="w3-bar-item w3-button" onclick="showSyncMaster()"><i class="fa fa-skyatlas"></i>
+            <label style="margin-left:10px;">Sync Masters</label>
+        </a>
+        <a href="#" class="w3-bar-item w3-button" onclick="showMultiLanguag()" id='multiLang'><i class="fa fa-cogs"></i>
+            <label style="margin-left:15px;">Languages</label>
+        </a>
+        <a href="#" class="w3-bar-item w3-button" onclick="showAboutPage()" ><i class="fa fa-info-circle"></i>
+            <label style="margin-left:15px;">About</label>
+        </a>
+        <a href="#" class="w3-bar-item w3-button" onclick="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i>
+        <label style="margin-left:15px;">Log Out</label></a>
+    </div>
+
+
+      <!-- Page Content -->
+    <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+    <div>
+        <button class="w3-button w3-white" onclick="w3_open()" style="color: #279fb8;">&#9776;</button>
+        
+    </div>
+
+
+    <div lang="en" style="display:none" id="syncSuccessMsg" class="displaysynctext">
+        Expenses synchronized successfully.
+    </div>
+    <div lang="en" style="display:none" id="syncFailureMsg" class="displaysynctext">
+        Expenses not synchronized successfully.
+    </div>
+</div>
+
+<script>
+    findProfileImagedata();
+
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+document.getElementById("empName").innerHTML = window.localStorage.getItem("FirstName") + " " + window.localStorage.getItem("LastName");
+</script>

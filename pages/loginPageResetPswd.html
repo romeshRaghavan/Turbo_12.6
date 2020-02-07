@@ -1,0 +1,39 @@
+<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
+<script src="js/msdropdown/jquery.dd.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/msdropdown/flags.css" />
+<div class="modal-body clearfix">
+    <div class="form-group">
+        <input id="userName" class="form-control input-lg" lang="en" placeholder="Enter your user name" disabled>
+    </div>
+    <div class="form-group">
+        <input id="pass" type="password" class="form-control input-lg" lang="en" placeholder="New password">
+    </div>
+    <div class="form-group">
+        <button id="loginBtnId" class="btn btn-primary btn-lg btn-block" style="width: 100%;" onclick="login();" lang="en">Login</button>
+    </div>
+    <div lang="en" style="display:none" id="loginErrorMsg" class="displayloginErrotext">
+
+    </div>
+    <div style="display:none" id="loading">
+        <img src="images/loading2.gif" id="loading-image" alt="Loading...">
+    </div>
+</div>
+<Script>
+    var user_name = window.localStorage.getItem("UserName");
+    document.getElementById("userName").value = user_name;
+</Script>
+
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>

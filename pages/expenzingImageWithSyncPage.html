@@ -1,0 +1,50 @@
+<div class="topfixednavigate">
+    <a href="#" class="backarrowbtn">
+        <img class="expenzingImg" src="images/expenzing-logo.png"></a>
+
+    <div class="dropdown aligndropdownv" align="right">
+        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" onclick="#"><img class="myprofile" /> My Profile</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" onclick="synchronizePRMaster()"><img class="prsync" /> Sync Master</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" onclick="#"><img class="notification" /> Notification</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" onclick="#"><img class="aboutus" /> About</a>
+            </li>
+            <li role="presentation">
+                <a role="menuitem" tabindex="-1" onclick="#"><img class="help" /> Help</a>
+            </li>
+        </ul>
+    </div>
+    <div style="display:none" id="syncSuccessMsg" class="displaysynctext">
+
+    </div>
+    <div style="display:none" id="syncFailureMsg" class="displaysynctext">
+
+    </div>
+</div>
+<p class="procureToPaySyncPage">Procure To Pay </p>
+<div class="modal-header">
+    <!-- tp fixed bar here -->
+
+    <div class="main-wrapper clearfix">
+    </div>
+</div>
+
+<style type="text/css">
+    .dropdown-menu>li>a {
+        color: lightblue;
+        background-color: black;
+    }
+    
+    .modal-header {
+        background-color: black;
+    }
+</style>

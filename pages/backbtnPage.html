@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<script>
+    var headerValue = headerMsg;
+    document.getElementById("headerId").innerHTML = headerValue;
+    // hideTRMenus();
+    // hideEAMenus(); 
+    hideMultilanguage();
+</script>
+<div class="topfixednavigate">
+    <span onclick="goBack();" class="backbluebtn"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+    <img class="expenzingImg" src="images/Expenzing_Square.png" onclick="goBack();" />
+    <H4 id="headerId" class="headerposition"></H4>
+
+    <div lang="en" style="display:none" id="syncSuccessMsg" class="displaysynctext">
+    </div>
+    <div lang="en" style="display:none" id="syncFailureMsg" class="displaysynctext">
+    </div>
+</div>

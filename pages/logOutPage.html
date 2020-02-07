@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Expenzing Expense Management System</title>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+<!-- Custom Theme files -->
+<link rel="stylesheet" href="css/jquery-ui.css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-1.11.0.min.js"></script>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+</script>
+<meta name="keywords" content="User Interface Ui Kit Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<meta charset="utf-8">
+<meta name="generator" content="Bootply" />
+<link href="css/app.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/datepicker.css" rel="stylesheet">
+<link href="css/prettify.css" rel="stylesheet">
+<link href="css/timepicki.css" rel="stylesheet">
+<link href="select2/select2.css" rel="stylesheet"/>
+<link href="css/font-awesome.min.css" rel="stylesheet"/>
+<script src="js/jquery-ui.js"></script>
+<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script LANGUAGE="JavaScript" type="text/javascript"src="js/modalPreview.js"></script>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" src="js/jquery.min.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" src="js/jquery.touchSwipe.min.js"></SCRIPT>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/appLib.js"></script>
+<script src="js/commonUtilities.js"></script>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" src="js/index.js"></SCRIPT>
+<script src="js/supported_date.js"></script>
+<script src="js/prettify.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="select2/select2.js"></script>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" src="js/timepicki.js"></SCRIPT>
+<script src="js/js.cookie.js" charset="utf-8" type="text/javascript"></script>
+<script src="js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
+<script src="js/jssor.slider-22.1.5.mini.js" type="text/javascript" data-library="jssor.slider.mini" data-version="22.1.5"></script>
+
+<style>
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: none;
+    content: " ";
+}
+
+.buttonLeft {
+  padding: 10px 35px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #dad2d2;
+  float:left;
+}
+
+.buttonRight {
+  padding: 10px 35px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #a91d1d;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #dad2d2;
+  float:right;
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.buttonRight:hover {background-color: #3e8e41}
+
+.buttonRight:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.fa1 {
+    font-size: 80px;
+    margin-left: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #58a7c4;
+    padding-top: 10%;
+}
+
+.backbluebtn {
+    display: none;
+}
+
+</style>
+
+</head>
+<body>  
+    <div class="body" style="height: 800px;background-color: #e8e5e5;">
+   		<div class="container fluid">
+   			<div class="row">
+          <div class="col-md-12">
+              <div class="fa1 fa fa-sign-out"></div> 
+   					<label style="text-align:center;padding-top: 20%;" for=""><b>Please sync your pending expenses before you exit or they will be lost</b>.</label>
+   				</div>
+          <br>
+          <br>
+          <br>
+          </div>
+        </div>
+        <div class="container fluid">
+          <div class="row">
+            <br>
+            <br>
+            <br>
+            <div class="col-md-12">
+              <button style="text-align:center;" class="buttonLeft" onclick="deleteLocalDatabase();"> Logout </button>
+              <button style="text-align:center;" class="buttonRight" onclick="defaultPage();"> Cancel </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- script references -->
+<script src="cordova.js"></script>
+
+</body>

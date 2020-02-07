@@ -1,0 +1,189 @@
+<br>
+<div class="modal-body clearfix">
+    <div class="row">
+        <div class="col-lg-12 clearfix addanexpense">
+            <h1>Add Travel Request</h1>
+            <div class="expenseform clearfix" data-role="page" id="page1">
+                <ul>
+                    <li>
+                        <input id="travelTitle" type="text" placeholder="Travel Title">
+                    </li>
+                    <li>
+                        <input id="travelType" type="hidden" style="width: 98%">
+                    </li>
+                    <li>
+                        <input id="trAccountHead" type="hidden" style="width: 98%">
+                    </li>
+                    <li>
+                        <input id="fromCitytown" type="hidden" style="width: 98%">
+                    </li>
+
+                    <li>
+                        <input id="toCitytown" type="hidden" style="width: 98%">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active" id="oneWay" onclick="resetRoundTrip();"><a href="#service-one" data-toggle="tab">One Way</a></li>
+                <li id="roundTrip" onclick="resetOneTrip();"><a href="#service-two" data-toggle="tab">Round Trip</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="service-one">
+                    <table class="table table-responsive">
+                        <tr>
+
+                            <td colspan="2">
+                                <div class="well datetime">
+                                    <input type="text" id="selectDate_One" class="span2 dp1" value="Select Date" readonly="true" placeholder="Select Date">
+                                </div>
+
+                                <div class="datetime1">
+                                    <input class="timepicker1" id="selectTime_One" type="text" name="timepicker1" readonly="true" placeholder="Select Time" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mode</td>
+                            <td>
+                                <input id="travelMode" type="hidden" style="width: 98%">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Class</td>
+                            <td>
+                                <input id="travelCategory" type="hidden" style="width: 98%">
+                            </td>
+                        </tr>
+                    </table>
+                    <p><font face="verdana" size="1" color="green">Specify only if you require travel desk to book any of these 3:</font></span>
+                    </p>
+                    <table class="table table-responsive">
+                        <tr>
+                            <td id="carDisabled" style="width: 100px;"><img src="images/oldcarbnw.png" onclick="setBooleanValueCar();"></td>
+                            <td id="carActive" style="display:none;width: 100px;"><img src="images/oldcar1.png" onclick="setBooleanValueCar();"></td>
+                            <td>
+                                <input id="travelCar" type="text" placeholder="Cab /Car Hire Instruction" onclick="setBooleanValueCarTextField();">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="hotelDisabled" style="width: 100px;"><img src="images/oldhotelbnw.png" onclick="setBooleanValueHotel();"></td>
+                            <td id="hotelActive" style="display:none;width: 100px;"><img src="images/oldhotel1.png" onclick="setBooleanValueHotel();"></td>
+                            <td>
+                                <input id="travelHotel" type="text" placeholder="Accommodation Instruction" onclick="setBooleanValueHotelTextField();">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="ticketDisabled" style="width: 100px;"><img src="images/oldplanebnw.png" onclick="setBooleanValueTicket();"></td>
+                            <td id="ticketActive" style="display:none;width: 100px;"><img src="images/oldplane1.png" onclick="setBooleanValueTicket();"></td>
+                            <td>
+                                <input id="travelPlane" type="text" placeholder="Ticket Instruction" onclick="setBooleanValueTicketTextField();">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="service-two">
+                    <table class="table table-responsive">
+                        <tr>
+                            <td colspan="2">
+                                <div class="well datetime">
+                                    <input type="text" id="selectDate_Three" class="span2 dp1" value="Select Date" readonly="true" placeholder="Select Date">
+                                </div>
+
+                                <div class="datetime1">
+                                    <input class="timepicker1" id="selectTime_Three" type="text" name="timepicker1" readonly="true" placeholder="Select Time" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="well datetime">
+                                    <input type="text" id="selectDate_Two" class="span2 dp1" value="Select Date" readonly="true" placeholder="Select Date">
+                                </div>
+
+                                <div class="datetime1">
+                                    <input class="timepicker1" id="selectTime_Two" type="text" name="timepicker1" readonly="true" placeholder="Select Time" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mode</td>
+                            <td>
+                                <input id="roundTripMode" type="hidden" style="width: 98%">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Class</td>
+                            <td>
+                                <input id="roundTripCategory" type="hidden" style="width: 98%">
+                            </td>
+                        </tr>
+                    </table>
+                    <p><font face="verdana" size="1" color="green">Specify only if you require travel desk to book any of these 3:</font></span>
+                    </p>
+                    <table class="table table-responsive">
+                        <tr>
+                            <td id="carRoundDisabled"><img src="images/oldcarbnw.png" onclick="setBooleanValueCarRound();"></td>
+                            <td id="carRoundActive" style="display:none"><img src="images/oldcar1.png" onclick="setBooleanValueCarRound();"></td>
+                            <td>
+                                <input id="roundTravelCar" type="text" placeholder="Cab /Car Hire Instruction" onclick="setBooleanValueCarRoundTextField();">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="hotelRoundDisabled"><img src="images/oldhotelbnw.png" onclick="setBooleanValueHotelRound();"></td>
+                            <td id="hotelRoundActive" style="display:none"><img src="images/oldhotel1.png" onclick="setBooleanValueHotelRound();"></td>
+                            <td>
+                                <input id="roundTravelHotel" type="text" placeholder="Accommodation Instruction" onclick="setBooleanValueHotelRoundTextField();">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="ticketRoundDisabled"><img src="images/oldplanebnw.png" onclick="setBooleanValueTicketRound();"></td>
+                            <td id="ticketRoundActive" style="display:none"><img src="images/oldplane1.png" onclick="setBooleanValueTicketRound();"></td>
+                            <td>
+                                <input id="roundTravelPlane" type="text" placeholder="Ticket Instruction" onclick="setBooleanValueTicketRoundTextField();">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div></div>
+        <div class="col-lg-12 clearfix expsync">
+            <div class="row form-group">
+                <div class="col-lg-12 savesyncwrapper">
+                    <button class="btn btn-primary btn-lg btn-block expbusinessbtnsingle" onclick="syncSubmitTravelDetails();">Send for Approval</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="loading_Cat">
+        <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#selectDate_One").datepicker();
+        $("#selectDate_Three").datepicker({
+            onSelect: function(selectedDate) {
+                var date = new Date(selectedDate);
+                $('#selectDate_Two').datepicker({
+                    minDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
+                });
+            }
+        });
+
+    });
+
+    j("#travelMode").change(function() {
+        getCatergoryBasedOnMode();
+    });
+
+    j("#roundTripMode").change(function() {
+        getRoundCatergoryBasedOnMode();
+    });
+
+    onloadTravelData();
+    onloadTimePicker();
+</script>

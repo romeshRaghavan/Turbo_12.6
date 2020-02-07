@@ -1,0 +1,33 @@
+<div style="background-color: white;height: 600px;">
+    <div class="modal-body clearfix">
+        <div style="height: 100px;">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <center><img src="images/failure.png" style="height: 40%;width: 20%; padding-top : 8%; text-align: -webkit-center;" /></center>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div lang="en" style="text-align: center;" id="succMsg" class="successmsg"></div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<script>
+    document.getElementById('succMsg').innerHTML = successMessage;
+    window.scrollTo(0, 0);
+</script>

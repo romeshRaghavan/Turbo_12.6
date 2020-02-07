@@ -1,0 +1,120 @@
+<div class="modal-body clearfix" style=" background-color: white;height: inherit;padding-top: 36px;">
+    <div class="row">
+        <div class="col-lg-12 clearfix addanexpense">
+            <h1>Add Business Expense</h1>
+            <div class="expenseform clearfix" data-role="page" id="page1">
+                <ul>
+                    <li>
+                        <div role="main" class="ui-content">
+                            <input id="expDate" type="text" class="span2 dp1" placeholder="Date" readonly="readonly">
+                        </div>
+                    </li>
+                    <li>
+                        <input id="accountHead" type="hidden" style="width: 98%">
+                    </li>
+                    <li>
+                        <input id="expenseName" type="hidden" style="width: 98%">
+                    </li>
+                    <li>
+                        <input id="ratePerUnit" type="hidden">
+                    </li>
+                    <li>
+                        <input id="expFromLoc" type="text" style="width: 49%" placeholder="From Location">
+                        <input id="expToLoc" type="text" style="width: 49%" placeholder="To Location">
+                    </li>
+                    <li>
+                        <input id="expNarration" type="text" placeholder="Enter Expense Narration">
+                    </li>
+                    <li>
+                        <p><font face="verdana" size="1" color="green">Unit is no.
+	of persons/Kms/meals etc.</font></p>
+                        <input id="expUnit" type="tel" style="width: 22%" placeholder="Units" onkeyup="calculatePerUnit();checkPerUnitExceptionStatusForBEAtLineLevel();">
+                        <input id="wayPointunitValue" value="" readonly="readonly" type="hidden">
+                        <input id="expAmt" type="tel" style="width: 38%" placeholder="Amount" onkeyup="checkPerUnitExceptionStatusForBEAtLineLevel();validate();">
+                        <input id="currency" type="hidden" style="width: 33%">
+                        <input id="smsID" style="display: none; width: 33%">
+                        <p id="errorMsgArea"><span id="errorSpan"></span></p>
+                    </li>
+                    <div>
+                        <li style="text-align:left;">
+                            <ul>
+                                <img src="images/camera.png" onclick="capturePhoto(0,'BE');" width="15%" height="15%">
+                                <img src="images/gallery.png" onclick="getPhoto(pictureSource.PHOTOLIBRARY,0,'BE');" width="15%" height="15%">
+                                <a id="mapLink" href="#openModal" style="" onclick="viewMap();">
+                                    <img src="images/google_map_icon.jpg" width="10%" height="10%" onload="loadImage();" id="mapImage" style="display : none;">
+                                </a>
+                                <img style="display:none;width:40%;height:100px;align:right;" id="smallImageBE" src="" />
+                                <input style="display:none;" type="file" id="imageBE" />
+                            </ul>
+                        </li>
+                    </div>
+                    <div style="display: none" id="displayText" class="displayTextCSS">
+                        Expenses added successfully.</div>
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary btn-lg " style="width: 40%; height: 52px;" onclick="saveBusinessDetails(0);">Save &amp; New</button>
+                        <button class="btn btn-primary btn-lg " style="width: 40%" onclick="saveBusinessDetails(1);">Save &amp; Go to Synch</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none" id="loading_Cat"><img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+    </div>
+</div>
+<div id="openModal" class="modalDialog" style="display: none;">
+    <div><a href="#close" onclick="closeMap();" title="Close" style="color: black; font-size: 16px; background-color: white;" class="close">X</a>
+        <div id="map" style="width: 285px; height: 400px"></div>
+    </div>
+</div>
+<script>
+    //alert(smsToExpenseStr)
+    expensePageFlag = 'S';
+    var smsSplitStr = smsToExpenseStr.split("_");
+    var currentMonth;
+    var currentDate;
+    var currentYear;
+    $(function() {
+        var date = new Date();
+        currentMonth = date.getMonth();
+        currentDate = date.getDate();
+        currentYear = date.getFullYear();
+        $('#expDate').datepicker({
+            maxDate: new Date(currentYear, currentMonth, currentDate)
+        });
+    });
+    currentMonth = currentMonth + 1;
+    if (currentDate < 10) {
+        currentDate = '0' + currentDate
+    }
+    if (currentMonth < 10) {
+        currentMonth = '0' + currentMonth
+    }
+
+    //document.getElementById("expDate").value = currentMonth + "/" + currentDate+ "/" + currentYear;
+    j("#accountHead").change(function() {
+        getExpenseNamesBasedOnAccountHead();
+    });
+    j("#expenseName").change(function() {
+        getPerUnitBasedOnExpense();
+    });
+    onloadExpense();
+
+    function validate() {
+        var field = document.getElementById("expAmt");
+        if (field.value.length > 8) {
+            field.value = field.value.substring(0, 8);
+            alert("Amount cannot be greater than 99999999.99");
+            field.value = '';
+            return false;
+        }
+    }
+    j(document).ready(function() {
+        setTimeout(function() {
+            var amt = Math.round(smsSplitStr[3]);;
+            document.getElementById("expDate").value = getExpenseDateFromSMS(smsSplitStr[2]);
+            document.getElementById("expNarration").value = smsSplitStr[1];
+            document.getElementById("expAmt").value = amt;
+            document.getElementById("smsID").value = smsSplitStr[0];
+            document.getElementById("expUnit").value = '1';
+        }, 250);
+    });
+</script>

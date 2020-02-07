@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#ffffff">
+    <title>Expenzing App</title>
+    <link rel="stylesheet" href="css/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="css/framework7/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/swipebox/src/css/swipebox.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="#" id="theme-style">
+    <link rel="stylesheet" href="select2/select2.css" />
+    <link rel="stylesheet" href="css/jquery-confirm.min.css">
+    <link rel="stylesheet" href="css/shoelace.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+</head>
+<style>
+    input.speechbutton {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        height: 20px;
+        width: 20px;
+        margin-left: 30px;
+        -webkit-transform: scale(3.0, 1.0);
+    }
+</style>
+
+<body>
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <!-- Left panel -->
+    <div class="panel panel-left panel-reveal">
+        <div class="line"></div>
+        <div class="logo-box">
+            <h2>Expenzing</h2>
+        </div>
+        <div class="list-block mt-15">
+            <div class="list-group">
+                <nav>
+                    <ul>
+                        <li style="line-height: 0">&nbsp;</li>
+                        <li class="text-center profilemenuimg">
+                            <p>Hello Vinay!</p>
+                            <img src="images/profile-big.jpg">
+                        </li>
+                        <li>
+                            <a href="" onclick="reload();" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-home"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Home</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="blog.html" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-briefcase"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">About</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="blog.html" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Profile</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="charts.html" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-random"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Synch Masters</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-cog"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Settings</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-sign-out"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Logout</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="text-center versionsub">Version: 2.0</div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Right panel -->
+    <div class="panel panel-right panel-reveal">
+        <div class="line"></div>
+        <div class="user-banner">
+            <span class="ava-box">
+               <img src="images/profile-big.jpg" alt="">
+            </span>
+        </div>
+        <div class="welcome-msg">
+            <h3>Hello <strong>Vinay</strong>!</h3>
+            <h4>How is your day going?</h4>
+        </div>
+        <div class="list-block mt-15">
+            <div class="list-group">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Profile</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="item-link close-panel item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-sign-out"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title">Logout</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Views -->
+    <div class="views">
+        <div class="view view-main">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="left lefticonspace">
+                        <a href="#" class="link icon-only open-panel">
+                            <span class="kkicon icon-menu"></span>
+                        </a>
+                    </div>
+                    <div onclick="getSms();" class="center sliding explogo"><img src="images/expenzing-logo1.png" alt=""></div>
+                    <div class="right">
+                        <a href="#" class="link icon-only" data-panel="right">
+                            <span class="kkicon profilepic"><img src="images/profile-sml.jpg" alt="" class="blk"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="pages navbar-fixed toolbar-fixed">
+                <div data-page="index" class="page page-bg">
+                    <div class="toolbar" style="display: none;">
+                        <div class="toolbar-inner">
+                            <a href="#" data-picker=".picker-social" class="open-picker link">
+                                <span class="icon-share2"></span>
+                            </a>
+                            <a href="#" class="link">
+                                <span class="icon-color-sampler"></span>
+                            </a>
+                            <a href="#" class="link open-popup" data-popup=".popup-splash">
+                                <span class="icon-bookmark2"></span>
+                            </a>
+                            <a href="#" class="link open-popup" data-popup=".popup-login">
+                                <span class="icon-lock"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="page-content">
+                        <div class="view another-view">
+                            <!-- Pages -->
+                            <div class="pages">
+                                <div class="page no-toolbar">
+                                    <div class="tabs-animated-wrap" style="overflow: visible;">
+                                        <div class="list-block nomargin comments-box">
+                                            <!-- this section for Add claim -->
+                                            <div class="choosetype">
+                                                <div class="content-block tabshead">
+                                                    <div class="buttons-row">
+                                                        <a onclick="location.href='trips-info.html';" class="tab-link active button button-secondary">Your Trip</a>
+                                                        <a href="#tab1" class="tab-link button button-secondary">Travel Request</a>
+                                                        <a href="#tab2" class="tab-link button button-secondary">Travel Expense</a>
+                                                        <a href="#tab3" class="tab-link button button-secondary">Sync</a>
+                                                    </div>
+                                                </div>
+                                                <!-- this section for Add claim -->
+                                                <div id="tab1" class="tab active">
+                                                    <div class="list-block mt-10 comments-box">
+                                                        <!-- this section for Add claim -->
+                                                        <div class="upcomingtripandpref">
+                                                            <h3 class="text-center">Select Flight Preferences</h3>
+                                                            <div class="upcomingboxtrip upcomingboxtripexcept">
+                                                                <ul>
+                                                                    <li class="airplan">
+                                                                        <div class="trippreflist">
+                                                                            <span class="pull-left tripreficon"><input type="text" class="selectpreftxt" placeholder="Eg.1"></span>
+                                                                            <div class="pull-left triprefblock">
+                                                                                <p>From: <b>Mumbai</b> - To: <b>Delhi</b></p>
+                                                                                <p>From: <b>06 Jun 2018</b> - To: <b>15 Jun 2018</b></p>
+                                                                                <p>Carrier Name: <b>Air India</b> , Amount: <b>Rs. 16000</b> </p>
+                                                                                <p>Class: <b>Economy</b></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="airplan">
+                                                                        <div class="trippreflist">
+                                                                            <span class="pull-left tripreficon"><input type="text" class="selectpreftxt" placeholder="Eg.2"></span>
+                                                                            <div class="pull-left triprefblock">
+                                                                                <p>From: <b>Mumbai</b> - To: <b>Delhi</b></p>
+                                                                                <p>From: <b>06 Jun 2018</b> - To: <b>15 Jun 2018</b></p>
+                                                                                <p>Carrier Name: <b>Air India</b> , Amount: <b>Rs. 16000</b> </p>
+                                                                                <p>Class: <b>Economy</b></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="airplan">
+                                                                        <div class="trippreflist">
+                                                                            <span class="pull-left tripreficon"><input type="text" class="selectpreftxt" placeholder="Eg.3"></span>
+                                                                            <div class="pull-left triprefblock">
+                                                                                <p>From: <b>Mumbai</b> - To: <b>Delhi</b></p>
+                                                                                <p>From: <b>06 Jun 2018</b> - To: <b>15 Jun 2018</b></p>
+                                                                                <p>Carrier Name: <b>Air India</b> , Amount: <b>Rs. 16000</b> </p>
+                                                                                <p>Class: <b>Economy</b></p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="confirmbtnall">
+                                                                <button onclick="location.href='prioritised-success.html';">Confirm my booking preferences <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="loading_Cat">
+        <img src="../../images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+    </div>
+    <script src="js/cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="css/framework7/js/framework7.min.js"></script>
+    <script type="text/javascript" src="css/swipebox/src/js/jquery.swipebox.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/Chart.js"></script>
+    <script type="text/javascript" src="js/jflickrfeed.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="select2/select2.js"></script>
+    <script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="js/commonUtilities.js"></script>
+    <script type="text/javascript" src="js/appLib.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+</body>
+
+</html>

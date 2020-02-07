@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<div class="modal-body clearfix" style=" background-color: white; height: -webkit-fill-available;">
+    <div class="row">
+        <div class="col-lg-12 screenshot clearfix">
+            <div class="col-lg-12 clearfix allexpebtn" id="walletBox">
+                <h1 lang="en">My Receipts Wallet</h1>
+            </div>
+            <div>
+                <div style="text-align:center;">
+                    <div lang="en">
+                        <img src="images/camera.png" onclick="capturePhoto(1,'wallet');" width="15%" height="15%">
+                        <img src="images/gallery.png" id='but_select' width="15%" height="15%">
+                        <br>
+                        <br>
+                        <p>Add to My Receipts Wallet</p>
+                        <img style="display:none;width:35%;height:80px;align:right;" id="smallImageWallet" src="" />
+                        <input style="display:none;" type="file" id="imageWallet" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display:none" id="loading_Cat">
+            <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+        </div>
+        <div lang="en" style="display:none" id="wallet_msg" class="displaywalletmsg">
+
+        </div>
+    </div>
+</div>
+<script>
+    fetchWalletImage();
+    j("#but_select").click(function() {
+        navigator.camera.getPicture(onSuccess, onFail, {
+            quality: 25,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+
+        });
+    });
+
+    function onSuccess(imageData) {
+        try {
+            setTimeout(function() {
+
+                smallImageWallet.style.display = 'block';
+                document.getElementById('imageWallet').setAttribute('src', "data:image/jpeg;base64," + imageData);
+                smallImageWallet.src = "data:image/jpeg;base64," + imageData;
+            }, 3000);
+
+            setTimeout(function() {
+                saveWalletAttachment(1);
+            }, 5000);
+
+        } catch (e) {
+            alert("Error gallery : " + e);
+        }
+    }
+
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+</script>

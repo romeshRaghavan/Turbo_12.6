@@ -1,0 +1,83 @@
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<div class="languagebar" style="">
+    <center>
+        <a>
+            <p style="color: #19CFEF;font: caption;padding-bottom: 20px;" onclick="" lang="en">Language</p>
+        </a>
+    </center>
+
+    <table style="width:98%">
+        <tr>
+            <td>
+                <a onclick="setLang('en');">
+                    <p class="addenglishflag"></p><span style="color: #14a6c5;">English</span></a>
+            </td>
+            <td>
+                <a onclick="setLang('ae');">
+                    <p class="addarabicflag"></p><span style="color: #14a6c5;"> Arabic</span></a>
+            </td>
+            <td>
+                <a onclick="setLang('ru');">
+                    <p class="addrussianflag"></p><span style="color: #14a6c5;">Russian</span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a onclick="setLang('tamil');">
+                    <p class="addInTamilflag"></p><span style="color: #14a6c5;">
+            India(Tamil)</span></a>
+            </td>
+            <td>
+                <a onclick="setLang('hindi');">
+                    <p class="addInTamilflag"></p><span style="color: #14a6c5;">
+            India(Hindi)</span></a>
+            </td>
+            <td>
+                <a onclick="setLang('ka');">
+                    <p class="addInTamilflag"></p><span style="color: #14a6c5;">
+            India(kannada)</span></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a onclick="setLang('vt');">
+                    <p class="addInVietnamflag"></p><span style="color: #14a6c5;">
+            Vietnam</span></a>
+            </td>
+            <td>
+                <a onclick="setLang('sd');">
+                    <p class="addInSwedenflag"></p><span style="color: #14a6c5;">
+            Swedish</span></a>
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+
+    <div>
+        <div style="display:none" id="loading_Cat">
+            <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+        </div>
+    </div>
+
+</div>
+<script>
+    function setLang(lang) {
+        window.lang.change(lang);
+        window.localStorage.setItem("localLanguage", lang);
+        populateMainPage();
+    }
+</script>

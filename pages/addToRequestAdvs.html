@@ -1,0 +1,83 @@
+<br>
+<div class="modal-body clearfix">
+    <div class="row">
+        <div class="col-lg-12 clearfix addanexpense">
+            <h1>Add Request Advance</h1>
+            <div class="expenseform clearfix" data-role="page" id="page1">
+                <ul>
+                    <li>
+                        <div role="main" class="ui-content">
+                            <input id="empAdvDate" type="text" class="span2 dp1" placeholder="Date" readonly="readonly" style="text-align:left;">
+                        </div>
+                    </li>
+                    <li>
+                        <input id="empAdvType" type="hidden" style="width: 98%">
+                    </li>
+                    <li>
+                        <input id="empAdvTitle" type="text" placeholder="Title" style="text-align:left;">
+                    </li>
+                    <li>
+                        <input id="empAdvAccHead" type="hidden" style="width: 98%">
+                    </li>
+                    <li>
+                        <textarea id="empAdvjustification" rows="4" cols="42.5" placeholder="Justification" style="width: 98%"></textarea>
+                    </li>
+
+                    <li>
+                        <input id="empAdvAmount" type="tel" placeholder="Amount" style="text-align:left;" onkeyup="validate();">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div></div>
+        <br>
+        <br>
+        <div class="col-lg-12 clearfix expsync">
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <button class="btn btn-primary btn-lg btn-block" onclick="syncSubmitEmpAdvance();">Send for Approval</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="loading_Cat">
+        <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#selectDate_One").datepicker();
+        $("#selectDate_Three").datepicker({
+            onSelect: function(selectedDate) {
+                var date = new Date(selectedDate);
+                $('#selectDate_Two').datepicker({
+                    minDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
+                });
+            }
+        });
+
+    });
+    var DefaultCurrencyName = window.localStorage.getItem("DefaultCurrencyName");
+    $("#empAdvAmount").attr("placeholder", "Amount(" + DefaultCurrencyName + ")");
+
+    j("#empAdvType").change(function() {
+        changeAdavanceType();
+    });
+
+    j("#empAdvAccHead").change(function() {
+        changeAccountHeadName();
+    });
+
+    function validate() {
+        var field = document.getElementById("empAdvAmount");
+        if (field.value.length > 8) {
+            field.value = field.value.substring(0, 8);
+            alert("Amount cannot be greater than 99999999.99");
+            field.value = '';
+            return false;
+        }
+    }
+    onloadEAData();
+    onloadTimePicker();
+</script>

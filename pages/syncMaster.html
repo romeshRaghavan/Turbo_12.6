@@ -1,0 +1,35 @@
+<script>
+    hideTRMenus();
+    hideEAMenus();
+</script>
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<div style="background-color: white;padding-left: 0px;height: 500px;padding-top: 40px;">
+    <div class="col-md-4 skill-one">
+        <div class="mid-menu">
+            <h1 lang="en">Sync Masters</h1>
+            <ul class="" style="display: block;">
+                <li><a onclick="synchronizeBEMasterData();" lang="en">Sync Business Expense Master</a></li>
+                <li id="EaDisplayID"><a onclick="synchronizeEAMasterData();" href="#" lang="en">Pull Employee Advance</a></li>
+                <li id="TrRoleID"><a onclick="synchronizeTRMasterData();" href="#" lang="en">Sync Travel Master</a></li>
+                <li id="TsRoleID"><a onclick="synchronizeTRForTS();" href="#" lang="en">Pull Travel Request to Settle</a></li>
+            </ul>
+        </div>
+    </div>
+    <div lang="en" style="display:none" id="syncSuccessMsg" class="displaysynctext">
+    </div>
+    <div lang="en" style="display:none" id="syncFailureMsg" class="displaysynctext">
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+</script>
+<br>
+<div class="expenseform clearfix" data-role="page" id="">
+    <table>
+        <Tr>
+            <td>
+                <label><font lang="en" face="verdana" color="gray" size="1.77">Total Expense Amount :</font></label>
+            </td>
+            <td>
+                <input id="" type="tel" name="usermail" placeholder="">
+            </td>
+        </Tr>
+        &nbsp;&nbsp;&nbsp;
+        <Tr>
+            <td>
+                <label><font lang="en" face="verdana" color="gray" size="1.77">Usettled Advances :</font></label>
+            </td>
+            <td>
+                <input id="" type="tel" name="password" placeholder="">
+            </td>
+        </Tr>
+        &nbsp;&nbsp;&nbsp;
+        <tr>
+            <td>
+                <label><font lang="en" face="verdana" color="gray" size="1.77">Refund to Employee :</font></label>
+            </td>
+            <td>
+                <input id="" type="tel" name="password" placeholder="">
+            </td>
+        </tr>
+        &nbsp;&nbsp;&nbsp;
+        <tr>
+            <td>
+                <label><font lang="en" face="verdana" color="gray" size="1.77">Recovery From Employee :</font></label>
+            </td>
+            <td>
+                <input id="" type="tel" name="password" placeholder="">
+            </td>
+        </tr>
+        &nbsp;&nbsp;&nbsp;
+    </table>
+</div>
+<div class="modal-body clearfix">
+    <div class="row">
+        <div class="col-lg-12 clearfix allexpebtn" id="box1">
+            <h1 lang="en">Select Your Advances </h1>
+        </div>
+        <div class="col-lg-12 clearfix expsync">
+            <div style="display:none" id="displayError" class="displayTextError">
+                <span id="errorMsg"></span>
+            </div>
+
+            <div class="form-group">
+            </div>
+
+            <div style="display:none" id="loading_Cat">
+                <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+<script>
+    fetchEmployeeAdvance();
+</script>
