@@ -5,6 +5,9 @@
 		"Help":"உதவி",
 		"Sync":"ஒத்திசைவு",
 		"Units":"அலகுகள்",
+                "Home":"வீடு",
+                "Request":"வேண்டுகோள்",
+                "Settlement":"தீர்வு",
         "Amount":"தொகை",
         "Amount (":"தொகை (",
 		"Save & New":"சேமி & நியூ",
@@ -125,7 +128,11 @@
         "Language":"மொழி",
         "Amount should be numeric.":"தொகை எண்ணாக இருக்க வேண்டும்.",
         "Amount should be greater than 0.":"அளவு 0 விட அதிகமாக இருக்க வேண்டும்.",
-        "My Receipts Wallet":"என் கைப்பை"
+        "My Receipts Wallet":"என் கைப்பை",
+        "Claim Expense":"உரிமைகோரல் செலவு",
+        "My Approval":"எனது ஒப்புதல்",
+        "In Queries":"வினவல்களில்",
+        "Settelment":"தீர்வு"
 	},
 	"regex": [
 		["Enter your user name","உங்கள் பயனர் பெயரை உள்ளிடவும்"],
@@ -154,6 +161,25 @@
         ["Specify only if you require travel desk to book any of these 3:","இந்த 3 எந்த பதிவு செய்ய பயண மேசை தேவை என்றால் மட்டுமே குறிப்பிடவும்:"],
         ["Cab /Car Hire Instruction","கேப் / கார் வாடகை வழிமுறை"],
         ["Accommodation Instruction","வழிமுறை விடுதி"],
-        ["Ticket Instruction","டிக்கெட் வழிமுறை"]
+        ["Ticket Instruction","டிக்கெட் வழிமுறை"],
+        ["Ticket Instruction","டிக்கெட் வழிமுறை"],
+        ["Add Expense Claims","செலவு உரிமைகோரல்களைச் சேர்க்கவும்"],
+        ["Add Travel Requests","பயண கோரிக்கைகளைச் சேர்க்கவும்"],
+        ["Approve / Send Back Claims","உரிமைகோரல்களை அங்கீகரிக்கவும் / அனுப்பவும்"],
+        ["Add Expense","செலவு சேர்க்கவும்"],
+        ["Request Advance","அட்வான்ஸ் கோருங்கள்"],
+        ["Submit Expense","செலவைச் சமர்ப்பிக்கவும்"],
+        ["Add Travel Settelment","பயண தீர்வு சேர்க்கவும்"],
+        ["Upcoming Trips","வரவிருக்கும் பயணங்கள்"],
+        ["You don't have any upcoming trips","உங்களிடம் வரவிருக்கும் பயணங்கள் எதுவும் இல்லை"],
+        ["Select Flight Preferences","விமான விருப்பத்தேர்வுகளைத் தேர்ந்தெடுக்கவும்"],
+        ["No preferences available","விருப்பத்தேர்வுகள் எதுவும் கிடைக்கவில்லை"],
+        ["Draft Expenses","வரைவு செலவுகள்"],
+        ["Pending Expenses","நிலுவையில் உள்ள செலவுகள்"],
+        ["Approved Unpaid Expenses","அங்கீகரிக்கப்படாத செலுத்தப்படாத செலவுகள்"],
+        ["Approved Paid Expenses","அங்கீகரிக்கப்பட்ட கட்டண செலவுகள்"],
+        ["Sent Back Expenses","மீண்டும் செலவுகளை அனுப்பியது"],
+        ["My Expenses","எனது செலவுகள்"],
+        ["Voucher Details","வவுச்சர் விவரங்கள்"]
 	]
 }
