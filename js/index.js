@@ -26,6 +26,7 @@ var fileTempCameraBE = "";
 var fileTempCameraTS = "";
 var fileTempGalleryBE = "";
 var fileTempGalleryTS = "";
+var fileTempCameraBEQ = "";
 var fileTempGalleryBEQ = "";
 var mapToCalcERAmt = new Map();
 var requestRunning = false;
@@ -2100,7 +2101,7 @@ function onPhotoDataSuccess(imageData) {
         fileTempGalleryTS = "";
     } else if(voucherType == 'BEQ'){
         smallImageBEQ.style.display = 'block';
-        fileTempGalleryBEQ = "data:image/jpeg;base64," + imageURI;
+        fileTempCameraBEQ = "data:image/jpeg;base64," + imageData;
         smallImageBEQ.src = "data:image/jpeg;base64," + imageData;
         fileTempGalleryBEQ = "";
     }
@@ -2162,7 +2163,6 @@ function onPhotoURISuccess(imageURI) {
         fileTempCameraBE = "";
     } else if (voucherType == 'TS') {
         smallImageTS.style.display = 'block';
-
         fileTempGalleryTS = "data:image/jpeg;base64," + imageURI;
 
         smallImageTS.src = "data:image/jpeg;base64," + imageURI;
@@ -2170,8 +2170,9 @@ function onPhotoURISuccess(imageURI) {
     } else if(voucherType == 'BEQ'){
         smallImageBEQ.style.display = 'block';
         fileTempGalleryBEQ = "data:image/jpeg;base64," + imageURI;
+
         smallImageBEQ.src = "data:image/jpeg;base64," + imageURI;
-        fileTempGalleryBEQ = "";
+        fileTempCameraBEQ = "";
     }
 
 }
