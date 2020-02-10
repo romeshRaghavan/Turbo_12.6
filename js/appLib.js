@@ -6011,7 +6011,7 @@ function queryAnwser(){
     var busExpHeaderId = beQueryId[0];
     var queryId = beQueryId[1];
     var comment = j.trim(j("#queryRply").val());
-    var data = fileTempGalleryBEQ;
+    var file = "";
 
     if(comment != ""){
 
@@ -6021,7 +6021,20 @@ function queryAnwser(){
         jsonToBeSendForQuery["queryId"] = queryId;
         jsonToBeSendForQuery["employeeId"] = window.localStorage.getItem("EmployeeId");
         jsonToBeSendForQuery["queryAnswer"] = comment;
-        jsonToBeSendForQuery["imageData"] = data;
+
+         if (fileTempGalleryBEQ == undefined || fileTempGalleryBEQ == "") {
+
+         } else {
+             file = fileTempGalleryBEQ;
+         }
+
+         if (fileTempCameraBEQ == undefined || fileTempCameraBEQ == "") {
+
+         } else {
+             file = fileTempCameraBEQ;
+         }
+
+        jsonToBeSendForQuery["imageData"] = file;
         j('#loading_Cat').show();
 
         j.ajax({
