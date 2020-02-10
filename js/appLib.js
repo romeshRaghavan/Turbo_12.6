@@ -6034,7 +6034,13 @@ function queryAnwser(){
              file = fileTempCameraBEQ;
          }
 
+         if(file != ""){
+            file = file.replace(/data:image\/(png|jpg|jpeg);base64,/, '');
+         }
+         
         jsonToBeSendForQuery["imageData"] = file;
+
+
         j('#loading_Cat').show();
 
         j.ajax({
