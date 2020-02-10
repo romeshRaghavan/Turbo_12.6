@@ -2112,6 +2112,8 @@ function resetImageData() {
     fileTempCameraTS = "";
     fileTempGalleryBE = "";
     fileTempGalleryTS = "";
+    fileTempCameraBEQ = "";
+    fileTempGalleryBEQ = "";
 }
 
 function hideImageBlock(){
