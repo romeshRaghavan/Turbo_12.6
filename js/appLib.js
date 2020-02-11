@@ -166,7 +166,7 @@ function arrayRemove(arr, value) {
          t.executeSql("CREATE TABLE IF NOT EXISTS walletMst (walletId INTEGER PRIMARY KEY ASC AUTOINCREMENT, walletAttachment  BLOB)");
          t.executeSql("CREATE TABLE IF NOT EXISTS travelModeMst (travelModeId INTEGER PRIMARY KEY ASC, travelModeName TEXT)");
          t.executeSql("CREATE TABLE IF NOT EXISTS travelCategoryMst (travelCategoryId INTEGER PRIMARY KEY ASC, travelCategoryName TEXT,travelModeId INTEGER)");
-         t.executeSql("CREATE TABLE IF NOT EXISTS cityTownMst (cityTownId INTEGER PRIMARY KEY ASC, cityTownName TEXT)");
+         t.executeSql("CREATE TABLE IF NOT EXISTS cityTownMst (cityTownId INTEGER PRIMARY KEY ASC, cityTownName TEXT, cityTownTypeId INTEGER)");
          t.executeSql("CREATE TABLE IF NOT EXISTS travelTypeMst (travelTypeId INTEGER PRIMARY KEY ASC, travelTypeName TEXT)");
          t.executeSql("CREATE TABLE IF NOT EXISTS travelAccountHeadMst (id INTEGER PRIMARY KEY ASC,accHeadId INTEGER, accHeadName TEXT, processId INTEGER)");
          t.executeSql("CREATE TABLE IF NOT EXISTS travelExpenseNameMst (id INTEGER PRIMARY KEY ASC,expenseNameId INTEGER, expenseName TEXT, isModeCategory char(1),accountCodeId INTEGER,accHeadId INTEGER REFERENCES travelAccountHeadMst(accHeadId))");
@@ -1077,7 +1077,8 @@ function arrayRemove(arr, value) {
                                  stateArr = cityTownJSONArray[i];
                                  var citytown_id = stateArr.CityTownId;
                                  var citytown_name = stateArr.CityTownName;
-                                 t.executeSql("INSERT INTO cityTownMst (cityTownId,cityTownName) VALUES (?, ?)", [citytown_id, citytown_name]);
+                                 var cityTownTypeId = stateArr.CityTownTypeId;
+                                 t.executeSql("INSERT INTO cityTownMst (cityTownId,cityTownName,cityTownTypeId) VALUES (?, ?, ?)", [citytown_id, citytown_name, cityTownTypeId]);
 
                              }
                          }
@@ -4511,12 +4512,35 @@ function arrayRemove(arr, value) {
      }
 
      if (travelReqID != 'undefined' && travelReqID != '-1') {
-         getExpenseIdForTravelFromDB(travelReqID, travelModeID, travelCategoryID, cityTownID, travelExpenseReqID, cityTownName, travelExpenseReqName);
+         setCityTownTypeId(cityTownID, travelReqID, travelModeID, travelCategoryID, travelExpenseReqID, cityTownName, travelExpenseReqName)
+     }
+ }
+
+ function setCityTownTypeId(cityTownID, travelReqID, travelModeID, travelCategoryID, travelExpenseReqID, cityTownName, travelExpenseReqName){
+   if (mydb) {
+         mydb.transaction(function(t) {
+             t.executeSql("SELECT cityTownTypeId FROM cityTownMst where cityTownId=" + cityTownID, [],
+                 function(transaction, results) {
+
+                     for (i = 0; i < results.rows.length; i++) {
+
+                         var row = results.rows.item(i);
+                         var cityTownTypeId = row.cityTownTypeId;
+
+                         if (cityTownTypeId != "" && cityTownTypeId != 0) {
+                                getExpenseIdForTravelFromDB(travelReqID, travelModeID, travelCategoryID, cityTownTypeId, travelExpenseReqID, cityTownName, travelExpenseReqName);
+                         }
+
+                     }
+                 });
+         });
+     } else {
+         alert(window.lang.translate('Database not found, your browser does not support web sql!'));
      }
  }
 
  function getExpenseIdForTravelFromDB(travelReqID, travelModeID, travelCategoryID, cityTownID, travelExpenseReqID, cityTownName, travelExpenseReqName) {
-
+console.log("cityTownID : "+cityTownID);
      if (mydb) {
          mydb.transaction(function(t) {
              t.executeSql("SELECT expenseNameId FROM travelExpenseNameMst where id=" + travelExpenseReqID, [],
@@ -4528,6 +4552,7 @@ function arrayRemove(arr, value) {
                          var expenseNameId = row.expenseNameId;
 
                          if (expenseNameId != "" && expenseNameId != 0) {
+
                              calcuteEntitlementForTS(expenseNameId, travelReqID, travelExpenseReqID, travelModeID, travelCategoryID, cityTownID, cityTownName, travelExpenseReqName);
                          }
 
@@ -4704,6 +4729,14 @@ function arrayRemove(arr, value) {
                                  if (document.getElementById("sideNavProfilePreview") != null) {
                                      document.getElementById("sideNavProfilePreview").src = "data:image/png;base64," + row.profileAttachment;
                                  }
+                                 if(document.getElementById("ProfilePreview") != null){
+                                     var x = document.getElementById("ProfilePreview").complete;
+                                     console.log("x = "+x);
+                                     if(x == false){
+                                         document.getElementById("ProfilePreview").src =  "images/profilepic.jpg";
+                                     }
+                                 }
+
                              }
                          }
 
@@ -6037,7 +6070,7 @@ function queryAnwser(){
          if(file != ""){
             file = file.replace(/data:image\/(png|jpg|jpeg);base64,/, '');
          }
-         
+
         jsonToBeSendForQuery["imageData"] = file;
 
 
@@ -6056,6 +6089,7 @@ function queryAnwser(){
                      successMessage = "Query Answered Successfully";
                      
                      requestRunning = false;
+                     resetImageData();
                      j('#loading_Cat').hide();
                      j('#mainHeader').load(headerBackBtn);
                      j('#mainContainer').load(pageRefSuccess);
@@ -6614,3 +6648,26 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
   // *************************************** Travel Request Header / Details -- End *****************************************************//
 
 // ---------------------------------------------------  Neha -- End -----------------------------------------------------  //
+function updateProfilePicture(imageData){
+     try {
+         var empId = window.localStorage.getItem("EmployeeId");
+
+         if (mydb) {
+
+                      mydb.transaction(function(t) {
+                         t.executeSql("DELETE FROM profileMst");
+                     });
+
+             if (val.ProfileImageData != "" && val.ProfileImageData != null) {
+                 mydb.transaction(function(t) {
+                     t.executeSql("INSERT INTO profileMst (empId,profileAttachment) VALUES (?,?)", [empId, imageData]);
+                 });
+             }
+         } else {
+             alert(window.lang.translate('Database not found, your browser does not support web sql!'));
+         }
+     } catch (e) {
+         console.log(e);
+     }
+}
+

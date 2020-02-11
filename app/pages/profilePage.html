@@ -56,14 +56,54 @@
             margin-bottom: 20px;
             color: lightgray;
         }
+
+        #overlay {
+          position: fixed;
+          display: none;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+         /* background-color: rgba(0,0,0,0.5);*/
+          z-index: 2;
+          cursor: pointer;
+           overflow-y: hidden;
+            max-height: 500px; /* approximate max height */
+
+            transition-property: all;
+            transition-duration: .5s;
+            transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+        }
+
+/*        .button {
+            background-color: white;
+            color: #1db398;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+         
+            overflow: auto;
+            position: relative;
+            width: 100%;
+            text-align: center;
+            margin-top: -1px;
+           
+            font-weight: 700;
+        }
+*/
     </style>
+<body>
+
  <div class="container-fluid" style="background-color: white;padding-top: 40px;">
         <div class="row">
             <div class="col-md-12" id ="imageBlock" >
                 <img src = "images/profilepic.jpg" id="ProfilePreview" alt="Employee Profile Picture" style="border: 1px solid;border-radius: 50%;margin-left: auto; border-radius: 35px; margin-right: auto;display: block;" height="40%" width="40%">
+                <div onclick="on()"><i class='fa fa-paperclip' style='font-size:18px;color:#0f97b2;' onclick=''></i></div>
             </div>
         </div>
-        <div class="container-fluid">
+        <div id = "mainContent" class="container-fluid">
             <br>
             <br>
             <div class="col-md-12" style="border-bottom: 1px solid #ccc;">
@@ -81,11 +121,86 @@
                 <label id="userName"></label>
             </div>
         </div>
-    </div>
+
+         <div id="profileContent"  onclick="off()" class="container-fluid">
+            <br>
+            <br>
+            <div class="col-md-12" style="border-bottom: 1px solid #ccc;text-align: center;"  onclick="captureProfilePhoto();">
+               <img src="images/camera.png"  width="15%" height="15%">Take Photo
+            </div>
+            <br>
+            <div class="col-md-12" style="border-bottom: 1px solid #ccc;text-align: center;" onclick="openGallery(pictureSource.PHOTOLIBRARY);">
+                <img src="images/gallery.png"  width="15%" height="15%">Gallery
+            </div>
+            <br>
+        </div>
+
+        </div>
+       
+
+<!--  <div id="overlay" onclick="off()"></div>
+<div id = "buttons" style="display: none;">
+<button class="button" onclick="captureProfilePhoto();"> <img src="images/camera.png"  width="15%" height="15%">Take Photo</button>
+<button class="button" onclick="openGallery(pictureSource.PHOTOLIBRARY);"><img src="images/gallery.png"  width="15%" height="15%">Gallery</button>
+</div>
+ -->
+
+</body>
     <script type="text/javascript">
         document.getElementById("firstName").innerHTML = window.localStorage.getItem("FirstName");
         document.getElementById("lastName").innerHTML = window.localStorage.getItem("LastName");
         document.getElementById("userName").innerHTML = window.localStorage.getItem("UserName");
         findProfileImagedata();
+
+        function on() {
+          document.getElementById("profileContent").style.display = "block";
+          document.getElementById("mainContent").style.display = "none";
+        }
+
+        function off() {
+          document.getElementById("profileContent").style.display = "none";
+          document.getElementById("mainContent").style.display = "block";
+        }
+
+
+/*  
+      
+*/
+        function capturePhoto() {
+
+            navigator.camera.getPicture(onProfilePhotoURISuccess, onFail, {
+                quality: 10,
+                destinationType: 0
+            });
+            camerastatus = status;
+
+        }
+
+        function onFail(message) {
+
+        }
+
+        function openGallery(source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(onProfilePhotoURISuccess, onFail, {
+            quality: 10,
+            destinationType: 0,
+            sourceType: source
+        });
+        camerastatus = status;
+
+    }
+
+/*    function onPhotoURISuccess(imageURI) {
+    document.getElementById("ProfilePreview").src = "data:image/png;base64," + imageData;
+        updateProfilePicture(imageData);
+
+}
+*/
+    function onProfilePhotoURISuccess(imageData) {
+        document.getElementById("ProfilePreview").src = "data:image/png;base64," + imageData;
+        updateProfilePicture(imageData);
+        }
+
 
     </script>
