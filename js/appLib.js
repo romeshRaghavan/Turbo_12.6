@@ -5218,7 +5218,7 @@ console.log("cityTownID : "+cityTownID);
      var pendingAt = "";
      mydb.transaction(function(t) {
 
-        alert("busExpHeaderId 1: "+busExpHeaderId);
+
 
          t.executeSql('SELECT * FROM BEHeader where busExpHeaderId = ' + busExpHeaderId, [],
              function(transaction, result) {``
@@ -5449,7 +5449,7 @@ function rejectVoucher(){
 
  function approveVoucher(busExpHeaderId){
 
-    alert("busExpHeaderId : "+busExpHeaderId);
+
     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var pageRefSuccess = defaultPagePath + 'success.html';
 
