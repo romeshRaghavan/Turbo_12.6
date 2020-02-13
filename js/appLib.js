@@ -5211,10 +5211,14 @@ console.log("cityTownID : "+cityTownID);
     return( date.getMonth() + 1 + "/" +date.getDate());
 }
 
+// Neha
+
  function setHeaderToDetail(busExpHeaderId, voucherDetailArray, detailBodyLines) {
      var statusForEdit = "";
      var pendingAt = "";
      mydb.transaction(function(t) {
+
+        alert("busExpHeaderId 1: "+busExpHeaderId);
 
          t.executeSql('SELECT * FROM BEHeader where busExpHeaderId = ' + busExpHeaderId, [],
              function(transaction, result) {``
@@ -5308,7 +5312,7 @@ console.log("cityTownID : "+cityTownID);
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.rejectionComments+"</div>"
                                             +"<div><br>"
                                             +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -5317,15 +5321,16 @@ console.log("cityTownID : "+cityTownID);
 
                              buttonValue =  
                                             "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
 
                          if(enableDivBasedOnStatus == 'A'){
-                             buttonValue =  "<div class='col-md-12' style='text-align: center; padding-bottom: 20px;'>"
-                                            +"<button type='submit' id = 'approveBtn' class='btn btn-primary' onclick='approveVoucher("+row.headerId+")'>Approve</button>&nbsp;"
-                                            +"<button type='button' id = 'RejectedBtn' class='btn btn-primary' data-toggle='modal' data-id="+row.headerId+" data-target='#myModal'>Send Back</button>"
+
+                            buttonValue =  "<div class='col-md-12' style='text-align: center; padding-bottom: 20px;'>"
+                                            +"<button type='submit' id = 'approveBtn' class='btn btn-primary' onclick='approveVoucher("+row.busExpHeaderId+")'>Approve</button>&nbsp;"
+                                            +"<button type='button' id = 'RejectedBtn' class='btn btn-primary' data-toggle='modal' data-id="+row.busExpHeaderId+" data-target='#myModal'>Send Back</button>"
                                             +"</div>";
 
                              j('#buttonsAttached').append(buttonValue);
@@ -5373,7 +5378,7 @@ console.log("cityTownID : "+cityTownID);
 
 // ************************************** Approve Reject Voucher Start ************************************************ //
 function rejectVoucher(){
-    var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var pageRefSuccess = defaultPagePath + 'success.html';
     var busExpHeaderId = j("#RejectedBtn").data('id');
     var comment = j.trim(j("#sendBackComment").val());
@@ -5382,8 +5387,7 @@ function rejectVoucher(){
 
         var jsonToBeSendForApproval = new Object();
         jsonToBeSendForApproval["processId"] = '1';
-        jsonToBeSendForApproval["headerList"] = 
-            
+        jsonToBeSendForApproval["headerList"] = busExpHeaderId;
         jsonToBeSendForApproval["employeeId"] = window.localStorage.getItem("EmployeeId");
         jsonToBeSendForApproval["buttonStatus"] = "R";
         jsonToBeSendForApproval["rejectionComment"] = comment;
@@ -5444,6 +5448,8 @@ function rejectVoucher(){
 }
 
  function approveVoucher(busExpHeaderId){
+
+    alert("busExpHeaderId : "+busExpHeaderId);
     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var pageRefSuccess = defaultPagePath + 'success.html';
 
