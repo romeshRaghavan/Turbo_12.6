@@ -6654,13 +6654,15 @@ function updateProfilePicture(imageData){
 
          if (mydb) {
 
-                      mydb.transaction(function(t) {
-                         t.executeSql("DELETE FROM profileMst");
-                     });
-
              if (val.ProfileImageData != "" && val.ProfileImageData != null) {
+
+                 var jsonToUpdateProfileImg = new Object();
+                 jsonToUpdateProfileImg["employeeId"] = empId;
+                 jsonToUpdateProfileImg["profileData"] = imageData;
+
                  mydb.transaction(function(t) {
-                     t.executeSql("INSERT INTO profileMst (empId,profileAttachment) VALUES (?,?)", [empId, imageData]);
+                     t.executeSql("UPDATE profileMst set profileAttachment ='"+imageData+ "'  where empId = " + empId + ";");
+                     updateEmpProfile(jsonToUpdateProfileImg);
                  });
              }
          } else {
@@ -6671,3 +6673,28 @@ function updateProfilePicture(imageData){
      }
 }
 
+ function updateEmpProfile(jsonToUpdateProfileImg) {
+
+     j.ajax({
+         url: window.localStorage.getItem("urlPath") + "UpdateProfilePicture",
+         type: 'POST',
+         dataType: 'json',
+         crossDomain: true,
+         data: JSON.stringify(jsonToUpdateProfileImg),
+         success: function(data) {
+            
+             if (data.Status == "Success") {
+                alert("completed successfully");
+
+                 requestRunning = false;
+             } else {
+                 successMessage = "Error: Oops something is wrong, Please Contact System Administer";
+                 requestRunning = false;
+             }
+         },
+         error: function(data) {
+             requestRunning = false;
+         }
+     });
+
+ }

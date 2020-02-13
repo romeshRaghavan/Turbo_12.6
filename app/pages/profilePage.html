@@ -147,15 +147,12 @@
 
     }
 
-/*    function onPhotoURISuccess(imageURI) {
-    document.getElementById("ProfilePreview").src = "data:image/png;base64," + imageData;
-        updateProfilePicture(imageData);
-
-}
-*/
     function onProfilePhotoURISuccess(imageData) {
         document.getElementById("ProfilePreview").src = "data:image/png;base64," + imageData;
+
+    setTimeout(function() {
         updateProfilePicture(imageData);
+          }, 100);
         }
 
 
