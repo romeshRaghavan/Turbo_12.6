@@ -6654,7 +6654,7 @@ function updateProfilePicture(imageData){
 
          if (mydb) {
 
-             if (val.ProfileImageData != "" && val.ProfileImageData != null) {
+             if (imageData != "") {
 
                  var jsonToUpdateProfileImg = new Object();
                  jsonToUpdateProfileImg["employeeId"] = empId;
