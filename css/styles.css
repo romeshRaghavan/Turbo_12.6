@@ -263,7 +263,7 @@ input[type=radio] {
     top: 12px;
     display: block;
     float: none;
-    left: 170px;
+    left: 145px;
     margin: 0;
     padding: 0;
     position: absolute;
@@ -520,8 +520,7 @@ input[type=radio] {
 .expenzingImg {
     position: absolute;
     top: 8px;
-    left: 140px;
-    z-index: 9;
+    left: 115px;
     width: 25px;
 }
 
@@ -653,13 +652,12 @@ a {
 a:focus,
 a:hover {
     color: #23527c;
-    text-decoration: underline
+    text-decoration: none;
 }
 
 a:focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px
 }
 
 a {
@@ -727,8 +725,7 @@ a:hover {
 }
 
 .topfixednavigate {
-    background-color: #fff;
-    /* border-bottom: 1px solid #999999;*/
+    background-color: #ffff;
     color: #58a7c4;
     height: 40px;
     left: 0;
@@ -759,7 +756,7 @@ a:hover {
 }
 
 .softwarecontent {
-    font-size: 22px;
+    font-size: 20px;
     color: #ffffff;
     text-align: center;
     margin-top: 10px;
@@ -781,7 +778,7 @@ a:hover {
     background-image: url("../images/expenzing-logo.png");
     background-repeat: no-repeat;
     background-position: center;
-    height: 85px;
+    height: 90px;
 }
 
 body {
@@ -1228,7 +1225,7 @@ div.image {
 }
 
 .selectionSubmitTSBtns {
-    width: 50%;
+    width: 33.33%;
     font-size: 13px;
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -1288,17 +1285,6 @@ div.image {
 
 }
 
-
 #grad1 {
-/*   background-color: #56b1bf;
-   background-image: linear-gradient(141deg,#56b1bf 0%, #56b1bf 51%,#08708a 75%);
-   opacity: 0.95;
-*/
-   /* background-color: #dae9e4;
-    background-image: linear-gradient(141deg,#dae9e4 0%, #a7e1de 51%,#a7e1de 75%);
-    opacity: 0.95;*/
-
-    background-color: #56b1bf;
-    background-image: linear-gradient(141deg,#154a78 0%, #63becc 51%,#154a78 75%);
-    opacity: 0.95;
+    background-color: #2CB2CA;
 }

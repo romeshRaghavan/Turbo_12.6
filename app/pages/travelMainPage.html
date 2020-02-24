@@ -16,7 +16,7 @@
 <div class="deals">
     <div class="sap_tabs">
         <div id="horizontalTab">
-            <ul class="resp-tabs-list">
+            <ul id = "helpimage" class="resp-tabs-list">
                 <li lang="en" class="resp-tab-item " aria-controls="tab_item-0" role="tab" onclick="addHeader(); clearDiv();">Travel <br> Home</li>
                 <li lang="en" class="active" class="resp-tab-item resp-tab-active" aria-controls="tab_item-1" role="tab" onclick="addHeader(); clearDivRequest();"> Travel <br> Request</li>
                 <li lang="en" class="resp-tab-item " aria-controls="tab_item-2" role="tab" onclick="addHeader(); clearDivExpense();">Travel <br> Settlement</li>
@@ -437,7 +437,7 @@
                     </script>
                 </div>
 
-                <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
+                <div id = "TS" class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
                     <div class="modal-body clearfix">
                         <div class="row" style="">
                             <div class="col-lg-12 clearfix allexpebtn" id="box">
@@ -454,9 +454,55 @@
                         fetchTravelSettlementExp();
                     </script>
                 </div>
-
             </div>
 
+<div id="EA" style="display: none">
+    <div class="modal-body clearfix">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 lang="en">Settle Employee Advance</h1>
+            </div>
+        </div>
+        <div class="row expenseform" data-role="page" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Total Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="totalAmt" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="row expenseform" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Advance Anount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="TRAdvAmount" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="row expenseform" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Refund Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="refundAmt" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="row expenseform" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Recovery Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="recoveryAmt" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <button class="btn btn-primary btn-lg btn-block expbusinessbtnsingle" onclick="submitTSWithEA();"><font size="3.5" lang="en">Send for Approval</font></button>
+            </div>
+        </div>
+    </div>
+</div>
             <div id="tabTrip1" class="tab active" style="display: none">
                 <div class="list-block mt-10 comments-box">
                     <div class="upcomingtripandpref">

@@ -723,7 +723,7 @@ h2.resp-accordion1 {
 
 h2.resp-accordion:hover,
 h2.resp-accordion1:hover {
-    background: #ffe71d;
+    background: #2CB2CA;
     text-shadow: none;
     transition: .5s all;
     -webkit-transition: .5s all;
@@ -1261,16 +1261,14 @@ li.com a:hover {
 }
 
 .ac-container label {
-    padding: 15px 6px 15px 60px;
+    padding: 15px 10px 15px 60px;
     position: relative;
     display: block;
     cursor: pointer;
     color: #000;
     line-height: 30px;
     font-size: 18px;
-    height: 75px;
     font-weight: 400;
-    background-image: url(../images/ar-n.png) no-repeat right;
 }
 
 .ac-container #smartClaimsID label:last-child {
@@ -2510,9 +2508,9 @@ a.hvr-hollow:active {
         margin-bottom: 8px;
     }
     .resp-tab-item {
-        font-size: 13px;
+        font-size: 14px;
         width: 25%;
-        padding: 17px 1px;
+        padding: 15px 15px;
     }
     .skill-inner {
         padding: 1em;
@@ -2645,9 +2643,9 @@ a.hvr-hollow:active {
         margin-top: 2em;
     }
     .resp-tab-item {
-        font-size: 13px;
+        font-size: 14px;
         width: 25%;
-        padding: 17px 1px;
+        padding: 15px 15px;
     }
     .skill-inner {
         padding: 2em;
@@ -2877,9 +2875,9 @@ a.hvr-hollow:active {
         margin-top: 2em;
     }
     .resp-tab-item {
-        font-size: 13px;
+        font-size: 14px;
         width: 25%;
-        padding: 17px 1px;
+        padding: 15px 15px;
     }
     .skill-inner {
         padding: 2em;
@@ -3418,9 +3416,9 @@ a.hvr-hollow:active {
         background: url("../images/tw.png") no-repeat 36px 8px #2daae4;
     }
     .resp-tab-item {
-        font-size: 13px;
+        font-size: 14px;
         width: 25%;
-        padding: 17px 1px;
+        padding: 15px 15px;
     }
     a.hvr-bounce-to-bottom2 {
         padding: 1em 1em;
@@ -3511,9 +3509,9 @@ a.hvr-hollow:active {
 
 @media (max-width:384px) {
     .resp-tab-item {
-        font-size: 11px;
+        font-size: 14px;
         width: 25%;
-        padding: 17px;
+        padding: 15px 15px;
     }
     .twitter {
         margin-top: 22em;
@@ -3686,4 +3684,17 @@ a.hvr-hollow:active {
     label {
         font-weight: 600;
     }
+}
+
+.badge {
+    border-radius: 50%;
+    background-color: #2CB2CA;
+    color: white;
+    float: right;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.2;
 }

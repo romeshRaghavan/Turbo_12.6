@@ -1,5 +1,5 @@
-<div class="modal-body clearfix" style="background-color:white;height: inherit;">
-    <div class="row" style="padding-top: 25px;">
+<div id = "TS" class="modal-body clearfix" style="background-color:white;height: inherit;">
+    <div  class="row" style="padding-top: 25px;">
         <div class="col-lg-12 clearfix allexpebtn" id="box">
             <h1 lang="en">View Travel Expense</h1>
         </div>
@@ -13,6 +13,53 @@
     </div>
     <div style="display:none" id="loading_Cat">
         <img src="images/loading2.gif" id="loading-image_Cat" alt="Loading...">
+    </div>
+</div>
+<div id="EA" style="display: none">
+    <div class="modal-body clearfix">
+        <div class="row">
+            <div class="col-lg-12 clearfix allexpebtn">
+                <h1 lang="en">Settle Employee Advance</h1>
+            </div>
+        </div>
+        <div class="row expenseform" data-role="page" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+               <label><font lang="en" face="verdana" color="gray" size="2.77">Total Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="totalAmt" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="row expenseform" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Advance Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+               <input id="advAmount" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="row expenseform" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Refund Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="refundAmt" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <div class="row expenseform" style="padding-bottom: 10px;">
+            <div class="col-lg-6">
+                <label><font lang="en" face="verdana" color="gray" size="2.77">Recovery Amount </font></label>
+            </div>
+            <div class="col-lg-6">
+                <input id="recoveryAmt" type="tel" placeholder="" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <button class="btn btn-primary btn-lg btn-block" onclick="submitTSWithEA();"><font size="3.5" lang="en">Send for Approval</font></button>
+            </div>
+        </div>
     </div>
 </div>
 <script>

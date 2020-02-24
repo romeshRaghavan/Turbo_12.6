@@ -58,21 +58,40 @@
         }
 
         #profileContent {
-          display: none;
+            display: none;
+        }
+
+        .ripple {
+          background-position: center;
+          transition: background 0.8s;
+        }
+        .ripple:hover {
+            background: #d3dadf radial-gradient(circle, transparent 1%,
+        #e7ebee 1%) center/15000%;
+            background-color: rgb(211, 218, 223);
+            background-size: 15000%;
+        }
+        .ripple:active {
+            background-color: #bdd1d7;
+            background-size: 100%;
+            transition: background 0s;
         }
 
     </style>
 <body>
-
- <div class="container-fluid" style="background-color: white;padding-top: 40px;">
-        <div class="row">
-            <div class="col-md-12" id ="imageBlock" >
-                <img src = "images/profilepic.jpg" id="ProfilePreview" alt="Employee Profile Picture" style="border: 1px solid;border-radius: 50%;margin-left: auto; border-radius: 35px; margin-right: auto;display: block;" height="40%" width="40%">
-                <div onclick="on()"><i class='fa fa-paperclip' style='font-size:18px;color:#0f97b2;' onclick=''></i></div>
+<div class="container-fluid" style="padding: 25px;border-bottom: 1px solid lightgray;background-color: #2CB2CA;">
+    <div class="row">
+        <div class="col-md-12" id ="imageBlock" >
+            <img src = "images/profilepic.png" id="ProfilePreview" alt="Employee Profile Picture" style="margin-left: auto;margin-right: auto;display: block;" height="40%" width="40%">
+            <div onclick="on()" > <img src = "images/cameraIcon.png"
+                style="position: absolute;right: 33%;bottom: 0%;width: 10%;height: 35px;">
             </div>
         </div>
+    </div>
+</div>
+
+ <div class="container-fluid">
         <div id = "mainContent" class="container-fluid">
-            <br>
             <br>
             <div class="col-md-12" style="border-bottom: 1px solid #ccc;">
                 <h5>First Name</h5>
@@ -90,20 +109,18 @@
             </div>
         </div>
 
-         <div id="profileContent"  onclick="off()" class="container-fluid" >
+         <div id="profileContent" onclick="off()" class="container-fluid">
             <br>
-            <br>
-            <div class="col-md-12" style="border-bottom: 1px solid #ccc;text-align: center;"  onclick="captureProfilePhoto();">
+            <div class="col-md-12 ripple" style="border-bottom: 1px solid #ccc;text-align: center;"  onclick="captureProfilePhoto();">
                <img src="images/camera.png"  width="15%" height="15%">Take Photo
             </div>
             <br>
-            <div class="col-md-12" style="border-bottom: 1px solid #ccc;text-align: center;" onclick="openGallery(pictureSource.PHOTOLIBRARY);">
+            <div class="col-md-12 ripple" style="border-bottom: 1px solid #ccc;text-align: center;" onclick="openGallery(pictureSource.PHOTOLIBRARY);">
                 <img src="images/gallery.png"  width="15%" height="15%">Gallery
             </div>
             <br>
         </div>
-
-        </div>
+    </div>
 
 </body>
     <script type="text/javascript">

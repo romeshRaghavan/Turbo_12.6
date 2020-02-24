@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+.modal.fade:not(.in).bottom .modal-dialog {
+	-webkit-transform: translate3d(0%, 50%, 0);
+	transform: translate3d(0%, 50%, 0);
+}
+
+li {
+	list-style: none;
+    padding: 5px;
+    margin-left: -15px;
+}
+
+.btn-flat {
+	font-size: 18px;
+}
+
+li:hover {
+    background-color: rgba(29, 29, 29, 0.1);
+    border-radius: 5px;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  	background: #d3dadf radial-gradient(circle, transparent 1%,
+#e7ebee 1%) center/15000%;
+    background-color: rgb(211, 218, 223);
+    background-size: 15000%;
+}
+.ripple:active {
+  	background-color: #bdd1d7;
+	background-size: 100%;
+	transition: background 0s;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+	padding-left: 15px;
+}
+</style>
+<body>
+
+<div class="container-fluid" id="profileContent" onclick="off()">
+  <div class="modal fade" id="myModal" role="dialog" >
+    <div class="modal-dialog" style="position:absolute; bottom:0; margin:0; left:0px; width:100%;">
+      <div class="modal-content">
+        <div class="modal-body">
+          <ul>
+              <li class="ripple">
+              	<div onclick="captureProfilePhoto();">
+                  <i class="fa fa-camera btn-flat" style="padding-right: 10px;"></i>
+                  <a href="#" class="modal-action modal-close btn-flat">Camera</a>
+              	</div>
+              </li>
+              <li class="ripple">
+              	<div onclick="openGallery(pictureSource.PHOTOLIBRARY);">
+                  <i class="fa fa-photo btn-flat" style="padding-right: 10px;"></i>
+                  <a href="#" class="modal-action modal-close btn-flat">Gallery</a>
+              	</div>
+              </li>
+              <li class="ripple">
+              	<div>
+                  <i class="fa fa-close btn-flat" style="padding-right: 15px;"></i>
+                  <a href="#" class="modal-action modal-close btn-flat">Cancel</a>
+              	</div>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	$('.btn').click(function() {
+      $('.modal')
+          .prop('class', 'modal fade') // revert to default
+          .addClass( $(this).data('direction') );
+      $('.modal').modal('show');
+  });
+</script>
+</body>
+</html>

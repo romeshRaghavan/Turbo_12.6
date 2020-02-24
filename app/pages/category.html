@@ -1,127 +1,120 @@
- <script type="text/javascript">
-        var lang = new Lang();
-        lang.dynamic('th', 'js/langpack/th.json');
-        lang.dynamic('ru','js/langpack/russian.json');
-        lang.dynamic('ae','js/langpack/arabic.json');
-        lang.dynamic('tamil','js/langpack/tamil.json');
-        lang.dynamic('hindi','js/langpack/hindi.json');
-        lang.dynamic('ka','js/langpack/kannada.json');
-        lang.dynamic('sd','js/langpack/swidish.json');
-        lang.dynamic('vt','js/langpack/vietnam.json');
-        lang.init({
-            defaultLang: 'en'
-        });
-        var smsWatchFlag=window.localStorage.getItem("smsWatchStatus");
-        var smartClaimsRole=window.localStorage.getItem("smartClaimsViaSMSOnMobile");
-         if(smartClaimsRole){
-             if(smsWatchFlag == false){
-                 startWatch();
-             }
+<script type="text/javascript">
+    var lang = new Lang();
+    lang.dynamic('th', 'js/langpack/th.json');
+    lang.dynamic('ru', 'js/langpack/russian.json');
+    lang.dynamic('ae', 'js/langpack/arabic.json');
+    lang.dynamic('tamil', 'js/langpack/tamil.json');
+    lang.dynamic('hindi', 'js/langpack/hindi.json');
+    lang.dynamic('ka', 'js/langpack/kannada.json');
+    lang.dynamic('sd', 'js/langpack/swidish.json');
+    lang.dynamic('vt', 'js/langpack/vietnam.json');
+    lang.init({
+        defaultLang: 'en'
+    });
+    var smsWatchFlag = window.localStorage.getItem("smsWatchStatus");
+    var smartClaimsRole = window.localStorage.getItem("smartClaimsViaSMSOnMobile");
+    if (smartClaimsRole) {
+        if (smsWatchFlag == false) {
+            startWatch();
         }
+    }
 </script>
- <script>
+<script>
     hideTRIcons();
     hideBusinessExpense();
     //hideSmartClaims();
- </script>
+</script>
 
 <body style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
-   
 
- <style>
-
-.kebab {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0 16px;
-    top: 20px;
-}
-
-.kebab figure {
-    width: 6px;
-    height: 6px;
-    border-radius: 5px;
-    background: #00bcd4;
-    margin: 3px 0;
-}
-
-.notification {
-  color: white;
-  text-decoration: none;
-  position: relative;
-  display: inline-block;
-  border-radius: 2px;
-}
-
-.notification .badge {
-    position: absolute;
-    top: 8px;
-    left: 163px;
-    border-radius: 50%;
-    background-color: red;
-    color: white;
-}
-
-.badge {
-    padding: 10px 13px;
-    font-size: 15px;
-    top: 8px;
-    border-radius: 50%;
-    background-color: #0f97b2;
-    color: white;
-    float: right;
-}
-
-
-
-/* Responsive columns */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    padding: 30px 5px 20px;
-  }
-}
-
-/* Style the counter cards */
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 30px;
-  text-align: center;
-  background-color: #f1f1f1;
-}
-
-</style>
-        <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
-            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
-        </div>
+    <style>
+        .kebab {
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 0px 20px;
+            top: 20px;
+        }
+        
+        .kebab figure {
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background: #00bcd4;
+            margin: 3px 0;
+        }
+        
+        .notification {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            border-radius: 2px;
+        }
+        
+        .notification .badge {
+            position: absolute;
+            top: 8px;
+            left: 163px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+        }
+        
+        .badge {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        /* Responsive columns */
+        
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                display: block;
+                padding: 30px 5px 20px;
+            }
+        }
+        /* Style the counter cards */
+        
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+    </style>
+    <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
+        <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+        <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
     </div>
+
     <div class="col-md-6 accordions">
-         <section class="ac-container">
-           <div class="allcats">
-                  <div onclick="pastVoucherViews()" class="kebab" style="float:right;">
+        <section class="ac-container">
+            <div class="allcats">
+                <div onclick="pastVoucherViews()" class="kebab" style="float:right;">
                     <figure></figure>
                     <figure class="middle"></figure>
                     <figure></figure>
-                  </div>
-                </ul>
-                <span class="claimicon"><i class="fa fa-money" aria-hidden="true"></i></span>
+                </div>
+                
+                <span class="claimicon" style="display: flex;"><img src="images/ic_3.png" style="width:20%;"/>
+                </span>
                 <label lang="en" onclick="createBusiExpMain();" style="width:90%;">
                     Claim Expense
                     <h5 lang="en">Add Expense Claims</h5>
                 </label>
             </div>
-                <div class="allcats">
-                  <div onclick="TRTSAllViews()" id = "TRkebab" class="kebab" style="float:right;">
+            <div class="allcats">
+                <div onclick="TRTSAllViews()" id="TRkebab" class="kebab" style="float:right;">
                     <figure></figure>
                     <figure class="middle"></figure>
                     <figure></figure>
-                  </div>
-                </ul>
-                <span class="claimicon"><i class="fa fa-plane" aria-hidden="true"></i></span>
+                </div>
+      
+                <span class="claimicon" style="display: flex;"><img src="images/ic_2.png" style="width:20%;"/></span>
                 <label lang="en" onclick="createTravelMain();" style="width:90%;">
                     Travel Management
                     <h5 lang="en">Add Travel Requests, Travel Settelments </h5>
@@ -133,35 +126,45 @@
                     My Receipts Wallet
                 </label>
             </div>
-            <div id="approver" class="allcats" >
-                <span class="claimicon"><i class="fa fa-check-square" style="font-size: 30px;color: darkcyan;" aria-hidden="true"></i>
+            <div id="approver" class="allcats">
+                <span class="claimicon" style="display: flex;"><img src="images/ic_1.png" style="width:20%;"/>
                 </span>
                 <label lang="en" onclick="viewVoucherHeaders('A');" style="" for="ac-2">
-                    My Approval 
+                    Expense Approval
                     <div class="badge" id="count" style="margin-top: 5px;"></div>
                     <h5 lang="en">Approve / Send Back Claims</h5>
                 </label>
             </div>
-             <div id="query" class="allcats" >
-                <span class="claimicon"><i class="fa fas fa-comments" style="font-size: 30px;color: darkcyan;" aria-hidden="true"></i>
+            <div id="trTsApprover" class="allcats">
+                <span class="claimicon" style="display: flex;"><img src="images/ic_4.png" style="width:20%;"/>
                 </span>
-                <label lang="en" onclick="viewVoucherHeaders('Q');" style="" for="ac-2">
+                <label lang="en" onclick="viewTravelVoucherHeaders('A');" style="" for="ac-2">
+                    Travel Approval
+                    <div class="badge" id="travelCount" style="margin-top: 5px;"></div>
+                    <h5 lang="en">Approve / Send Back Travel</h5>
+                </label>
+            </div>
+            <div id="query" class="allcats">
+                <span class="claimicon" style="display: flex;"><img src="images/ic_5.png" style="width:20%;"/>
+                </span>
+                <label lang="en" onclick="viewVoucherHeaders('Q');" for="ac-2" style="line-height: 45px;">
                     Queries
                     <div class="badge" id="queryCount" style="margin-top: 5px;"></div>
                     <h5 lang="en"></h5>
                 </label>
             </div>
-         </section>
+        </section>
     </div>
 </body>
 
 <script type="text/javascript">
     fetchCountForMyApproval('A');
-    if(window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.2){
+    fetchCountForTravelMyApproval('A');
+    if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.2) {
         document.getElementById('approver').style.display = 'none';
         $('.kebab').hide();
     }
-     if(window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.3){
+    if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.3) {
         $('#TRkebab').hide();
         document.getElementById('query').style.display = 'none';
     }
