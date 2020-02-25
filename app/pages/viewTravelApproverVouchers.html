@@ -155,7 +155,7 @@ label {
         <div id="horizontalTab" style="display: block;">
             <ul id="tab" class="resp-tabs-list" style="display: flex;">
                 <li lang="en" class="active" class="resp-tab-item resp-tab-active" aria-controls="tab_item-0" role="tab" onclick="addHeader();">Travel Request<div class="badge" id="trCount" style="float: none;margin-left: 5px;"></div></li>
-                <li lang="en" id="CategoryEAId" class="resp-tab-item " aria-controls="tab_item-1" role="tab" onclick="addHeader();" style="margin-right: -5px;">Travel Settelment <div class="badge" id="tsCount" style="margin-left: 4px;margin-top: -3px;"></div></li>
+                <li lang="en" id="CategoryEAId" class="resp-tab-item " aria-controls="tab_item-1" role="tab" onclick="addHeaderForTS();" style="margin-right: -5px;">Travel Settelment <div class="badge" id="tsCount" style="margin-left: 4px;margin-top: -3px;"></div></li>
             </ul>
 
             <div class="resp-tabs-container">
@@ -199,5 +199,5 @@ label {
     fetchCountForTravelRequest('A')
     fetchCountForTravelSettelment('A')
     syncTravelVoucherHeader(enableDivBasedOnStatus);
-    syncSettelmentVoucherHeader(enableDivBasedOnStatus);
+    //syncSettelmentVoucherHeader(enableDivBasedOnStatus);
 </script>
