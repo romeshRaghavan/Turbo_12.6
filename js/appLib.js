@@ -4737,6 +4737,8 @@ console.log("cityTownID : "+cityTownID);
 
                              var row = results.rows.item(i);
 
+                             ////console.log("row.profileAttachment : "+row.profileAttachment);
+
                              if (row.profileAttachment != "" ) {
                                  if (document.getElementById("ProfilePreview") != null) {
                                      document.getElementById("ProfilePreview").src = "data:image/png;base64," + row.profileAttachment;
@@ -4748,14 +4750,14 @@ console.log("cityTownID : "+cityTownID);
                                      var x = document.getElementById("ProfilePreview").complete;
                                      console.log("x = "+x);
                                      if(x == false){
-                                         document.getElementById("ProfilePreview").src =  "images/profilepic.png";
+                                         //document.getElementById("ProfilePreview").src =  "images/profilepic.png";
                                      }
                                  }
                                 if(document.getElementById("sideNavProfilePreview") != null){
                                      var x = document.getElementById("sideNavProfilePreview").complete;
                                      console.log("x = "+x);
                                      if(x == false){
-                                         document.getElementById("sideNavProfilePreview").src =  "images/profilepic.png";
+                                        // document.getElementById("sideNavProfilePreview").src =  "images/profilepic.png";
                                      }
                                  }
 
@@ -6388,8 +6390,6 @@ function queryAnwser(){
                          requestRunning = false;
                          if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                              displayTravelPastVoucherPage(data.Status);
-                         }  else if(statusOfVoucher == 'Q'){
-                            displayQueryVoucherPage(data.Status);
                          } else {
                              displayTravelApprovalPage(data.Status);
                          }
@@ -6397,9 +6397,12 @@ function queryAnwser(){
                      });
 
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
+                    alert("SUCCESS_NO_DATA statusOfVoucher : "+statusOfVoucher);
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                          displayTravelPastVoucherPage(data.Status);
+                     }  else if(statusOfVoucher == 'Q'){
+                            displayQueryVoucherPage(data.Status);
                      } else {
                          displayTravelApprovalPage(data.Status);
                      }
@@ -6802,6 +6805,11 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                                  }
                             });
                         }
+
+                           if(statusForEdit =='In Queries' && enableDivBasedOnStatus == 'A'){
+                            document.getElementById("approveBtn").disabled =true;
+                            }
+
                         var empId = window.localStorage.getItem("EmployeeId");
                         if(statusForEdit == 'In Queries'  && (empId==row.createdById)){
                             
@@ -6867,7 +6875,7 @@ function updateProfilePicture(imageData){
          success: function(data) {
             
              if (data.Status == "Success") {
-                alert("completed successfully");
+                alert("Profile Picture Message uploaded successfully");
 
                  requestRunning = false;
              } else {

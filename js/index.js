@@ -2294,8 +2294,11 @@ function hideTRIcons() {
      if (document.getElementById('CategoryTrRoleID') != null) {
     if (window.localStorage.getItem("TrRole") == "true") {
         document.getElementById('CategoryTrRoleID').style.display = "block";
+        document.getElementById('trTsApprover').style.display = "block";
+        
     } else {
         document.getElementById('CategoryTrRoleID').style.display = "none";
+        document.getElementById('trTsApprover').style.display = "none";
     }
   }
 }
@@ -3926,9 +3929,7 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                          requestRunning = false;
                          if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                              displaySettlementPastVoucherPage(data.Status);
-                         } else if( statusOfVoucher == 'Q'){
-                             displaySettlementQueryVoucherPage(data.Status);
-                         } else {
+                         }else {
                              displaySettlementApprovalPage(data.Status);
                          }
 
@@ -3938,6 +3939,8 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                      requestRunning = false;
                      if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
                          displaySettlementPastVoucherPage(data.Status);
+                     }  else if( statusOfVoucher == 'Q'){
+                             displaySettlementQueryVoucherPage(data.Status);
                      } else {
                          displaySettlementApprovalPage(data.Status);
                      }
@@ -4330,7 +4333,10 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                             });
                         }
                         var empId = window.localStorage.getItem("EmployeeId");
-                            
+                         
+                        if(statusForEdit =='In Queries' && enableDivBasedOnStatus == 'A'){
+                            document.getElementById("approveBtn").disabled =true;
+                        }   
                         if(statusForEdit == 'In Queries'  && (empId==row.createdById)){
                             
                             var ids = row.headerId+'&'+row.queryId;
@@ -4895,3 +4901,12 @@ function fetchViewForSettelmentApproverVouchersHeader() {
      });
  }
 
+
+
+function addHeaderForTS() {
+    var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+    j(document).ready(function() {
+        j('#mainHeader').load(headerBackBtn);
+    });
+    syncSettelmentVoucherHeader(enableDivBasedOnStatus);
+}
