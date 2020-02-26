@@ -5404,7 +5404,7 @@ console.log("cityTownID : "+cityTownID);
                         var pg = appPageHistory[len - 3];
                         if(statusForEdit == 'In Queries'  && (empId==row.createdById) && pg !='app/pages/viewPastVoucher.html'){
                             
-                            var ids = row.headerId+'&'+row.queryId;
+                            var ids = row.busExpHeaderId+'&'+row.queryId;
                        
                             buttonValue =   
                                             "<br>"
@@ -6816,7 +6816,7 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                         var empId = window.localStorage.getItem("EmployeeId");
                         if(statusForEdit == 'In Queries'  && (empId==row.createdById)){
                             
-                            var ids = row.busExpHeaderId+'&'+row.queryId;
+                            var ids = row.headerId+'&'+row.queryId;
                        
                             buttonValue =   
                                             "<br>"
