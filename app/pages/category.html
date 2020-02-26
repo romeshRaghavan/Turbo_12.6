@@ -168,4 +168,7 @@
         $('#TRkebab').hide();
         document.getElementById('query').style.display = 'none';
     }
+     if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+        document.getElementById('trTsApprover').style.display = 'none';
+    }
 </script>

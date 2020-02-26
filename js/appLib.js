@@ -4737,8 +4737,6 @@ console.log("cityTownID : "+cityTownID);
 
                              var row = results.rows.item(i);
 
-                             ////console.log("row.profileAttachment : "+row.profileAttachment);
-
                              if (row.profileAttachment != "" ) {
                                  if (document.getElementById("ProfilePreview") != null) {
                                      document.getElementById("ProfilePreview").src = "data:image/png;base64," + row.profileAttachment;
@@ -4833,9 +4831,15 @@ console.log("cityTownID : "+cityTownID);
  }
 
   function hideTRQuery(){
+
+    if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") > 12.3) {
         if (window.localStorage.getItem("TrRole") == "true") {
             document.getElementById('trQueryTab').style.display = "block";
             document.getElementById('tsQueryTab').style.display = "block";
+            } else {
+            document.getElementById('trQueryTab').style.display = "none";
+            document.getElementById('tsQueryTab').style.display = "none";
+            }
         } else {
             document.getElementById('trQueryTab').style.display = "none";
             document.getElementById('tsQueryTab').style.display = "none";
@@ -6397,12 +6401,11 @@ function queryAnwser(){
                      });
 
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
-                    alert("SUCCESS_NO_DATA statusOfVoucher : "+statusOfVoucher);
                      requestRunning = false;
                      if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                          displayTravelPastVoucherPage(data.Status);
                      }  else if(statusOfVoucher == 'Q'){
-                            displayQueryVoucherPage(data.Status);
+                           // displayQueryVoucherPage(data.Status);
                      } else {
                          displayTravelApprovalPage(data.Status);
                      }
@@ -6875,7 +6878,7 @@ function updateProfilePicture(imageData){
          success: function(data) {
             
              if (data.Status == "Success") {
-                alert("Profile Picture Message uploaded successfully");
+                alert("Profile Picture uploaded successfully");
 
                  requestRunning = false;
              } else {
@@ -6909,13 +6912,11 @@ function updateProfilePicture(imageData){
 
 function submitTSWithEA(){
 
-        var jsonTravelSettlementDetailsArr = [];
+            var jsonTravelSettlementDetailsArr = [];
         var travelSettleExpDetailsArr = [];
         minExpenseClaimDate = new Object;
-        var exceptionMessage = '';
-         var travelRequestIdToBeSent = ''
-
-        if (j("#source tr.selected").hasClass("selected")) {
+         if(validateTravelSettelment() == true){
+            if (j("#source tr.selected").hasClass("selected")) {
             j("#source tr.selected").each(function(index, row) {
                 if (requestRunning) {
                     return;
@@ -6925,12 +6926,6 @@ function submitTSWithEA(){
                 var expDate = j(this).find('td.expDate1').text();
 
                 var expenseDate = expDate;
-
-                var currentTravelRequestId = j(this).find('td.travelRequestId').text();
-
-                if (validateTravelSettelment() == true) {
-
-                travelRequestIdToBeSent = currentTravelRequestId
 
                 jsonFindTS["expenseDate"] = expenseDate;
                 jsonFindTS["travelRequestId"] = j(this).find('td.travelRequestId').text();
@@ -6958,25 +6953,21 @@ function submitTSWithEA(){
                 jsonTravelSettlementDetailsArr.push(jsonFindTS);
 
                 travelSettleExpDetailsArr.push(travelSettleDetailId);
-               } else {
-                if (exceptionMessage == '') {
-                    exceptionMessage = "Selected expenses should be mapped under Single Expense Type/Account Head."
-                  
-                    requestRunning = false;
-                    accountHeadIdToBeSent = "";
-                    alert(exceptionMessage);
-                }
-
-               }
             });
-        } 
-         if (travelRequestIdToBeSent != "" && travelSettleExpDetailsArr.length > 0) {
+                if (travelSettleExpDetailsArr.length > 0) {
                 saveTravelSettle(jsonTravelSettlementDetailsArr, travelSettleExpDetailsArr);
-            }/*else {
-            requestRunning = false;
-            alert(window.lang.translate('Tap and select Expenses to synch with server.'));
-        }*/
-
+                }
+                } else {
+                requestRunning = false;
+                alert(window.lang.translate('Tap and select Expenses to synch with server.'));
+                }
+        }else{
+            if (exceptionMessage == '') {
+                exceptionMessage = "Selected expenses should be mapped under Single Travel Request."
+                requestRunning = false;
+                alert(exceptionMessage);
+            }
+        }
 }
 
  function validateTravelSettelment() {

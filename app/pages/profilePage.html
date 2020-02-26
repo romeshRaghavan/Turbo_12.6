@@ -83,7 +83,7 @@
     <div class="row">
         <div class="col-md-12" id ="imageBlock" >
             <img src = "images/profilepic.png" id="ProfilePreview" alt="Employee Profile Picture" style="margin-left: auto;margin-right: auto;display: block;" height="40%" width="40%">
-            <div onclick="on()" > <img src = "images/cameraIcon.png"
+            <div id ="uploadbtn" onclick="on()" > <img src = "images/cameraIcon.png"
                 style="position: absolute;right: 33%;bottom: 0%;width: 10%;height: 35px;">
             </div>
         </div>
@@ -128,6 +128,12 @@
         document.getElementById("lastName").innerHTML = window.localStorage.getItem("LastName");
         document.getElementById("userName").innerHTML = window.localStorage.getItem("UserName");
         findProfileImagedata();
+
+
+    console.log("asd : "+window.localStorage.getItem("versionNumber") < 12.4);
+    if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+        document.getElementById('uploadbtn').style.display = 'none';
+    }
 
         function on() {
           document.getElementById("profileContent").style.display = "block";

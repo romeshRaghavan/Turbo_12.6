@@ -4505,13 +4505,16 @@ function fetchCountForTravelSettelment(statusOfVoucher) {
 
  }
 function saveTravelSettle(jsonTSArr, tsExpDetailsArr) {
-    var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+ var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var jsonToSaveTS = new Object();
+     var travelReqID ;
     jsonToSaveTS["employeeId"] = window.localStorage.getItem("EmployeeId");
     jsonToSaveTS["expenseDetails"] = jsonTSArr;
     jsonToSaveTS["ProcessStatus"] = "1";
-    
-    
+    j("#source tr.selected").each(function(index, row) {
+        travelReqID = j(this).find('td.travelRequestId').text();
+    });
+    jsonToSaveTS ["travelReqID"]=travelReqID;
     requestRunning = true;
     var pageRefSuccess = defaultPagePath + 'success.html';
     var pageRefFailure = defaultPagePath + 'failure.html';
@@ -4523,7 +4526,7 @@ function saveTravelSettle(jsonTSArr, tsExpDetailsArr) {
         data: JSON.stringify(jsonToSaveTS),
         success: function(data) {
             if (data.Status == "Success") {
-                successMessage = "Record(s) has been Saved successfully.";
+                successMessage = data.Message;
                 for (var i = 0; i < tsExpDetailsArr.length; i++) {
                     var travelSettleExpDetailId = tsExpDetailsArr[i];
                     deleteSelectedTSExpDetails(travelSettleExpDetailId);
