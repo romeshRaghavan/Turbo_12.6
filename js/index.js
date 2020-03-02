@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
 var WebServicePath = 'http://1.255.255.99:8080/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
@@ -29,6 +29,10 @@ var fileTempGalleryBE = "";
 var fileTempGalleryTS = "";
 var fileTempCameraBEQ = "";
 var fileTempGalleryBEQ = "";
+var fileTempCameraTRQ = "";
+var fileTempGalleryTRQ = "";
+var fileTempCameraTSQ = "";
+var fileTempGalleryTSQ = "";
 var mapToCalcERAmt = new Map();
 var requestRunning = false;
 var flagForUnitEnable = false;
@@ -2128,6 +2132,16 @@ function onPhotoDataSuccess(imageData) {
         fileTempCameraBEQ = "data:image/jpeg;base64," + imageData;
         smallImageBEQ.src = "data:image/jpeg;base64," + imageData;
         fileTempGalleryBEQ = "";
+    } else if(voucherType == 'TRQ'){
+        smallImageTRQ.style.display = 'block';
+        fileTempCameraTRQ = "data:image/jpeg;base64," + imageData;
+        smallImageTRQ.src = "data:image/jpeg;base64," + imageData;
+        fileTempGalleryTRQ = "";
+    }else if(voucherType == 'TSQ'){
+        smallImageTSQ.style.display = 'block';
+        fileTempCameraTSQ = "data:image/jpeg;base64," + imageData;
+        smallImageTSQ.src = "data:image/jpeg;base64," + imageData;
+        fileTempGalleryTSQ = "";
     }
 }
 
@@ -2138,6 +2152,10 @@ function resetImageData() {
     fileTempGalleryTS = "";
     fileTempCameraBEQ = "";
     fileTempGalleryBEQ = "";
+    fileTempCameraTRQ = "";
+    fileTempGalleryTRQ = "";
+    fileTempCameraTSQ = "";
+    fileTempGalleryTSQ = "";
 }
 
 function hideImageBlock(){
