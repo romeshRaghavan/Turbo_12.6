@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'http://1.255.255.99:8080/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'http://1.255.255.99:8080/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
@@ -2128,6 +2128,7 @@ function onPhotoDataSuccess(imageData) {
         smallImageTS.src = "data:image/jpeg;base64," + imageData;
         fileTempGalleryTS = "";
     } else if(voucherType == 'BEQ'){
+        alert("in BEQ");
         smallImageBEQ.style.display = 'block';
         fileTempCameraBEQ = "data:image/jpeg;base64," + imageData;
         smallImageBEQ.src = "data:image/jpeg;base64," + imageData;
@@ -2217,6 +2218,18 @@ function onPhotoURISuccess(imageURI) {
 
         smallImageBEQ.src = "data:image/jpeg;base64," + imageURI;
         fileTempCameraBEQ = "";
+    } else if(voucherType == 'TRQ'){
+        smallImageTRQ.style.display = 'block';
+        fileTempGalleryTRQ = "data:image/jpeg;base64," + imageURI;
+
+        smallImageTRQ.src = "data:image/jpeg;base64," + imageURI;
+        fileTempCameraTRQ = "";
+    } else if(voucherType == 'TSQ'){
+        smallImageTSQ.style.display = 'block';
+        fileTempGalleryTSQ = "data:image/jpeg;base64," + imageURI;
+
+        smallImageTSQ.src = "data:image/jpeg;base64," + imageURI;
+        fileTempCameraTSQ = "";
     }
 
 }
