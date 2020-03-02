@@ -1359,7 +1359,7 @@ function arrayRemove(arr, value) {
      } else {
          window.localStorage.setItem("APPLICATION_VERSION", val.APPLICATION_VERSION);
          var versionNumber = parseFloat(val.APPLICATION_VERSION.match(/[\d\.]+/));
-         window.localStorage.setItem("versionNumber", 12.3);
+         window.localStorage.setItem("versionNumber", versionNumber);
      }
 
      //For Mobile Google Map Role Start
