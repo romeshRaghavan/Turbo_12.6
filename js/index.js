@@ -2128,7 +2128,6 @@ function onPhotoDataSuccess(imageData) {
         smallImageTS.src = "data:image/jpeg;base64," + imageData;
         fileTempGalleryTS = "";
     } else if(voucherType == 'BEQ'){
-        alert("in BEQ");
         smallImageBEQ.style.display = 'block';
         fileTempCameraBEQ = "data:image/jpeg;base64," + imageData;
         smallImageBEQ.src = "data:image/jpeg;base64," + imageData;
