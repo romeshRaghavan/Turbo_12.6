@@ -1359,7 +1359,7 @@ function arrayRemove(arr, value) {
      } else {
          window.localStorage.setItem("APPLICATION_VERSION", val.APPLICATION_VERSION);
          var versionNumber = parseFloat(val.APPLICATION_VERSION.match(/[\d\.]+/));
-         window.localStorage.setItem("versionNumber", versionNumber);
+         window.localStorage.setItem("versionNumber", 12.3);
      }
 
      //For Mobile Google Map Role Start
@@ -4866,6 +4866,8 @@ console.log("cityTownID : "+cityTownID);
                      t.executeSql("DELETE FROM BEHeader");
                  });
 
+
+alert("data.Status " +data.Status);
                  if (data.Status == 'Success') {
                      
                      var claimExpArray = data.expenseDetails;
@@ -4914,7 +4916,7 @@ console.log("cityTownID : "+cityTownID);
 
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                          displayPastVoucherPage(data.Status);
                      }  else if(statusOfVoucher == 'Q'){
                         displayQueryPage(data.Status);
@@ -7174,6 +7176,7 @@ function fetchViewForTravelApproveVouchersHeader() {
 
    function displayQueryPage(statusOfVoucher) {
      if (statusOfVoucher == "SUCCESS_NO_DATA") {
+         j('#beQueryData').empty();
               var data = "<div style='text-align: center;'>"
                          +"<p  style='text-align: center;'><img src = 'images/noVoucher1.png'></p>"
                          +"<h4><b style='color: darkgrey;'>No expense available.</b></h4>"
