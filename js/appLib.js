@@ -186,9 +186,9 @@ function arrayRemove(arr, value) {
 
         // ****************     Approval Table      ***************** //
 
-         t.executeSql("CREATE TABLE IF NOT EXISTS BEHeader ( busExpHeaderId INTEGER ,busExpNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT,query TEXT,queryId INTEGER)");
+         t.executeSql("CREATE TABLE IF NOT EXISTS BEHeader ( busExpHeaderId INTEGER ,busExpNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT,query TEXT,queryId INTEGER,queryAns TEXT)");
          t.executeSql("CREATE TABLE IF NOT EXISTS BEDetails (busExpDetailId INTEGER ,busExpHeaId INTEGER , expNameId INTEGER REFERENCES expNameMst(expNameId), expName  TEXT,expDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT, perUnit INTEGER,fromLocation TEXT,toLocation TEXT,convertedAmt DOUBLE ,expAttachment BLOB)");
-         t.executeSql("CREATE TABLE IF NOT EXISTS TravelHeader (headerId INTEGER ,voucherNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT, iternaryType TEXT , toLocation TEXT, fromLocation TEXT, travelType TEXT, travelTitle TEXT, query TEXT,queryId INTEGER)");
+         t.executeSql("CREATE TABLE IF NOT EXISTS TravelHeader (headerId INTEGER ,voucherNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT, iternaryType TEXT , toLocation TEXT, fromLocation TEXT, travelType TEXT, travelTitle TEXT, query TEXT,queryId INTEGER,queryAns TEXT)");
 
      });
  } else {
@@ -1359,7 +1359,7 @@ function arrayRemove(arr, value) {
      } else {
          window.localStorage.setItem("APPLICATION_VERSION", val.APPLICATION_VERSION);
          var versionNumber = parseFloat(val.APPLICATION_VERSION.match(/[\d\.]+/));
-         window.localStorage.setItem("versionNumber", versionNumber);
+         window.localStorage.setItem("versionNumber", 12.3);
      }
 
      //For Mobile Google Map Role Start
@@ -4894,8 +4894,10 @@ console.log("cityTownID : "+cityTownID);
                                  var creatorName =  headArray.creatorName;
                                  var query =  headArray.query;
                                  var queryId =  headArray.queryId;
+                                 var queryAns =  headArray.queryAns;
 
-                                 t.executeSql("INSERT INTO BEHeader (busExpHeaderId ,busExpNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments,query,queryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [busExpHeaderId, busExpNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , query ,queryId]);
+
+                                 t.executeSql("INSERT INTO BEHeader (busExpHeaderId ,busExpNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments,query,queryId,queryAns) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", [busExpHeaderId, busExpNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , query ,queryId,queryAns]);
 
                              }
                          }
@@ -4914,7 +4916,9 @@ console.log("cityTownID : "+cityTownID);
                      requestRunning = false;
                      if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
                          displayPastVoucherPage(data.Status);
-                     } else {
+                     }  else if(statusOfVoucher == 'Q'){
+                        displayQueryPage(data.Status);
+                    } else {
                          displayApprovalPage(data.Status);
                      }
                  } else {
@@ -5016,14 +5020,14 @@ console.log("cityTownID : "+cityTownID);
                          var data =
                              "<div class='col-md-12' onclick='fetchViewForVoucherDetails(" + row.busExpHeaderId + ");'>" 
                              + "<div class='card shadow'>" 
-                             + "<div class='card-header' style='font-size: 15px;color: #076473;'>" 
+                             + "<div class='card-header' style='font-size: 15px;color: #076473;'>"
                              + row.busExpNumber 
                                 + "<h7 style='display: inline;'>&nbsp("+defaultCurrency+")</h7>"
                                 + "<label style = 'color:darkorange;float: right;'>" + statusForEdit + "</label></div>" 
                                  + "<div class='card-body' style='padding: 10px;'>" 
                                         + "<div class='row'>" 
                                             + "<div class='col-md-12' style='margin-bottom: 5px;'>"
-                                                + "<label>" + row.accHeadDesc + "</label>"    
+                                                + "<label>" + row.accHeadDesc + "</label>"  
                                             + "</div>" 
                                         + "</div>" 
                                         + "<div class='row'>"
@@ -5264,6 +5268,7 @@ console.log("cityTownID : "+cityTownID);
  function setHeaderToDetail(busExpHeaderId, voucherDetailArray, detailBodyLines) {
      var statusForEdit = "";
      var pendingAt = "";
+     var exceptionId = busExpHeaderId+"_1";
      mydb.transaction(function(t) {
 
          t.executeSql('SELECT * FROM BEHeader where busExpHeaderId = ' + busExpHeaderId, [],
@@ -5325,6 +5330,7 @@ console.log("cityTownID : "+cityTownID);
                                  + "</div>" 
                              + "</div>" 
                          + "<div class='card-footer' id='buttonsAttached' style='padding-bottom:20px;'>" 
+                        
                          + "<span style='width: 25%;display: contents;'>" 
                          + "<i class='fa fa-calendar' aria-hidden='true' style='margin-left: 5px;'></i>" 
                          + "<label><h5 style='padding-bottom: 10%;style='font-weight: 500;''>&nbsp;" + row.startDate + ' - ' + row.endDate + "</h5></label>"
@@ -5343,7 +5349,9 @@ console.log("cityTownID : "+cityTownID);
                          + "<tbody id='detailBodyId'>" + detailBodyLines + "</tbody>" 
                          + "</table>" 
                          + "</div>" 
-                         + "</div>" 
+                         + "</div>"
+                         + "<div id = 'exceptionMsg'>"
+                         +"</div>"
                          + "</div>" 
                          + "</div>";
 
@@ -5357,8 +5365,9 @@ console.log("cityTownID : "+cityTownID);
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.rejectionComments+"</div>"
                                             +"<div><br>"
-                                            +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                            +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" 
+                                            + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
+                                           +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -5366,8 +5375,9 @@ console.log("cityTownID : "+cityTownID);
                          if (statusForEdit == 'Draft') {
 
                              buttonValue =  
-                                            "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                            "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" 
+                                            + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
+                                         +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -5406,7 +5416,9 @@ console.log("cityTownID : "+cityTownID);
                             
                             var ids = row.busExpHeaderId+'&'+row.queryId;
                        
-                            buttonValue =   
+                            if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
+                                 
+                                buttonValue =   
                                             "<br>"
                                             +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
                                             +"<br>"
@@ -5414,6 +5426,19 @@ console.log("cityTownID : "+cityTownID);
                                             +"<div><br>"
                                             +"<button type='button' id = 'QueryBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalQuery'>Reply</button>"
                                             ;
+                             }else{
+                                 buttonValue =   
+                                            "<br>"
+                                            +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
+                                            +"<br>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div><br>"
+                                            +"<div style='margin-right: 2%;'><label>Reply:</label>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.queryAns+"</div>"
+                                            +"<div><br>"
+                                            +"<button type='button' id = 'QueryBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalQuery'>Edit</button>"
+                                            ;
+                             }
+                       
 
                              j('#buttonsAttached').append(buttonValue);
                             
@@ -5426,6 +5451,7 @@ console.log("cityTownID : "+cityTownID);
      });
 
  }
+
 
 // ************************************** Approve Reject Voucher Start ************************************************ //
 
@@ -5552,76 +5578,6 @@ function rejectVoucher(){
         alert("Please enter send back comment.");
     }
 }
-
-/*function rejectVoucher(){
-     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
-    var pageRefSuccess = defaultPagePath + 'success.html';
-    var busExpHeaderId = j("#RejectedBtn").data('id');
-    var comment = j.trim(j("#sendBackComment").val());
-
-    if(comment != ""){
-
-        var jsonToBeSendForApproval = new Object();
-        jsonToBeSendForApproval["processId"] = res[1];
-        jsonToBeSendForApproval["headerList"] = res[0];
-        jsonToBeSendForApproval["employeeId"] = window.localStorage.getItem("EmployeeId");
-        jsonToBeSendForApproval["buttonStatus"] = "R";
-        jsonToBeSendForApproval["rejectionComment"] = comment;
-         
-        j('#loading_Cat').show();
-
-        j.ajax({
-            url: window.localStorage.getItem("urlPath") + "MobileApproveRejectService",
-            type: 'POST',
-            dataType: 'json',
-            crossDomain: true,
-            data: JSON.stringify(jsonToBeSendForApproval),
-            success: function(data) {
-              
-                if (data.Status == "Success") {
-                    j('#loading_Cat').hide();
-                    var claimExpArray = data.expenseDetails;
-
-                    mydb.transaction(function(t) {
-                        if (claimExpArray != null && claimExpArray.length > 0) {
-                            for (var i = 0; i < claimExpArray.length; i++) {
-                                var headArray = new Array();
-                                headArray = claimExpArray[i];
-                                //console.log("headArray : "+headArray);
-
-                                var approvalMsg = headArray.message;
-                                successMessage = approvalMsg;
-
-                            }
-                        }
-
-                        if(successMessage != null && successMessage != ""){
-                            j('#loading_Cat').hide();
-                            j('#mainHeader').load(headerBackBtn);
-                            j('#mainContainer').load(pageRefSuccess);
-                        }
-                        requestRunning = false;             
-                    });
-
-                    requestRunning = false;
-                    j('#mainHeader').load(headerBackBtn);
-                    j('#mainContainer').load(pageRefSuccess);
-
-                } else {
-                     j('#loading_Cat').hide();
-                    successMessage = "Error: Oops something is wrong, Please Contact System Administer";
-                    requestRunning = false;
-                }
-            },
-            error: function(data) {
-                 j('#loading_Cat').hide();
-                requestRunning = false;
-            }
-        });
-    }else{
-        alert("Please enter send back comment.");
-    }
-}*/
 
  function approveVoucher(busExpHeaderId){
 
@@ -6386,15 +6342,19 @@ function queryAnwser(){
                                  var travelType =  headArray.travelType;           
                                  var query =  headArray.query;
                                  var queryId =  headArray.queryId;
+                                 var queryAns =  headArray.queryAns;
 
-                                 t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, query, queryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, query ,queryId]);
+
+                                 t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, query, queryId,queryAns) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, query ,queryId,queryAns]);
 
                              }
                          }
                          requestRunning = false;
                          if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                              displayTravelPastVoucherPage(data.Status);
-                         } else {
+                         }  else if(statusOfVoucher == 'Q'){
+                            displayQueryVoucherPage(data.Status);
+                        } else {
                              displayTravelApprovalPage(data.Status);
                          }
 
@@ -6404,9 +6364,9 @@ function queryAnwser(){
                      requestRunning = false;
                      if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                          displayTravelPastVoucherPage(data.Status);
-                     }  else if(statusOfVoucher == 'Q'){
-                           // displayQueryVoucherPage(data.Status);
-                     } else {
+                     } else if(statusOfVoucher == 'Q'){
+                            displayQueryVoucherPage(data.Status);
+                    }else {
                          displayTravelApprovalPage(data.Status);
                      }
                  } else {
@@ -6754,9 +6714,10 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                          + "<tbody id='detailBodyId'>" + detailBodyLines + "</tbody>" 
                          + "</table>" 
                          + "</div>"
-
-                                + "</div>"
-                             + "</div>"
+                         + "</div>"
+                         + "</div>"
+                         + "<div id = 'exceptionMsg'>"
+                         +"</div>"
                          + "</div>" 
                      + "</div>" 
                  + "<br>";
@@ -6771,8 +6732,9 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.rejectionComments+"</div>"
                                             +"<div><br>"
-                                            +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTR()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTRVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                          +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>"
+                                            /*   + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTR()'>Edit</button>&nbsp;" */  
+                                          +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTRVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -6780,7 +6742,8 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                          if (statusForEdit == 'Draft') {
 
                              buttonValue =  
-                                            "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTR()'>Edit</button>&nbsp;" 
+                                           "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" 
+                                            /* + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTR()'>Edit</button>&nbsp;"  */
                                             +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTRVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
@@ -6818,14 +6781,28 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                             
                             var ids = row.headerId+'&'+row.queryId;
                        
-                            buttonValue =   
+                        if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
+                                 
+                                buttonValue =   
                                             "<br>"
                                             +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div>"
                                             +"<div><br>"
-                                            +"<button type='button' id = 'QueryTrBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalQuery'>Reply</button>"
+                                            +"<button type='button' id = 'QueryTrBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTrQuery'>Reply</button>"
                                             ;
+                             }else{
+                                 buttonValue =   
+                                            "<br>"
+                                            +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
+                                            +"<br>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div><br>"
+                                            +"<div style='margin-right: 2%;'><label>Reply:</label>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.queryAns+"</div>"
+                                            +"<div><br>"
+                                            +"<button type='button' id = 'QueryTrBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTrQuery'>Edit</button>"
+                                            ;
+                             }
 
                              j('#buttonsAttached').append(buttonValue);
                             
@@ -6955,7 +6932,7 @@ function submitTSWithEA(){
                 travelSettleExpDetailsArr.push(travelSettleDetailId);
             });
                 if (travelSettleExpDetailsArr.length > 0) {
-                saveTravelSettle(jsonTravelSettlementDetailsArr, travelSettleExpDetailsArr);
+                saveTravelSettle(jsonTravelSettlementDetailsArr, travelSettleExpDetailsArr,"N");
                 }
                 } else {
                 requestRunning = false;
@@ -7444,7 +7421,7 @@ function queryTsAnwser(){
 
   function displayQueryVoucherPage(statusOfVoucher) {
      if (statusOfVoucher == "SUCCESS_NO_DATA") {
-
+        j('#trQueryData').empty();
               var data = "<div style='text-align: center;'>"
                          +"<p  style='text-align: center;'><img src = 'images/noVoucher1.png'></p>"
                          +"<h4><b style='color: darkgrey;'>No expense available.</b></h4>"
@@ -7549,3 +7526,57 @@ function fetchViewForQueryTravelVouchersHeader() {
      });
  }
 
+function fetchException(headerId,processId){
+  var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+    var pageRefSuccess = defaultPagePath + 'success.html';
+
+    var jsonToBeSend = new Object();
+    console.log("headerId : "+headerId);
+    console.log("processId : "+processId);
+
+    jsonToBeSend["processId"] = headerId;
+    jsonToBeSend["headerList"] = processId;
+    jsonToBeSend["employeeId"] = window.localStorage.getItem("EmployeeId");
+     console.log("exception json to be sent : "+JSON.stringify(jsonToBeSend));
+    //j('#loading_Cat').show();
+
+var expContent = $('exceptionMsg').text();
+console.log("expContent : "+expContent);
+
+var rejectionComments = "Entitlements briched";
+
+var buttonValue = "<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+rejectionComments+"</div>"
+
+j('#exceptionMsg').append(buttonValue);
+
+/*
+    j.ajax({
+        url: window.localStorage.getItem("urlPath") + "FetchExceptionMessages",
+         type: 'POST',
+         dataType: 'json',
+         crossDomain: true,
+         data: JSON.stringify(jsonToBeSend),
+         success: function(data) {
+
+             if (data.Status == "Success") {
+                j('#loading_Cat').hide();
+                var exceptionMessage  = data.exceptionMessage;
+                 if(exceptionMessage != ""){
+
+                 }
+                requestRunning = false;
+
+             } else {
+                 j('#loading_Cat').hide();
+                 successMessage = "Error: Oops something is wrong, Please Contact System Administer";
+                 requestRunning = false;
+             }
+         },
+         error: function(data) {
+            j('#loading_Cat').hide();
+            successMessage = "Error: Oops something is wrong, Please Contact System Administer";
+            requestRunning = false;
+         }
+     });
+*/
+ }

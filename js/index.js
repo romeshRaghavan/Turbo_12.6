@@ -42,7 +42,7 @@ var toLocationWayPoint = "";
 var profileImg = "";
 var enableDivBasedOnStatus = ""; // For Past Voucher = 'V' and For my Approval = 'A'
 var updateAttachment = ""; // For BE Edit
-var MOBILE_APP_VERSION = "12.2";
+var MOBILE_APP_VERSION = "12.3";
 var MOBILE_APP_NAME = "Turbo Mobile App";
 
 j(document).ready(function() {
@@ -3921,23 +3921,25 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                                  var travelTitle =  headArray.travelTitle; 
                                  var query =  headArray.query;
                                  var queryId =  headArray.queryId;
+                                 var queryAns = headArray.queryAns;
 
-                                 t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, travelTitle, query, queryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, travelTitle, query ,queryId]);
+                                 t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, travelTitle, query, queryId, queryAns) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, travelTitle, query ,queryId,queryAns]);
 
                              }
                          }
                          requestRunning = false;
                          if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                              displaySettlementPastVoucherPage(data.Status);
-                         }else {
+                         } else if( statusOfVoucher == 'Q'){
+                             displaySettlementQueryVoucherPage(data.Status);
+                         } else {
                              displaySettlementApprovalPage(data.Status);
                          }
 
                      });
-
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                          displaySettlementPastVoucherPage(data.Status);
                      }  else if( statusOfVoucher == 'Q'){
                              displaySettlementQueryVoucherPage(data.Status);
@@ -4280,10 +4282,9 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                          + "</div>" 
                          + "</div>" 
                          + "</div>" 
+                         + "<div id = 'exceptionMsg'>"
+                         +"</div>"
                          + "</div>";
-
-                           
-
 
                          j('#voucherDetailsTab').append(data);
 
@@ -4295,8 +4296,9 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.rejectionComments+"</div>"
                                             +"<div><br>"
-                                            +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTS()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTSVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+/*                                          +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" */  
+                                            + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTS()'>Edit</button>&nbsp;" 
+                                        +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTSVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -4304,8 +4306,9 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                          if (statusForEdit == 'Draft') {
 
                              buttonValue =  
-                                            "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTS()'>Edit</button>&nbsp;" 
-                                            +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTSVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                           "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" 
+                                       /*        + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTS()'>Edit</button>&nbsp;" */   
+                                         +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTSVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -4341,13 +4344,28 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                             
                             var ids = row.headerId+'&'+row.queryId;
                        
-                             buttonValue =   
+                                                      if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
+                                 
+                                buttonValue =   
                                             "<br>"
                                             +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div>"
                                             +"<div><br>"
-                                            +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Reply</button>";
+                                            +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Reply</button>"
+                                            ;
+                             }else{
+                                 buttonValue =   
+                                            "<br>"
+                                            +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
+                                            +"<br>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div><br>"
+                                            +"<div style='margin-right: 2%;'><label>Reply:</label>"
+                                            +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.queryAns+"</div>"
+                                            +"<div><br>"
+                                            +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Edit Query</button>"
+                                            ;
+                             }
 
                              j('#buttonsAttached').append(buttonValue);
                             
@@ -4504,13 +4522,14 @@ function fetchCountForTravelSettelment(statusOfVoucher) {
      });
 
  }
-function saveTravelSettle(jsonTSArr, tsExpDetailsArr) {
+function saveTravelSettle(jsonTSArr, tsExpDetailsArr, isModeCategoryChecked) {
  var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var jsonToSaveTS = new Object();
      var travelReqID ;
     jsonToSaveTS["employeeId"] = window.localStorage.getItem("EmployeeId");
     jsonToSaveTS["expenseDetails"] = jsonTSArr;
     jsonToSaveTS["ProcessStatus"] = "1";
+    jsonToSaveTS["isModeCategoryChecked"] = isModeCategoryChecked;
     j("#source tr.selected").each(function(index, row) {
         travelReqID = j(this).find('td.travelRequestId').text();
     });
@@ -4525,15 +4544,33 @@ function saveTravelSettle(jsonTSArr, tsExpDetailsArr) {
         crossDomain: true,
         data: JSON.stringify(jsonToSaveTS),
         success: function(data) {
+             console.log("data.Status : "+data.Status  +" data.Message "+data.Message); 
             if (data.Status == "Success") {
                 successMessage = data.Message;
                 for (var i = 0; i < tsExpDetailsArr.length; i++) {
                     var travelSettleExpDetailId = tsExpDetailsArr[i];
-                    deleteSelectedTSExpDetails(travelSettleExpDetailId);
+                    if(isModeCategoryChecked == "Y"){
+                        deleteSelectedTSExpDetails(travelSettleExpDetailId);
+                    }
                 }
                 requestRunning = false;
                 j('#mainHeader').load(headerBackBtn);
                 j('#mainContainer').load(pageRefSuccess);
+            } else if (data.Status == "WARNING") {
+                requestRunning = false;
+                successMessage = data.Message;
+                if(successMessage != "" && isModeCategoryChecked == "N"){
+                 var confirmBox = confirm(successMessage);
+
+                 if (confirmBox == true) {
+                     saveTravelSettle(jsonTSArr, tsExpDetailsArr, "Y");
+                 } else {
+                     entitlementMsg = false;
+                 }
+                }else{
+                    saveTravelSettle(jsonTSArr, tsExpDetailsArr, "Y");
+                }
+
             } else if (data.Status == "Error") {
                 requestRunning = false;
                 successMessage = "Oops!! Something went wrong. Please contact system administrator.";
@@ -4807,7 +4844,7 @@ function fetchViewForSettelmentApproverVouchersHeader() {
 
    function displaySettlementQueryVoucherPage(statusOfVoucher) {
      if (statusOfVoucher == "SUCCESS_NO_DATA") {
-
+              j('#tsQueryData').empty();
               var data = "<div style='text-align: center;'>"
                          +"<p  style='text-align: center;'><img src = 'images/noVoucher1.png'></p>"
                          +"<h4><b style='color: darkgrey;'>No expense available.</b></h4>"
