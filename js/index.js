@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -143,8 +143,8 @@ function commanLogin() {
     var domainName = userNameValue.split('@')[1];
     var jsonToDomainNameSend = new Object();
     jsonToDomainNameSend["userName"] = domainName;
-    jsonToDomainNameSend["mobilePlatform"] = device.platform;
-    //jsonToDomainNameSend["mobilePlatform"] = "Android";
+    //jsonToDomainNameSend["mobilePlatform"] = device.platform;
+    jsonToDomainNameSend["mobilePlatform"] = "Android";
     jsonToDomainNameSend["appType"] = "NEXGEN_EXPENZING_TNE_APP";
     //var res=JSON.stringify(jsonToDomainNameSend);
     var requestPath = WebServicePath;
@@ -871,6 +871,8 @@ function validateExpenseDetails(exp_date, exp_from_loc, exp_to_loc, exp_narratio
 
 function syncSubmitTravelDetails() {
 
+    var travelAdminComment = document.getElementById('travelAdminComment').value;
+    var travelAdminRoundComment = document.getElementById('travelAdminRoundComment').value;
     var tvl_hotel = document.getElementById('travelHotel').value;
     var tvl_plane = document.getElementById('travelPlane').value;
     var tvl_car = document.getElementById('travelCar').value;
@@ -970,6 +972,7 @@ function syncSubmitTravelDetails() {
             jsonToSaveTR["Hotel"] = tvl_hotel;
             jsonToSaveTR["TravelTicket"] = tvl_plane;
             jsonToSaveTR["CarRent"] = tvl_car;
+            jsonToSaveTR["TravelAdminComment"] = travelAdminComment;
 
             if (clickedFlagCar == true) {
                 jsonToSaveTR["IsCarRent"] = 'true';
@@ -997,6 +1000,7 @@ function syncSubmitTravelDetails() {
             }
 
         } else {
+            jsonToSaveTR["TravelAdminComment"] = travelAdminRoundComment;
             jsonToSaveTR["ItenaryType"] = 'R';
             jsonToSaveTR["TravelModeId"] = tvl_mode_rnd_id;
             jsonToSaveTR["TravelCategoryId"] = tvl_category_rnd_id;
@@ -1036,6 +1040,7 @@ function syncSubmitTravelDetails() {
         return false;
     }
 }
+
 
 function saveTravelRequestAjax(jsonToSaveTR) {
     var pageRefSuccess = defaultPagePath + 'success.html';
@@ -1220,7 +1225,7 @@ function setBooleanValueHotelRoundTextField() {
     }
 }
 
-function validatetravelDetails(travel_purpose_id, account_head_id, from_id, to_id, travel_mode_id, travel_category_id, tvl_mode_rnd_id, tvl_category_rnd_id, tvl_date, travel_title, advance_req, advance_amount) {
+function validatetravelDetails(travel_purpose_id, account_head_id, from_id, to_id, travel_mode_id, travel_category_id, tvl_mode_rnd_id, tvl_category_rnd_id, tvl_date, travel_title, advance_req, advance_amount, travelAdminComment) {
     if (travel_title == "") {
         alert(window.lang.translate('Travel Title is required'));
         return false;
