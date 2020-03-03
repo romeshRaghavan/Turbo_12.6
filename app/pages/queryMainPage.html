@@ -143,23 +143,30 @@
 }
 
 .badge {
-    padding: 10px 13px;
-    font-size: 15px;
-    top: 8px;
-    border-radius: 50%;
-    background-color: #0f97b2;
-    color: white;
-    float: right;
+    margin-top: -5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
     </style>
+    
+     <script type="text/javascript">
+     fetchCountForTravelSettelment('Q');
+     fetchCountForTravelRequest('Q');
+     fetchCountForMyApproval('Q');
+    </script>
 <div class="deals">
     <div class="sap_tabs">
             <div id="horizontalTab" style="display: block;">
                 <ul id="tab" class="resp-tabs-list" style="display: flex;">
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-0" role="tab" >Business <br>Expense</li>
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-1" id="trQueryTab" role="tab" onclick="syncTravelVoucherHeader('Q');">Travel Request</li>
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-2" id="tsQueryTab" role="tab"  onclick="syncSettelmentVoucherHeader('Q');"> Travel Settlement</li>
+                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-0" role="tab" ><span style="text-align: left; margin-left: -8px; font-weight: 600; font-size: 14px;">Business Expense</span>
+                        <div class="badge" style="margin-top: -38px; margin-left: -5px; margin-right: -10px;" id="queryCount"></li>
+                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-1" id="trQueryTab" role="tab" onclick="syncTravelVoucherHeader('Q');"><span style="text-align: left; font-weight: 600; margin-left: -8px; font-size: 14px;">Travel Request</span>
+                        <div class="badge" style="margin-top: -38px; margin-left: -5px; margin-right: -10px;" id="trQueryCount"></li>
+                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-2" id="tsQueryTab" role="tab" onclick="syncSettelmentVoucherHeader('Q');"><span style="text-align: left; margin-left: -8px; font-weight: 600; font-size: 14px;">Travel Settlement</span>
+                        <div class="badge" style="margin-top: -38px; margin-left: -5px; margin-right: -10px;" id="tsQueryCount"></li>
                 </ul>
 
             <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">

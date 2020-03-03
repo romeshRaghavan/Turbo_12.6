@@ -12,15 +12,22 @@
         defaultLang: 'en'
     });
 </script>
+<script type="text/javascript">
+    hideTravelDesk();
+</script>
 
 <div class="deals">
     <div class="sap_tabs">
         <div id="horizontalTab">
-            <ul id = "helpimage" class="resp-tabs-list">
-                <li lang="en" class="resp-tab-item " aria-controls="tab_item-0" role="tab" onclick="addHeader(); clearDiv();">Travel <br> Home</li>
-                <li lang="en" class="active" class="resp-tab-item resp-tab-active" aria-controls="tab_item-1" role="tab" onclick="addHeader(); clearDivRequest();"> Travel <br> Request</li>
-                <li lang="en" class="resp-tab-item " aria-controls="tab_item-2" role="tab" onclick="addHeader(); clearDivExpense();">Travel <br> Settlement</li>
-                <li lang="en" class="resp-tab-item " aria-controls="tab_item-3" role="tab" onclick="fetchTravelSettlementExpFromMain(); clearDivSync();">Travel <br> Sync</li>
+            <ul id="helpimage" class="resp-tabs-list">
+                <li lang="en" class="resp-tab-item " aria-controls="tab_item-0" role="tab" onclick="addHeader(); clearDiv();">Travel
+                    <br> Home</li>
+                <li lang="en" class="active" class="resp-tab-item resp-tab-active" aria-controls="tab_item-1" role="tab" onclick="addHeader(); clearDivRequest();"> Travel
+                    <br> Request</li>
+                <li lang="en" class="resp-tab-item " aria-controls="tab_item-2" role="tab" onclick="addHeader(); clearDivExpense();">Travel
+                    <br> Settlement</li>
+                <li lang="en" class="resp-tab-item " aria-controls="tab_item-3" role="tab" onclick="fetchTravelSettlementExpFromMain(); clearDivSync();">Travel
+                    <br> Sync</li>
             </ul>
             <div class="resp-tabs-container">
 
@@ -121,7 +128,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                             <tr id = "validationMsgBox" style="display: none;">
+                                            <tr id="validationMsgBox" style="display: none;">
                                                 <td colspan="2" style="border-top: none;">
                                                     <p id="delayDaysMsgArea" style="padding-bottom: 12px;"><span id="errorMsg1">
                                                     </span></p>
@@ -142,30 +149,36 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <p><font lang="en" face="verdana" size="2" color="green">Specify only if you require travel desk to book any of these 3:</font></p>
-                                        <table class="table table-responsive">
-                                            <tr>
-                                                <td id="carDisabled" style="width: 100px;"><img src="images/oldcarbnw.png" onclick="setBooleanValueCar();"></td>
-                                                <td id="carActive" style="display:none;width: 100px;"><img src="images/oldcar1.png" onclick="setBooleanValueCar();"></td>
-                                                <td style="vertical-align: middle;">
-                                                    <input lang="en" id="travelCar" type="text" placeholder="Cab /Car Hire Instruction" onclick="setBooleanValueCarTextField();">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="hotelDisabled" style="width: 100px;"><img src="images/oldhotelbnw.png" onclick="setBooleanValueHotel();"></td>
-                                                <td id="hotelActive" style="display:none;width: 100px;"><img src="images/oldhotel1.png" onclick="setBooleanValueHotel();"></td>
-                                                <td style="vertical-align: middle;">
-                                                    <input lang="en" id="travelHotel" type="text" placeholder="Accommodation Instruction" onclick="setBooleanValueHotelTextField();">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="ticketDisabled" style="width: 100px;"><img src="images/oldplanebnw.png" onclick="setBooleanValueTicket();"></td>
-                                                <td id="ticketActive" style="display:none;width: 100px;"><img src="images/oldplane1.png" onclick="setBooleanValueTicket();"></td>
-                                                <td style="vertical-align: middle;">
-                                                    <input lang="en" id="travelPlane" type="text" placeholder="Ticket Instruction" onclick="setBooleanValueTicketTextField();">
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div id="travelDeskData">
+                                            <p><font lang="en" face="verdana" size="2" color="green">Specify only if you require travel desk to book any of these 3:</font></p>
+                                            <table class="table table-responsive">
+                                                <tr>
+                                                    <td id="carDisabled" style="width: 100px;"><img src="images/oldcarbnw.png" onclick="setBooleanValueCar();"></td>
+                                                    <td id="carActive" style="display:none;width: 100px;"><img src="images/oldcar1.png" onclick="setBooleanValueCar();"></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <input lang="en" id="travelCar" type="text" placeholder="Cab /Car Hire Instruction" onclick="setBooleanValueCarTextField();">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="hotelDisabled" style="width: 100px;"><img src="images/oldhotelbnw.png" onclick="setBooleanValueHotel();"></td>
+                                                    <td id="hotelActive" style="display:none;width: 100px;"><img src="images/oldhotel1.png" onclick="setBooleanValueHotel();"></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <input lang="en" id="travelHotel" type="text" placeholder="Accommodation Instruction" onclick="setBooleanValueHotelTextField();">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="ticketDisabled" style="width: 100px;"><img src="images/oldplanebnw.png" onclick="setBooleanValueTicket();"></td>
+                                                    <td id="ticketActive" style="display:none;width: 100px;"><img src="images/oldplane1.png" onclick="setBooleanValueTicket();"></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <input lang="en" id="travelPlane" type="text" placeholder="Ticket Instruction" onclick="setBooleanValueTicketTextField();">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div id="travelAdmin">
+                                            <label class="advAmount" style="margin-top:3px !important;">Travel Instruction: </label>
+                                            <textarea style="width:100%;" rows="4" maxlength="250" id="travelAdminComment"></textarea>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="service-two">
                                         <table class="table table-responsive">
@@ -191,10 +204,10 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr id = "validationMsgBoxRoundTrip" style="display: none;">
+                                            <tr id="validationMsgBoxRoundTrip" style="display: none;">
                                                 <td colspan="2" style="border-top: none;">
                                                     <p id="delayDaysMsgRoundArea" style="padding-bottom: 12px;"><span id="errorMsg3"></span></p>
-                                                
+
                                                     <p id="overlapMsgRoundTripArea"><span id="errorMsg4"></span></p>
                                                 </td>
                                             </tr>
@@ -211,30 +224,36 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <p><font lang="en" face="verdana" size="2" color="green">Specify only if you require travel desk to book any of these 3:</font></p>
-                                        <table class="table table-responsive">
-                                            <tr>
-                                                <td id="carRoundDisabled" style="width: 100px;"><img src="images/oldcarbnw.png" onclick="setBooleanValueCarRound();"></td>
-                                                <td id="carRoundActive" style="display:none; width: 100px;"><img src="images/oldcar1.png" onclick="setBooleanValueCarRound();"></td>
-                                                <td style="vertical-align: middle;">
-                                                    <input lang="en" id="roundTravelCar" type="text" placeholder="Cab /Car Hire Instruction" onclick="setBooleanValueCarRoundTextField();">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="hotelRoundDisabled" style="width: 100px;"><img src="images/oldhotelbnw.png" onclick="setBooleanValueHotelRound();"></td>
-                                                <td id="hotelRoundActive" style="display:none;width: 100px;"><img src="images/oldhotel1.png" onclick="setBooleanValueHotelRound();"></td>
-                                                <td style="vertical-align: middle;">
-                                                    <input lang="en" id="roundTravelHotel" type="text" placeholder="Accommodation Instruction" onclick="setBooleanValueHotelRoundTextField();">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="ticketRoundDisabled" style="width: 100px;"><img src="images/oldplanebnw.png" onclick="setBooleanValueTicketRound();"></td>
-                                                <td id="ticketRoundActive" style="display:none;width: 100px;"><img src="images/oldplane1.png" onclick="setBooleanValueTicketRound();"></td>
-                                                <td style="vertical-align: middle;">
-                                                    <input lang="en" id="roundTravelPlane" type="text" placeholder="Ticket Instruction" onclick="setBooleanValueTicketRoundTextField();">
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div id="travelDeskRoundData">
+                                            <p><font lang="en" face="verdana" size="2" color="green">Specify only if you require travel desk to book any of these 3:</font></p>
+                                            <table class="table table-responsive">
+                                                <tr>
+                                                    <td id="carRoundDisabled" style="width: 100px;"><img src="images/oldcarbnw.png" onclick="setBooleanValueCarRound();"></td>
+                                                    <td id="carRoundActive" style="display:none; width: 100px;"><img src="images/oldcar1.png" onclick="setBooleanValueCarRound();"></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <input lang="en" id="roundTravelCar" type="text" placeholder="Cab /Car Hire Instruction" onclick="setBooleanValueCarRoundTextField();">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="hotelRoundDisabled" style="width: 100px;"><img src="images/oldhotelbnw.png" onclick="setBooleanValueHotelRound();"></td>
+                                                    <td id="hotelRoundActive" style="display:none;width: 100px;"><img src="images/oldhotel1.png" onclick="setBooleanValueHotelRound();"></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <input lang="en" id="roundTravelHotel" type="text" placeholder="Accommodation Instruction" onclick="setBooleanValueHotelRoundTextField();">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="ticketRoundDisabled" style="width: 100px;"><img src="images/oldplanebnw.png" onclick="setBooleanValueTicketRound();"></td>
+                                                    <td id="ticketRoundActive" style="display:none;width: 100px;"><img src="images/oldplane1.png" onclick="setBooleanValueTicketRound();"></td>
+                                                    <td style="vertical-align: middle;">
+                                                        <input lang="en" id="roundTravelPlane" type="text" placeholder="Ticket Instruction" onclick="setBooleanValueTicketRoundTextField();">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div id="travelAdminRound">
+                                            <label class="advAmount" style="margin-top:2px !important;">Travel Instruction: </label>
+                                            <textarea style="width:100%;" rows="4" maxlength="250" id="travelAdminRoundComment"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +271,7 @@
                         </div>
                     </div>
 
-                    <script>
+                   <script>
                         $(function() {
 
                             $("#selectDate_One").datepicker({
@@ -265,7 +284,7 @@
                             $("#selectDate_Three").datepicker({
                                 onSelect: function(selectedDate) {
                                     var date = new Date(selectedDate);
-                                    $('#selectDate_Two').datepicker({
+                                    $('#selectDate_Two').datepicker("change",{
                                         minDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
                                     });
                                     checkLastMinRoundTrip();
@@ -332,8 +351,9 @@
                                         <li>
                                             <input lang="en" id="expNarration" type="text" placeholder="Enter Expense Narration">
                                         </li>
-                                        <li id = "advanceTxtArea" style="display: none;">
-                                            <label class="advAmount">Advance Amount:</label><input readonly = "true" class="advAmountfield" style="text-align: right;" type="text" id="advAmt">
+                                        <li id="advanceTxtArea" style="display: none;">
+                                            <label class="advAmount">Advance Amount:</label>
+                                            <input readonly="true" class="advAmountfield" style="text-align: right;" type="text" id="advAmt">
                                         </li>
                                         <li>
                                             <p><font lang="en" face="verdana" size="1" color="green">Unit is no. of persons/Kms/meals etc.</font></p>
@@ -408,7 +428,7 @@
                                 .datepicker("destroy");
                             $('#expDate').val("");
                         }
- // **********************************************   Advance Amount - Start *******************************************  //
+                        // **********************************************   Advance Amount - Start *******************************************  //
                         $(function() {
                             $('input[name="type"]').on('click', function() {
                                 if ($(this).val() == 'Y') {
@@ -433,11 +453,11 @@
                             }
                         }
 
-// **********************************************   Advance Amount - End  *******************************************  //
+                        // **********************************************   Advance Amount - End  *******************************************  //
                     </script>
                 </div>
 
-                <div id = "TS" class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
+                <div id="TS" class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
                     <div class="modal-body clearfix">
                         <div class="row" style="">
                             <div class="col-lg-12 clearfix allexpebtn" id="box">
@@ -456,53 +476,53 @@
                 </div>
             </div>
 
-<div id="EA" style="display: none">
-    <div class="modal-body clearfix">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 lang="en">Settle Employee Advance</h1>
+            <div id="EA" style="display: none">
+                <div class="modal-body clearfix">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 lang="en">Settle Employee Advance</h1>
+                        </div>
+                    </div>
+                    <div class="row expenseform" data-role="page" style="padding-bottom: 10px;">
+                        <div class="col-lg-6">
+                            <label><font lang="en" face="verdana" color="gray" size="2.77">Total Amount </font></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input id="totalAmt" type="tel" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <div class="row expenseform" style="padding-bottom: 10px;">
+                        <div class="col-lg-6">
+                            <label><font lang="en" face="verdana" color="gray" size="2.77">Advance Anount </font></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input id="TRAdvAmount" type="tel" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <div class="row expenseform" style="padding-bottom: 10px;">
+                        <div class="col-lg-6">
+                            <label><font lang="en" face="verdana" color="gray" size="2.77">Refund Amount </font></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input id="refundAmt" type="tel" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <div class="row expenseform" style="padding-bottom: 10px;">
+                        <div class="col-lg-6">
+                            <label><font lang="en" face="verdana" color="gray" size="2.77">Recovery Amount </font></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input id="recoveryAmt" type="tel" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary btn-lg btn-block expbusinessbtnsingle" onclick="submitTSWithEA();"><font size="3.5" lang="en">Send for Approval</font></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row expenseform" data-role="page" style="padding-bottom: 10px;">
-            <div class="col-lg-6">
-                <label><font lang="en" face="verdana" color="gray" size="2.77">Total Amount </font></label>
-            </div>
-            <div class="col-lg-6">
-                <input id="totalAmt" type="tel" placeholder="" readonly>
-            </div>
-        </div>
-        <div class="row expenseform" style="padding-bottom: 10px;">
-            <div class="col-lg-6">
-                <label><font lang="en" face="verdana" color="gray" size="2.77">Advance Anount </font></label>
-            </div>
-            <div class="col-lg-6">
-                <input id="TRAdvAmount" type="tel" placeholder="" readonly>
-            </div>
-        </div>
-        <div class="row expenseform" style="padding-bottom: 10px;">
-            <div class="col-lg-6">
-                <label><font lang="en" face="verdana" color="gray" size="2.77">Refund Amount </font></label>
-            </div>
-            <div class="col-lg-6">
-                <input id="refundAmt" type="tel" placeholder="" readonly>
-            </div>
-        </div>
-        <div class="row expenseform" style="padding-bottom: 10px;">
-            <div class="col-lg-6">
-                <label><font lang="en" face="verdana" color="gray" size="2.77">Recovery Amount </font></label>
-            </div>
-            <div class="col-lg-6">
-                <input id="recoveryAmt" type="tel" placeholder="" readonly>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-12">
-                <button class="btn btn-primary btn-lg btn-block expbusinessbtnsingle" onclick="submitTSWithEA();"><font size="3.5" lang="en">Send for Approval</font></button>
-            </div>
-        </div>
-    </div>
-</div>
             <div id="tabTrip1" class="tab active" style="display: none">
                 <div class="list-block mt-10 comments-box">
                     <div class="upcomingtripandpref">

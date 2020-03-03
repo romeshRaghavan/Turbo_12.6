@@ -100,7 +100,7 @@
                     <figure></figure>
                 </div>
                 
-                <span class="claimicon" style="display: flex;"><img src="images/ic_3.png" style="width:20%;"/>
+                <span class="claimicon" style="display: flex;"><img src="images/ic_3.png" style="border-radius: 50%;height: 40px;width: 40px;margin-top: -2px;"/>
                 </span>
                 <label lang="en" onclick="createBusiExpMain();" style="width:90%;">
                     Claim Expense
@@ -114,7 +114,7 @@
                     <figure></figure>
                 </div>
       
-                <span class="claimicon" style="display: flex;"><img src="images/ic_2.png" style="width:20%;"/></span>
+                <span class="claimicon" style="display: flex;"><img src="images/ic_2.png" style="border-radius: 50%;height: 40px;width: 40px;margin-top: -2px;"/></span>
                 <label lang="en" onclick="createTravelMain();" style="width:90%;">
                     Travel Management
                     <h5 lang="en">Add Travel Requests, Travel Settelments </h5>
@@ -127,7 +127,7 @@
                 </label>
             </div>
             <div id="approver" class="allcats">
-                <span class="claimicon" style="display: flex;"><img src="images/ic_1.png" style="width:20%;"/>
+                <span class="claimicon" style="display: flex;"><img src="images/ic_1.png" style="border-radius: 50%;height: 40px;width: 40px;margin-top: -2px;"/>
                 </span>
                 <label lang="en" onclick="viewVoucherHeaders('A');" style="" for="ac-2">
                     Expense Approval
@@ -136,7 +136,7 @@
                 </label>
             </div>
             <div id="trTsApprover" class="allcats">
-                <span class="claimicon" style="display: flex;"><img src="images/ic_4.png" style="width:20%;"/>
+                <span class="claimicon" style="display: flex;"><img src="images/ic_4.png" style="border-radius: 50%;height: 40px;width: 40px;margin-top: -2px;"/>
                 </span>
                 <label lang="en" onclick="viewTravelVoucherHeaders('A');" style="" for="ac-2">
                     Travel Approval
@@ -145,11 +145,11 @@
                 </label>
             </div>
             <div id="query" class="allcats">
-                <span class="claimicon" style="display: flex;"><img src="images/ic_5.png" style="width:20%;"/>
+                <span class="claimicon" style="display: flex;"><img src="images/ic_5.png" style="border-radius: 50%;height: 40px;width: 40px;margin-top: -2px;"/>
                 </span>
                 <label lang="en" onclick="viewVoucherHeaders('Q');" for="ac-2" style="line-height: 45px;">
                     Queries
-                    <div class="badge" id="queryCount" style="margin-top: 5px;"></div>
+                    <div class="badge" id="totalQueryCount" style="margin-top: 5px;"></div>
                     <h5 lang="en"></h5>
                 </label>
             </div>
@@ -160,6 +160,7 @@
 <script type="text/javascript">
     fetchCountForMyApproval('A');
     fetchCountForTravelMyApproval('A');
+     fetchCountForQuery('Q');
     if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.2) {
         document.getElementById('approver').style.display = 'none';
         $('.kebab').hide();
