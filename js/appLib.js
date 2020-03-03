@@ -1359,7 +1359,7 @@ function arrayRemove(arr, value) {
      } else {
          window.localStorage.setItem("APPLICATION_VERSION", val.APPLICATION_VERSION);
          var versionNumber = parseFloat(val.APPLICATION_VERSION.match(/[\d\.]+/));
-         window.localStorage.setItem("versionNumber", 12.3);
+         window.localStorage.setItem("versionNumber", versionNumber);
      }
 
      //For Mobile Google Map Role Start
@@ -4866,8 +4866,6 @@ console.log("cityTownID : "+cityTownID);
                      t.executeSql("DELETE FROM BEHeader");
                  });
 
-
-alert("data.Status " +data.Status);
                  if (data.Status == 'Success') {
                      
                      var claimExpArray = data.expenseDetails;
@@ -4916,7 +4914,7 @@ alert("data.Status " +data.Status);
 
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
                          displayPastVoucherPage(data.Status);
                      }  else if(statusOfVoucher == 'Q'){
                         displayQueryPage(data.Status);
@@ -5023,6 +5021,13 @@ alert("data.Status " +data.Status);
                              "<div class='col-md-12' onclick='fetchViewForVoucherDetails(" + row.busExpHeaderId + ");'>" 
                              + "<div class='card shadow'>" 
                              + "<div class='card-header' style='font-size: 15px;color: #076473;'>"
+
+                             //if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+/*                             + "<span style='display: inline;'>"
+                             + "<i style='font-size: 12px;color: red;' class='fa fa-circle'></i>" 
+                             + "</span>&nbsp;"*/
+                           // }
+  
                              + row.busExpNumber 
                                 + "<h7 style='display: inline;'>&nbsp("+defaultCurrency+")</h7>"
                                 + "<label style = 'color:darkorange;float: right;'>" + statusForEdit + "</label></div>" 
@@ -5352,6 +5357,13 @@ alert("data.Status " +data.Status);
                          + "</table>" 
                          + "</div>" 
                          + "</div>"
+
+                        //if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+/*                         + "<div onclick='fetchException("+busExpHeaderId+","+"1)'>"
+                         + "<td><i class='fa fa-plus-square-o' style='font-size:18px;color:#337ab7;'> Policies</i></td>"
+                         + "</div>"*/
+                       // }
+
                          + "<div id = 'exceptionMsg'>"
                          +"</div>"
                          + "</div>" 
@@ -6717,6 +6729,13 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                          + "</table>" 
                          + "</div>"
                          + "</div>"
+
+                        //if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+                         + "<div onclick='fetchException("+headerId+","+"3)'>"
+                         + "<td><i class='fa fa-plus-square-o' style='font-size:18px;color:##337ab7;'> Policies</i></td>"
+                         + "</div>" 
+                       // }
+
                          + "</div>"
                          + "<div id = 'exceptionMsg'>"
                          +"</div>"
@@ -7176,7 +7195,6 @@ function fetchViewForTravelApproveVouchersHeader() {
 
    function displayQueryPage(statusOfVoucher) {
      if (statusOfVoucher == "SUCCESS_NO_DATA") {
-         j('#beQueryData').empty();
               var data = "<div style='text-align: center;'>"
                          +"<p  style='text-align: center;'><img src = 'images/noVoucher1.png'></p>"
                          +"<h4><b style='color: darkgrey;'>No expense available.</b></h4>"

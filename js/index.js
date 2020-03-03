@@ -5,9 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'http://1.255.255.99:8080/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -29,10 +28,6 @@ var fileTempGalleryBE = "";
 var fileTempGalleryTS = "";
 var fileTempCameraBEQ = "";
 var fileTempGalleryBEQ = "";
-var fileTempCameraTRQ = "";
-var fileTempGalleryTRQ = "";
-var fileTempCameraTSQ = "";
-var fileTempGalleryTSQ = "";
 var mapToCalcERAmt = new Map();
 var requestRunning = false;
 var flagForUnitEnable = false;
@@ -47,7 +42,7 @@ var toLocationWayPoint = "";
 var profileImg = "";
 var enableDivBasedOnStatus = ""; // For Past Voucher = 'V' and For my Approval = 'A'
 var updateAttachment = ""; // For BE Edit
-var MOBILE_APP_VERSION = "12.3";
+var MOBILE_APP_VERSION = "12.4";
 var MOBILE_APP_NAME = "Turbo Mobile App";
 
 j(document).ready(function() {
@@ -147,8 +142,8 @@ function commanLogin() {
     var userNameValue = userName.value;
     var domainName = userNameValue.split('@')[1];
     var jsonToDomainNameSend = new Object();
-    jsonToDomainNameSend["userName"] = domainName;
-    //jsonToDomainNameSend["mobilePlatform"] = device.platform;
+    //jsonToDomainNameSend["userName"] = domainName;
+    jsonToDomainNameSend["mobilePlatform"] = device.platform;
     jsonToDomainNameSend["mobilePlatform"] = "Android";
     jsonToDomainNameSend["appType"] = "NEXGEN_EXPENZING_TNE_APP";
     //var res=JSON.stringify(jsonToDomainNameSend);
@@ -2132,16 +2127,6 @@ function onPhotoDataSuccess(imageData) {
         fileTempCameraBEQ = "data:image/jpeg;base64," + imageData;
         smallImageBEQ.src = "data:image/jpeg;base64," + imageData;
         fileTempGalleryBEQ = "";
-    } else if(voucherType == 'TRQ'){
-        smallImageTRQ.style.display = 'block';
-        fileTempCameraTRQ = "data:image/jpeg;base64," + imageData;
-        smallImageTRQ.src = "data:image/jpeg;base64," + imageData;
-        fileTempGalleryTRQ = "";
-    }else if(voucherType == 'TSQ'){
-        smallImageTSQ.style.display = 'block';
-        fileTempCameraTSQ = "data:image/jpeg;base64," + imageData;
-        smallImageTSQ.src = "data:image/jpeg;base64," + imageData;
-        fileTempGalleryTSQ = "";
     }
 }
 
@@ -2152,10 +2137,6 @@ function resetImageData() {
     fileTempGalleryTS = "";
     fileTempCameraBEQ = "";
     fileTempGalleryBEQ = "";
-    fileTempCameraTRQ = "";
-    fileTempGalleryTRQ = "";
-    fileTempCameraTSQ = "";
-    fileTempGalleryTSQ = "";
 }
 
 function hideImageBlock(){
@@ -2217,18 +2198,6 @@ function onPhotoURISuccess(imageURI) {
 
         smallImageBEQ.src = "data:image/jpeg;base64," + imageURI;
         fileTempCameraBEQ = "";
-    } else if(voucherType == 'TRQ'){
-        smallImageTRQ.style.display = 'block';
-        fileTempGalleryTRQ = "data:image/jpeg;base64," + imageURI;
-
-        smallImageTRQ.src = "data:image/jpeg;base64," + imageURI;
-        fileTempCameraTRQ = "";
-    } else if(voucherType == 'TSQ'){
-        smallImageTSQ.style.display = 'block';
-        fileTempGalleryTSQ = "data:image/jpeg;base64," + imageURI;
-
-        smallImageTSQ.src = "data:image/jpeg;base64," + imageURI;
-        fileTempCameraTSQ = "";
     }
 
 }
@@ -4312,10 +4281,21 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                          + "</table>" 
                          + "</div>" 
                          + "</div>" 
+
+                       // if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+/*                         + "<div onclick='fetchException("+headerId+","+"5)'>"
+                         + "<td><i class='fa fa-plus-square-o' style='font-size:18px;color:##337ab7;'> Policies</i></td>"
+                         + "</div>"*/
+                       // }
+
+                         
                          + "</div>" 
                          + "<div id = 'exceptionMsg'>"
                          +"</div>"
                          + "</div>";
+
+                           
+
 
                          j('#voucherDetailsTab').append(data);
 
@@ -4483,76 +4463,6 @@ function fetchCountForTravelRequest(statusOfVoucher) {
 
  }
 
-
-function fetchCountForTravelSettelment(statusOfVoucher) {
-
-     var jsonSentToSync = new Object();
-     jsonSentToSync["employeeId"] = window.localStorage.getItem("EmployeeId");
-     jsonSentToSync["processId"] = "5";
-     jsonSentToSync["vocherStatus"] = statusOfVoucher;
-
-     j.ajax({
-         url: window.localStorage.getItem("urlPath") + "FetchCount",
-         type: 'POST',
-         dataType: 'json',
-         crossDomain: true,
-         data: JSON.stringify(jsonSentToSync),
-         success: function(data) {
-
-             if (data.Status == "Success") {
-
-                 var countForVouchers = data.VoucherCount.toString();
-
-
-                if(statusOfVoucher == 'A' && document.getElementById('tsCount') != null){
-                 document.getElementById("tsCount").innerHTML = countForVouchers.match(/\d+/);
-
-                   var totalArray = countForVouchers.split(",");
-
-                    for(var i = 0 ; i < totalArray.length ; i++){
-                        if(totalArray[i].includes("Q") && document.getElementById('tsQueryCount') != null){
-                            document.getElementById("tsQueryCount").innerHTML = totalArray[i].match(/\d+/);
-                     }
-                   }
-                }else{
-                     var arrayOfCount = countForVouchers.split(",");
-
-                     for(var i = 0 ; i < arrayOfCount.length ; i++){
-
-                        if(arrayOfCount[i].includes("D") && document.getElementById('tsDraftCount') != null){
-                            document.getElementById("tsDraftCount").innerHTML = arrayOfCount[i].match(/\d+/);
-                        }
-                        if(arrayOfCount[i].includes("P") && document.getElementById('tsPendingCount') != null){
-                            document.getElementById("tsPendingCount").innerHTML = arrayOfCount[i].match(/\d+/);
-                        }
-                        if(arrayOfCount[i].includes("U") && document.getElementById('tsApprovedUnpaidCount') != null){
-                            document.getElementById("tsApprovedUnpaidCount").innerHTML = arrayOfCount[i].match(/\d+/);
-                        }
-                         if(arrayOfCount[i].includes("F") && document.getElementById('tsApprovedPaidCount') != null){
-                            document.getElementById("tsApprovedPaidCount").innerHTML = arrayOfCount[i].match(/\d+/);
-                        }
-                         if(arrayOfCount[i].includes("R") && document.getElementById('tsSendBackCount') != null){
-                            document.getElementById("tsSendBackCount").innerHTML = arrayOfCount[i].match(/\d+/);
-                        }
-                          if(arrayOfCount[i].includes("Q") && document.getElementById('tsQueryCount') != null){
-                            document.getElementById("tsQueryCount").innerHTML = arrayOfCount[i].match(/\d+/);
-                        }
-
-                     }
-
-                }
-
-                 requestRunning = false;
-             } else {
-                 requestRunning = false;
-             }
-         },
-         error: function(data) {
-             requestRunning = false;
-         }
-     });
-
- }
 function saveTravelSettle(jsonTSArr, tsExpDetailsArr, isModeCategoryChecked) {
  var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var jsonToSaveTS = new Object();
@@ -4981,3 +4891,130 @@ function addHeaderForTS() {
     });
     syncSettelmentVoucherHeader(enableDivBasedOnStatus);
 }
+
+
+//************************************  Travel Admin -- Start *************************************//
+
+function hideTravelDesk() {
+    if (window.localStorage.getItem("TravelDesk") == "true") {
+        document.getElementById('travelDeskData').style.display = "block";
+        document.getElementById('travelAdmin').style.display = "none";
+         document.getElementById('travelDeskRoundData').style.display = "block";
+          document.getElementById('travelAdminRound').style.display = "none";
+        
+    } else {
+        document.getElementById('travelDeskData').style.display = "none";
+        document.getElementById('travelAdmin').style.display = "block";
+        document.getElementById('travelDeskRoundData').style.display = "none";
+        document.getElementById('travelAdminRound').style.display = "block";
+    }
+}
+
+//************************************  Travel Admin -- End *************************************//
+
+
+function fetchCountForTravelSettelment(statusOfVoucher) {
+     var jsonSentToSync = new Object();
+     jsonSentToSync["employeeId"] = window.localStorage.getItem("EmployeeId");
+     jsonSentToSync["processId"] = "5";
+     jsonSentToSync["vocherStatus"] = statusOfVoucher;
+
+     j.ajax({
+         url: window.localStorage.getItem("urlPath") + "FetchCount",
+         type: 'POST',
+         dataType: 'json',
+         crossDomain: true,
+         data: JSON.stringify(jsonSentToSync),
+         success: function(data) {
+
+             if (data.Status == "Success") {
+
+                 var countForVouchers = data.VoucherCount.toString();
+
+
+                if(statusOfVoucher == 'A' && document.getElementById('tsCount') != null){
+                 document.getElementById("tsCount").innerHTML = countForVouchers.match(/\d+/);
+
+                   var totalArray = countForVouchers.split(",");
+
+                    for(var i = 0 ; i < totalArray.length ; i++){
+                        if(totalArray[i].includes("Q") && document.getElementById('tsQueryCount') != null){
+                            document.getElementById("tsQueryCount").innerHTML = totalArray[i].match(/\d+/);
+                     }
+                   }
+                }else{
+                     var arrayOfCount = countForVouchers.split(",");
+
+                     for(var i = 0 ; i < arrayOfCount.length ; i++){
+
+                        if(arrayOfCount[i].includes("D") && document.getElementById('tsDraftCount') != null){
+                            document.getElementById("tsDraftCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+                        if(arrayOfCount[i].includes("P") && document.getElementById('tsPendingCount') != null){
+                            document.getElementById("tsPendingCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+                        if(arrayOfCount[i].includes("U") && document.getElementById('tsApprovedUnpaidCount') != null){
+                            document.getElementById("tsApprovedUnpaidCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+                         if(arrayOfCount[i].includes("F") && document.getElementById('tsApprovedPaidCount') != null){
+                            document.getElementById("tsApprovedPaidCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+                         if(arrayOfCount[i].includes("R") && document.getElementById('tsSendBackCount') != null){
+                            document.getElementById("tsSendBackCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+                          if(arrayOfCount[i].includes("Q") && document.getElementById('tsQueryCount') != null){
+                            document.getElementById("tsQueryCount").innerHTML = arrayOfCount[i].match(/\d+/);
+                        }
+
+                     }
+
+                }
+
+                 requestRunning = false;
+             } else {
+                 requestRunning = false;
+             }
+         },
+         error: function(data) {
+             requestRunning = false;
+         }
+     });
+
+ }
+
+ /**************************** Total Query Count  start****************************************/
+
+ function fetchCountForQuery(statusOfVoucher) {
+     var jsonSentToSync = new Object();
+     jsonSentToSync["employeeId"] = window.localStorage.getItem("EmployeeId");
+     jsonSentToSync["processId"] = "7";
+     jsonSentToSync["vocherStatus"] = statusOfVoucher;
+
+     j.ajax({
+         url: window.localStorage.getItem("urlPath") + "FetchCount",
+         type: 'POST',
+         dataType: 'json',
+         crossDomain: true,
+         data: JSON.stringify(jsonSentToSync),
+         success: function(data) {
+
+             if (data.Status == "Success") {
+
+                 var countForVouchers = data.VoucherCount.toString();
+
+                if(statusOfVoucher == 'Q' && document.getElementById('totalQueryCount') != null){
+                 document.getElementById("totalQueryCount").innerHTML = countForVouchers;
+                }
+
+                requestRunning = false;
+             } else {
+                 requestRunning = false;
+             }
+         },
+         error: function(data) {
+             requestRunning = false;
+         }
+     });
+
+ }
+ /**************************** Total Query Count end ******************************************/
