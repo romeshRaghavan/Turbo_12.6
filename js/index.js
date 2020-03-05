@@ -28,6 +28,10 @@ var fileTempGalleryBE = "";
 var fileTempGalleryTS = "";
 var fileTempCameraBEQ = "";
 var fileTempGalleryBEQ = "";
+var fileTempCameraTRQ = "";
+var fileTempGalleryTRQ = "";
+var fileTempCameraTSQ = "";
+var fileTempGalleryTSQ = "";
 var mapToCalcERAmt = new Map();
 var requestRunning = false;
 var flagForUnitEnable = false;
@@ -143,8 +147,8 @@ function commanLogin() {
     var domainName = userNameValue.split('@')[1];
     var jsonToDomainNameSend = new Object();
     jsonToDomainNameSend["userName"] = domainName;
-    //jsonToDomainNameSend["mobilePlatform"] = device.platform;
-    jsonToDomainNameSend["mobilePlatform"] = "Android";
+    jsonToDomainNameSend["mobilePlatform"] = device.platform;
+    //jsonToDomainNameSend["mobilePlatform"] = "Android";
     jsonToDomainNameSend["appType"] = "NEXGEN_EXPENZING_TNE_APP";
     //var res=JSON.stringify(jsonToDomainNameSend);
     var requestPath = WebServicePath;
@@ -2132,6 +2136,16 @@ function onPhotoDataSuccess(imageData) {
         fileTempCameraBEQ = "data:image/jpeg;base64," + imageData;
         smallImageBEQ.src = "data:image/jpeg;base64," + imageData;
         fileTempGalleryBEQ = "";
+    }  else if(voucherType == 'TRQ'){
+        smallImageTRQ.style.display = 'block';
+        fileTempCameraTRQ = "data:image/jpeg;base64," + imageData;
+        smallImageTRQ.src = "data:image/jpeg;base64," + imageData;
+        fileTempGalleryTRQ = "";
+    }else if(voucherType == 'TSQ'){
+        smallImageTSQ.style.display = 'block';
+        fileTempCameraTSQ = "data:image/jpeg;base64," + imageData;
+        smallImageTSQ.src = "data:image/jpeg;base64," + imageData;
+        fileTempGalleryTSQ = "";
     }
 }
 
@@ -2142,6 +2156,10 @@ function resetImageData() {
     fileTempGalleryTS = "";
     fileTempCameraBEQ = "";
     fileTempGalleryBEQ = "";
+    fileTempCameraTRQ = "";
+    fileTempGalleryTRQ = "";
+    fileTempCameraTSQ = "";
+    fileTempGalleryTSQ = "";
 }
 
 function hideImageBlock(){
@@ -2203,6 +2221,18 @@ function onPhotoURISuccess(imageURI) {
 
         smallImageBEQ.src = "data:image/jpeg;base64," + imageURI;
         fileTempCameraBEQ = "";
+    } else if(voucherType == 'TRQ'){
+        smallImageTRQ.style.display = 'block';
+        fileTempGalleryTRQ = "data:image/jpeg;base64," + imageURI;
+
+        smallImageTRQ.src = "data:image/jpeg;base64," + imageURI;
+        fileTempCameraTRQ = "";
+    } else if(voucherType == 'TSQ'){
+        smallImageTSQ.style.display = 'block';
+        fileTempGalleryTSQ = "data:image/jpeg;base64," + imageURI;
+
+        smallImageTSQ.src = "data:image/jpeg;base64," + imageURI;
+        fileTempCameraTSQ = "";
     }
 
 }
