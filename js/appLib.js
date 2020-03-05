@@ -7314,16 +7314,16 @@ function queryTrAnwser(){
         jsonToTrSendForQuery["employeeId"] = window.localStorage.getItem("EmployeeId");
         jsonToTrSendForQuery["queryAnswer"] = comment;
 
-         if (fileTempGalleryBEQ == undefined || fileTempGalleryBEQ == "") {
+         if (fileTempGalleryTRQ == undefined || fileTempGalleryTRQ == "") {
 
          } else {
-             file = fileTempGalleryBEQ;
+             file = fileTempGalleryTRQ;
          }
 
-         if (fileTempCameraBEQ == undefined || fileTempCameraBEQ == "") {
+         if (fileTempCameraTRQ == undefined || fileTempCameraTRQ == "") {
 
          } else {
-             file = fileTempCameraBEQ;
+             file = fileTempCameraTRQ;
          }
 
          if(file != ""){
@@ -7389,16 +7389,16 @@ function queryTsAnwser(){
         jsonToTsSendForQuery["employeeId"] = window.localStorage.getItem("EmployeeId");
         jsonToTsSendForQuery["queryAnswer"] = comment;
 
-         if (fileTempGalleryBEQ == undefined || fileTempGalleryBEQ == "") {
+         if (fileTempGalleryTSQ == undefined || fileTempGalleryTSQ == "") {
 
          } else {
-             file = fileTempGalleryBEQ;
+             file = fileTempGalleryTSQ;
          }
 
-         if (fileTempCameraBEQ == undefined || fileTempCameraBEQ == "") {
+         if (fileTempGalleryTSQ == undefined || fileTempGalleryTSQ == "") {
 
          } else {
-             file = fileTempCameraBEQ;
+             file = fileTempGalleryTSQ;
          }
 
          if(file != ""){
