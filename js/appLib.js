@@ -5407,6 +5407,7 @@ console.log("cityTownID : "+cityTownID);
                         }
                          
                          if(statusForEdit =='In Queries' && enableDivBasedOnStatus == 'A'){
+                            document.getElementById("RejectedBtn").disabled =true;
                             document.getElementById("approveBtn").disabled =true;
                             }
                           
@@ -6731,9 +6732,9 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                          + "</div>"
 
                         //if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
-                         + "<div onclick='fetchException("+headerId+","+"3)'>"
+/*                         + "<div onclick='fetchException("+headerId+","+"3)'>"
                          + "<td><i class='fa fa-plus-square-o' style='font-size:18px;color:##337ab7;'> Policies</i></td>"
-                         + "</div>" 
+                         + "</div>"*/ 
                        // }
 
                          + "</div>"
@@ -6794,6 +6795,7 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                         }
 
                            if(statusForEdit =='In Queries' && enableDivBasedOnStatus == 'A'){
+                             document.getElementById("RejectedBtn").disabled =true;
                             document.getElementById("approveBtn").disabled =true;
                             }
 
