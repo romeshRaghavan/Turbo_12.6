@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -4342,8 +4342,8 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.rejectionComments+"</div>"
                                             +"<div><br>"
-/*                                          +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" */  
-                                            + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTS()'>Edit</button>&nbsp;" 
+                                          +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>"   
+                                           /* + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdTS()'>Edit</button>&nbsp;" */
                                         +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveTSVoucher(" + row.headerId + ")'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
@@ -4387,12 +4387,15 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                             document.getElementById("RejectedBtn").disabled =true;
                             document.getElementById("approveBtn").disabled =true;
                         }   
-                        if(statusForEdit == 'In Queries'  && (empId==row.createdById)){
+
+                        var len = appPageHistory.length;
+                        var pg = appPageHistory[len - 3];
+
+                        if(statusForEdit == 'In Queries'  && (empId==row.createdById) && pg !='app/pages/TRTSAllViews.html'){
                             
                             var ids = row.headerId+'&'+row.queryId;
                        
-                                                      if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
-                                 
+                            if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
                                 buttonValue =   
                                             "<br>"
                                             +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"

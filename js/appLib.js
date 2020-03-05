@@ -5432,7 +5432,6 @@ console.log("cityTownID : "+cityTownID);
                             var ids = row.busExpHeaderId+'&'+row.queryId;
                        
                             if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
-                                 
                                 buttonValue =   
                                             "<br>"
                                             +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
@@ -6800,12 +6799,15 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                             }
 
                         var empId = window.localStorage.getItem("EmployeeId");
-                        if(statusForEdit == 'In Queries'  && (empId==row.createdById)){
+
+                        var len = appPageHistory.length;
+                        var pg = appPageHistory[len - 3];
+
+                        if(statusForEdit == 'In Queries'  && (empId==row.createdById) && pg !='app/pages/TRTSAllViews.html'){
                             
                             var ids = row.headerId+'&'+row.queryId;
                        
                         if(row.queryAns == "" || row.queryAns=="undefined" ||row.queryAns=="Null"){
-                                 
                                 buttonValue =   
                                             "<br>"
                                             +"<div style='margin-left: 2%;'><label>Query Asked To Me:</label>"
