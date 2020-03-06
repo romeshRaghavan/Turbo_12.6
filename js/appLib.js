@@ -7379,7 +7379,7 @@ function queryTsAnwser(){
     var queryId = tsQueryId[1];
     var comment = j.trim(j("#queryTsRply").val());
     var file = "";
-
+alert("query TS");
     if(comment != ""){
 
         var jsonToTsSendForQuery = new Object();
@@ -7389,10 +7389,10 @@ function queryTsAnwser(){
         jsonToTsSendForQuery["employeeId"] = window.localStorage.getItem("EmployeeId");
         jsonToTsSendForQuery["queryAnswer"] = comment;
 
-         if (fileTempGalleryTSQ == undefined || fileTempGalleryTSQ == "") {
+         if (fileTempCameraTSQ == undefined || fileTempCameraTSQ == "") {
 
          } else {
-             file = fileTempGalleryTSQ;
+             file = fileTempCameraTSQ;
          }
 
          if (fileTempGalleryTSQ == undefined || fileTempGalleryTSQ == "") {
