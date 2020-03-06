@@ -1344,7 +1344,7 @@ function arrayRemove(arr, value) {
  }
 
  function setUserSessionDetails(val, userJSON) {
-     //alert("buss : "+val.mobileEC);
+     window.localStorage.setItem("TravelDesk", val.travelDesk);
      window.localStorage.setItem("TrRole", val.TrRole);
      window.localStorage.setItem("EmployeeId", val.EmpId);
      window.localStorage.setItem("FirstName", val.FirstName);
