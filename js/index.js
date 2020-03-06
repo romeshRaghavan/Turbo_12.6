@@ -4042,8 +4042,7 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
  }
 
  function fetchViewForSettelmentVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM TravelHeader;', [],
              function(transaction, result) {
@@ -4051,6 +4050,9 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                      j('#voucherHeader').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var statusForEdit = "";
+                         var pendingAt = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -4070,6 +4072,7 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                          if(enableDivBasedOnStatus == "A"){
                             pendingAt = row.creatorName;
                          }
+
 
                         if(pendingAt == ""){
                             pendingAt = row.currentOwnerName;
@@ -4223,8 +4226,7 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
  }
 
 function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLines) {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
 
          t.executeSql('SELECT * FROM TravelHeader where headerId = ' + headerId, [],
@@ -4234,7 +4236,8 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
                 
-
+                             var statusForEdit = "";
+                             var pendingAt = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -4268,7 +4271,6 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                           if (travelTitle.length > 15) {
                             travelTitle = travelTitle.substr(0, 12) + "..";
                          }
-// Neha
 
                          var data =
                              "<div class='col-md-12'>" 
@@ -4673,8 +4675,7 @@ function populateTSAmount() {
 /********************    Kunal Coding For Approve Voucher start   *************************/
 
 function fetchViewForSettelmentApproverVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM TravelHeader;', [],
              function(transaction, result) {
@@ -4682,6 +4683,9 @@ function fetchViewForSettelmentApproverVouchersHeader() {
                      j('#voucherHeader').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var statusForEdit = "";
+                         var pendingAt = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -4838,8 +4842,7 @@ function fetchViewForSettelmentApproverVouchersHeader() {
  }
 
  function fetchViewForSettelmentQueryVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM TravelHeader;', [],
              function(transaction, result) {
@@ -4847,6 +4850,9 @@ function fetchViewForSettelmentApproverVouchersHeader() {
                      j('#tsQueryData').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var statusForEdit = "";
+                         var pendingAt = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
