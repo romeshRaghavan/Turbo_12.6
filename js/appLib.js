@@ -4982,8 +4982,7 @@ console.log("cityTownID : "+cityTownID);
  }
 
  function fetchViewForVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM BEHeader;', [],
              function(transaction, result) {
@@ -4991,6 +4990,9 @@ console.log("cityTownID : "+cityTownID);
                      j('#voucherHeader').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var statusForEdit = "";
+                         var pendingAt = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -5270,11 +5272,9 @@ console.log("cityTownID : "+cityTownID);
     return( date.getMonth() + 1 + "/" +date.getDate());
 }
 
-// Neha
 
  function setHeaderToDetail(busExpHeaderId, voucherDetailArray, detailBodyLines) {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      var exceptionId = busExpHeaderId+"_1";
      mydb.transaction(function(t) {
 
@@ -5284,6 +5284,9 @@ console.log("cityTownID : "+cityTownID);
                      j('#voucherDetailsTab').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                            var statusForEdit = "";
+                            var pendingAt = "";
                         
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -6261,7 +6264,7 @@ function queryAnwser(){
 }
 
 
-// ---------------------------------------------------  Neha -- Start -----------------------------------------------------  //
+// ---------------------------------------------------  Travel Past -- Start -----------------------------------------------------  //
 
  function TRTSAllViews() {
 
@@ -6327,6 +6330,8 @@ function queryAnwser(){
                  if (data.Status == 'Success') {
                      
                      var claimExpArray = data.expenseDetails;
+
+                     console.log("claimExpArray TR : "+JSON.stringify(claimExpArray));
 
                      mydb.transaction(function(t) {
                          if (claimExpArray != null && claimExpArray.length > 0) {
@@ -6444,8 +6449,7 @@ function queryAnwser(){
  }
 
  function fetchViewForTravelVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+     
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM TravelHeader;', [],
              function(transaction, result) {
@@ -6453,6 +6457,9 @@ function queryAnwser(){
                      j('#voucherHeader').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var pendingAt = "";
+                         var statusForEdit = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -6631,8 +6638,7 @@ function queryAnwser(){
  }
 
 function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
 
          t.executeSql('SELECT * FROM TravelHeader where headerId = ' + headerId, [],
@@ -6642,6 +6648,9 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
                         
+                             var statusForEdit = "";
+                             var pendingAt = "";
+
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
                          } else if (row.vocherStatus == 'P') {
@@ -6843,7 +6852,7 @@ function setTravelHeaderToDetail(headerId, voucherDetailArray, detailBodyLines) 
 
   // *************************************** Travel Request Header / Details -- End *****************************************************//
 
-// ---------------------------------------------------  Neha -- End -----------------------------------------------------  //
+// ---------------------------------------------------  Profile -- End -----------------------------------------------------  //
 function updateProfilePicture(imageData){
      try {
          var empId = window.localStorage.getItem("EmployeeId");
@@ -7000,8 +7009,8 @@ function submitTSWithEA(){
  /********************    Kunal Coding For Approve Voucher start   *************************/
 
 function fetchViewForTravelApproveVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+     
+     
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM TravelHeader;', [],
              function(transaction, result) {
@@ -7009,6 +7018,9 @@ function fetchViewForTravelApproveVouchersHeader() {
                      j('#voucherHeader').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var pendingAt = "";
+                         var statusForEdit = "";
 
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
@@ -7212,8 +7224,7 @@ function fetchViewForTravelApproveVouchersHeader() {
 
 
  function fetchViewForQueryVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM BEHeader;', [],
              function(transaction, result) {
@@ -7221,6 +7232,10 @@ function fetchViewForTravelApproveVouchersHeader() {
                      j('#beQueryData').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                         var statusForEdit = "";
+                         var pendingAt = "";
+
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
                          } else if (row.vocherStatus == 'P') {
@@ -7460,8 +7475,7 @@ function queryTsAnwser(){
  }
 
 function fetchViewForQueryTravelVouchersHeader() {
-     var statusForEdit = "";
-     var pendingAt = "";
+
      mydb.transaction(function(t) {
          t.executeSql('SELECT * FROM TravelHeader;', [],
              function(transaction, result) {
@@ -7469,6 +7483,10 @@ function fetchViewForQueryTravelVouchersHeader() {
                      j('#trQueryData').empty();
                      for (record = 0; record < result.rows.length; record++) {
                          var row = result.rows.item(record);
+
+                        var statusForEdit = "";
+                        var pendingAt = "";
+
                          if (row.vocherStatus == 'R') {
                              statusForEdit = 'Sent Back';
                          } else if (row.vocherStatus == 'P') {
