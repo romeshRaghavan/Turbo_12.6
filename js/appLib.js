@@ -7379,7 +7379,7 @@ function queryTsAnwser(){
     var queryId = tsQueryId[1];
     var comment = j.trim(j("#queryTsRply").val());
     var file = "";
-alert("query TS");
+
     if(comment != ""){
 
         var jsonToTsSendForQuery = new Object();
