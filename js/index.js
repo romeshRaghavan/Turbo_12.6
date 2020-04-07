@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'http://1.255.255.178:8083/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'http://1.255.255.176:8083/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -147,8 +147,8 @@ function commanLogin() {
     var domainName = userNameValue.split('@')[1];
     var jsonToDomainNameSend = new Object();
     jsonToDomainNameSend["userName"] = domainName;
-    jsonToDomainNameSend["mobilePlatform"] = device.platform;
-    //jsonToDomainNameSend["mobilePlatform"] = "Android";
+    //jsonToDomainNameSend["mobilePlatform"] = device.platform;
+    jsonToDomainNameSend["mobilePlatform"] = "Android";
     jsonToDomainNameSend["appType"] = "NEXGEN_EXPENZING_TNE_APP";
     //var res=JSON.stringify(jsonToDomainNameSend);
     var requestPath = WebServicePath;
@@ -3684,7 +3684,10 @@ function expPrimaryId() {
             alert(window.lang.translate('Select single expense line for edit.'));
         } else {
             j("#source tr.selected").each(function(index, row) {
-                getPrimaryExpenseId(j(this).find('td.expNameId').text());
+                var accCodeIdValue = j(this).find('td.accountCodeId').text();
+                var expNameID = j(this).find('td.expNameId').text();
+                var accHeadIdVal = j(this).find('td.accHeadId').text(); 
+                getPrimaryExpenseId(expNameID,accCodeIdValue,accHeadIdVal);
             });
         }
     } else {
@@ -3957,8 +3960,10 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                                  var query =  headArray.query;
                                  var queryId =  headArray.queryId;
                                  var queryAns = headArray.queryAns;
+                                 var workflowToBeFollowed = headArray.workflowToBeFollowed;
 
-                                 t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, travelTitle, query, queryId, queryAns) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, travelTitle, query ,queryId,queryAns]);
+
+                                 t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, travelTitle, query, queryId, queryAns, workflowToBeFollowed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, travelTitle, query ,queryId, queryAns, workflowToBeFollowed]);
 
                              }
                          }
@@ -4088,7 +4093,8 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                          var data =
                              "<div class='col-md-12' onclick='fetchViewForSettelmentDetails(" + row.headerId + ");'>" 
                                 + "<div class='card shadow'>" 
-                                    + "<div class='card-header' style='font-size: 15px;color: #076473;'>" 
+                                    + "<div class='card-header' style='font-size: 15px;color: #076473;'>"
+                                    + "<span style='display: inline;' id = 'isEntitlementExceeded_"+record+"'></span>"
                                          + row.voucherNumber 
                                             +"<h7 style='display: inline;'>&nbsp("+defaultCurrency+")</h7>"
                              + "<label style = 'color:darkorange;float: right;'>" + statusForEdit + "</label></div>" 
@@ -4119,6 +4125,18 @@ function viewSettelmentVoucherHeaders(statusOfVoucher) {
                  + "<br>";
 
                          j('#voucherHeader').append(data);
+
+                        if (row.workflowToBeFollowed == 'D') {
+                            if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") > 12.4) {
+
+                                var buttonValue =
+                                    "<i style='font-size: 12px;color: red;float: left;margin-top: 5px;' class='fa fa-circle'></i>" + "&nbsp;";
+
+                                j('#isEntitlementExceeded_' + record).append(buttonValue);
+
+                            }
+
+                        }
 
                      }
                  }
@@ -4275,7 +4293,8 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                          var data =
                              "<div class='col-md-12'>" 
                              + "<div class='card shadow'>" 
-                             + "<div class='card-header' style='font-size: 15px;color: #076473;'>" 
+                             + "<div class='card-header' style='font-size: 15px;color: #076473;'>"
+                             + "<span style='display: inline;' id = 'isEntitlementExceeded_"+record+"'></span>"
                              + row.voucherNumber 
                              +"<h7 style='display: inline;'>&nbsp("+defaultCurrency+")</h7>"
                              +"<label style = 'color:darkorange;float: right;'>" + statusForEdit + "</label></div>"
@@ -4319,22 +4338,31 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                          + "</div>" 
                          + "</div>" 
 
-                       // if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
-/*                         + "<div onclick='fetchException("+headerId+","+"5)'>"
-                         + "<td><i class='fa fa-plus-square-o' style='font-size:18px;color:##337ab7;'> Policies</i></td>"
-                         + "</div>"*/
-                       // }
+                         + "<div id = 'policies' style='display: none;' onclick='fetchException("+headerId+","+"5)'>"
+                         + "<td><i class='fa fa-plus-square-o' style='font-size:18px;color:#337ab7;padding: 6px;'> Policies</i></td>"
+                         + "</div>"
 
-                         
+                         + "<div id = 'exceptionMsg' style='padding-left: 5px; padding-bottom: 5px; padding-right:5px;'>"
                          + "</div>" 
-                         + "<div id = 'exceptionMsg'>"
                          +"</div>"
                          + "</div>";
 
-                           
 
 
                          j('#voucherDetailsTab').append(data);
+
+                            if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") > 12.4) {
+                                if (row.workflowToBeFollowed == 'D') {
+                                    var buttonValue =
+                                        "<i style='font-size: 12px;color: red;float: left;margin-top: 5px;' class='fa fa-circle'></i>" + "&nbsp;";
+
+                                    j('#isEntitlementExceeded_' + record).append(buttonValue);
+
+                                    document.getElementById('policies').style.display = "block";
+
+                                }
+
+                            }
 
                          if (statusForEdit == 'Sent Back') {
 
@@ -4404,7 +4432,9 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.query+"</div>"
                                             +"<div><br>"
+                                            +"<div class='col-md-12' style='text-align: center;'>"
                                             +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Reply</button>"
+                                            +"</div>"
                                             ;
                              }else{
                                  buttonValue =   
@@ -4415,7 +4445,9 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                                             +"<div style='margin-right: 2%;'><label>Reply:</label>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.queryAns+"</div>"
                                             +"<div><br>"
+                                            +"<div class='col-md-12' style='text-align: center;'>"
                                             +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Edit Query</button>"
+                                            +"</div>"
                                             ;
                              }
 
@@ -4752,6 +4784,17 @@ function fetchViewForSettelmentApproverVouchersHeader() {
 
                          j('#tsVoucherHeader').append(data);
 
+                        if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") > 12.4) {
+                            if (row.workflowToBeFollowed == 'D') {
+                                var buttonValue =
+                                    "<i style='font-size: 12px;color: red;float: left;margin-top: 5px;' class='fa fa-circle'></i>" + "&nbsp;";
+
+                                j('#isEntitlementExceeded_' + record).append(buttonValue);
+
+                            }
+
+                        }
+
                      }
                  }
 
@@ -4887,7 +4930,8 @@ function fetchViewForSettelmentApproverVouchersHeader() {
                          var data =
                              "<div class='col-md-12' onclick='fetchViewForSettelmentDetails(" + row.headerId + ");'>" 
                                 + "<div class='card shadow'>" 
-                                    + "<div class='card-header' style='font-size: 15px;color: #076473;'>" 
+                                    + "<div class='card-header' style='font-size: 15px;color: #076473;'>"
+                                    +"<span style='display: inline;' id = 'tsEntitlementExceeded_" + record + "'></span>"
                                          + row.voucherNumber 
                                             +"<h7 style='display: inline;'>&nbsp("+defaultCurrency+")</h7>"
                              + "<label style = 'color:darkorange;float: right;'>" + statusForEdit + "</label></div>" 
@@ -4919,6 +4963,16 @@ function fetchViewForSettelmentApproverVouchersHeader() {
 
                          j('#tsQueryData').append(data);
 
+                        if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") > 12.4) {
+                            if (row.workflowToBeFollowed == 'D') {
+                                var buttonValue =
+                                    "<i style='font-size: 12px;color: red;float: left;margin-top: 5px;' class='fa fa-circle'></i>" + "&nbsp;";
+
+                                j('#tsEntitlementExceeded_' + record).append(buttonValue);
+
+                            }
+
+                        }
                      }
                  }
 
