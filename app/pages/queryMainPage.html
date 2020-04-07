@@ -161,22 +161,20 @@
     <div class="sap_tabs">
             <div id="horizontalTab" style="display: block;">
                 <ul id="tab" class="resp-tabs-list" style="display: flex;">
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-0" role="tab" ><span style="text-align: left; margin-left: -8px; font-weight: 600; font-size: 14px;">Business Expense</span>
-                        <div class="badge" style="margin-top: -38px; margin-left: -5px; margin-right: -10px;" id="queryCount"></li>
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-1" id="trQueryTab" role="tab" onclick="syncTravelVoucherHeader('Q');"><span style="text-align: left; font-weight: 600; margin-left: -8px; font-size: 14px;">Travel Request</span>
-                        <div class="badge" style="margin-top: -38px; margin-left: -5px; margin-right: -10px;" id="trQueryCount"></li>
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-2" id="tsQueryTab" role="tab" onclick="syncSettelmentVoucherHeader('Q');"><span style="text-align: left; margin-left: -8px; font-weight: 600; font-size: 14px;">Travel Settlement</span>
-                        <div class="badge" style="margin-top: -38px; margin-left: -5px; margin-right: -10px;" id="tsQueryCount"></li>
+                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-0" role="tab" ><span style="font-size: 14px;">Business Expense</span>
+                        <div style="display: inline-flex; margin-top: 5px; margin-bottom: -5px;">(<span style="font-size: 14px;" id="queryCount"></span>)</div></li>
+                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-1" id="trQueryTab" role="tab" onclick="syncTravelVoucherHeader('Q');"><span style="font-size: 14px;">Travel Request</span>
+                        <div style="display: inline-flex; margin-top: 5px; margin-bottom: -5px;">(<span style="font-size: 14px;" id="trQueryCount"></span>)</div></li>
+                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-2" id="tsQueryTab" role="tab" onclick="syncSettelmentVoucherHeader('Q');"><span style="font-size: 14px;">Travel Settlement</span>
+                        <div style="display: inline-flex; margin-top: 5px; margin-bottom: -5px;">(<span style="font-size: 14px;" id="tsQueryCount"></span>)</div></li>
                 </ul>
 
             <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                 <div class="modal-body clearfix">
                     <section class="ac-containerPast">
                         <h1 lang="en" style="padding-top:10px">My Queries</h1>
-                         <div class="container-fluid" style="background-color: white;">
-                                <div id ="beQueryData" class="row">
-
-                                </div>
+                         <div class="container-fluid" style="background-color: white;padding-right: 0px;padding-left: 0px;">
+                            <div id ="beQueryData" class="row" style="margin-right: -15px; margin-left: -15px;"></div>
                         </div>
                     </section>
                 </div>
@@ -187,8 +185,8 @@
                 <div class="modal-body clearfix">
                     <section class="ac-containerPast">
                         <h1 lang="en" style="padding-top:10px">My Queries</h1>
-                        <div class="container-fluid" style="background-color: white;">
-                            <div  id = "trQueryData" class="row">
+                        <div class="container-fluid" style="background-color: white;padding-right: 0px;padding-left: 0px;">
+                            <div id = "trQueryData" class="row" style="margin-right: -15px; margin-left: -15px;">
                             </div>
                         </div>
                     </section>
@@ -199,8 +197,8 @@
 
                     <section class="ac-containerPast">
                         <h1 lang="en" style="padding-top:10px">My Queries</h1>
-                        <div class="container-fluid" style="background-color: white;">
-                            <div  id = "tsQueryData" class="row">
+                        <div class="container-fluid" style="background-color: white;padding-right: 0px;padding-left: 0px;">
+                            <div id = "tsQueryData" class="row" style="margin-right: -15px; margin-left: -15px;">
                             </div>
                         </div>
                     </section>
