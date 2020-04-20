@@ -29,7 +29,7 @@
         "Mode":"प्रकार",
         "Class":"क्लास",
         "Add Travel Expense":"यात्रा व्यय जोड़ें",
-        "Start Dt.":"आरंभ करने की तिथि",
+        "Start Dt.":"आरंभ तिथि",
         "End Dt.":"अंतिम तिथि",
         "View Travel Expense":"यात्रा व्यय देखें",
         "Travel Expense":"यात्रा व्यय",
@@ -122,8 +122,68 @@
         "Select Language":"भाषा चुनिए",
         "Language":"भाषा",
         "Amount should be numeric.":"राशि संख्यात्मक होना चाहिए",
-        "Amount should be greater than 0.":"राशि 0 से अधिक होनी चाहिए"
-	},
+        "Amount should be greater than 0.":"राशि 0 से अधिक होनी चाहिए",
+
+
+        "Claim Expense":"व्यय का दावा",
+        "Expense Approval":"व्यय स्वीकृति",
+        "Travel Approval":"यात्रा स्वीकृति",
+        "Queries":"प्रश्नों",
+        "Add Expense Claims":"व्यय दावे जोड़ें।",
+        "Add Travel Requests, Travel Settelments":"यात्रा अनुरोध, यात्रा निपटान जोड़ें",
+        "Approve / Send Back Claims":"अनुमोदन / वापस दावे भेजें",
+        "Approve / Send Back Travel":"अनुमोदन / वापस यात्रा भेजें",
+
+        "Add Expense":"व्यय जोड़ें",
+        "Request Advance":"अग्रिम अनुरोध",
+        "Submit Expense":"व्यय जमा करें",
+        "Select Business Expense":"व्यवसाय व्यय का चयन करें",
+
+        "Edit":"संपादित करें",
+        "Approval":"अनुमोदन",
+        "Sync":"सिंक",
+        "Delete":"हटाएं",
+        "Save & Add New":"सहेजें और नया जोड़ें",
+        "Save & Submit":"सहेजें और सबमिट करें",
+
+        "Draft Expenses":"ड्राफ्ट व्यय",
+        "Pending Expenses":"लंबित व्यय",
+        "Approved Unpaid Expenses":"स्वीकृत अवैतनिक व्यय",
+        "Approved Paid Expenses":"स्वीकृत व्यय",
+        "Sent Back Expenses":"वापस भेजे गए खर्च",
+        "My Expenses":"मेरे खर्चे",
+        "Edit":"संपादित करें",
+        "Send For Approval":"स्वीकृति के लिए भेजें",
+        "Travel Settelment":"यात्रा सेटलमेंट",
+        "My Approval":"मेरा अनुमोदन",
+        "Business":"व्यापार",
+        "Travel Settlement":"यात्रा का सेटलमेंट",
+        "Voucher Details":"वाउचर विवरण",
+        "Edit Business Expense":"व्यवसाय व्यय संपादित करें",
+        "Update":"अपडेट करें",
+        "Cancel":"रद्द करना",
+        "Settlement":"समझौता",
+        "Home":"घर",
+        "Request":"निवेदन",
+        "Save & New":"सहेजें और नया",
+        "Add Travel Settelment":"ट्रैवल सेटलमेंट जोड़ें",
+       
+        "Send For Approval":"स्वीकृति के लिए भेजें",
+        "Delete":"हटाएं",
+
+        "Profile":"प्रोफ़ाइल",
+        "Sync Masters":"सिंक मास्टर्स",
+        "Languages":"बोली",
+        "About":"के बारे में",
+        "Log Out":"लॉग आउट",
+
+        "TR":"टी.आर.",
+        "CityTown":"सिटी टाउन"
+
+
+        },
+
+
 	"regex": [
 		["Enter your user name","अपने उपयोगकर्ता नाम दर्ज करें"],
 		["Enter your password","अपना पासवर्ड डालें"],
@@ -152,6 +212,8 @@
         ["Specify only if you require travel desk to book any of these 3:","केवल तभी निर्दिष्ट करें जब आपको इन 3 में से किसी भी बुक करने के लिए यात्रा डेस्क की आवश्यकता होती है"],
         ["Cab /Car Hire Instruction"," / टैक्सी / कार किराया निर्देश"],
         ["Accommodation Instruction","आवास निर्देश"],
-        ["Ticket Instruction","टिकट निर्देश"]
+        ["Ticket Instruction","टिकट निर्देश"],
+        ["Push to Web","वेब पर पुश करें"],
+        ["Please sync your pending expenses before you exit or they will be lost","कृपया बाहर निकलने से पहले अपने लंबित खर्चों को सिंक करें या वे खो जाएंगे"]
 	]
 }

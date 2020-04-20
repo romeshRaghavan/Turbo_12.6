@@ -613,7 +613,7 @@ function arrayRemove(arr, value) {
      mytable = j('<table></table>').attr({
          id: "source",
          class: ["table", "table-striped", "table-bordered" ],
-         style:["overflow-x: auto;display: inline-block;"].join(' ')
+         style:["overflow-x: auto;display: inline-table;"].join(' ')
      });
 
      var rowThead = j("<thead></thead>").appendTo(mytable);
@@ -2711,7 +2711,7 @@ function arrayRemove(arr, value) {
      mytable = j('<table></table>').attr({
          id: "source",
          class: ["table", "table-striped", "table-bordered"],
-         style:["overflow-x: auto;display: inline-block;"].join(' ')
+         style:["overflow-x: auto;display: inline-table;"].join(' ')
      });
 
      var rowThead = j("<thead></thead>").appendTo(mytable);
@@ -4121,13 +4121,12 @@ function arrayRemove(arr, value) {
 
      document.getElementById("expAmt").value = jsonFindBEEditValues.amount;
 
-alert("jsonFindBEEditValues.expenseId  11:"+jsonFindBEEditValues.expenseId);
+
 
 setTimeout(function() {
      j("#expenseName").select2("val", jsonFindBEEditValues.expenseId);
 }, 50);
 
-     alert("jsonFindBEEditValues.expenseId 22:"+jsonFindBEEditValues.expenseId);
 
      j("#currency").select2("val", jsonFindBEEditValues.currencyId);
 
@@ -4269,7 +4268,6 @@ setTimeout(function() {
 
  function getPrimaryExpenseId(expMstId,accountCodeId,accHeadIdVal) {
 
-    alert("expMstId accountCodeId accHeadIdVal : "+expMstId   +" "+accountCodeId +" "+accHeadIdVal);
      if (mydb) {
          //Get all the employeeDetails from the database with a select statement, set outputEmployeeDetails as the callback function for the executeSql command
          mydb.transaction(function(t) {
@@ -5903,8 +5901,6 @@ function expPrimaryIdSB() {
 }
 
 function getPrimaryExpenseIdSB(expMstId,accHeadIdVal) {
-
-    alert(" 22 expMstId  accHeadIdVal : "+expMstId   +" "+accHeadIdVal);
 
      if (mydb) {
          //Get all the employeeDetails from the database with a select statement, set outputEmployeeDetails as the callback function for the executeSql command
@@ -7730,35 +7726,14 @@ function fetchException(headerId,processId){
     var pageRefSuccess = defaultPagePath + 'success.html';
 
     var jsonToBeSend = new Object();
-    console.log("voucherId : "+headerId);
-    console.log("processId : "+processId);
 
     jsonToBeSend["processId"] = processId;
     jsonToBeSend["voucherId"] = headerId;
     jsonToBeSend["employeeId"] = window.localStorage.getItem("EmployeeId");
-     console.log("exception json to be sent : "+JSON.stringify(jsonToBeSend));
-    //j('#loading_Cat').show();
 
-/*var expContent = document.getElementById("exceptionMsg").textContent;
-console.log("expContent : "+expContent);
-
-$( "#exceptionMsg" ).toggle();
-
-if(expContent == ""){
-
-$( "#exceptionMsg" ).toggle();
-
-var rejectionComments = "Entitlements briched";
-
-var buttonValue = "<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+rejectionComments+"</div>"
-
-j('#exceptionMsg').append(buttonValue);
-}*/
 
  var expContent = document.getElementById("exceptionMsg").textContent;
   $( "#exceptionMsg" ).toggle();
- console.log("expContent : "+expContent);
-
 
  if(expContent == ""){
     j.ajax({
@@ -7773,9 +7748,6 @@ j('#exceptionMsg').append(buttonValue);
 
                     var entitlementExceeded = data.exceptionMessage;
 
-                    console.log("entitlementExceeded :"+entitlementExceeded);
-
-                   
 
                     $( "#exceptionMsg" ).toggle();
 

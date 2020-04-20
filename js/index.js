@@ -5,8 +5,8 @@ var headerMsg = "Expenzing";
 //var WebServicePath ='http://1.255.255.99:8681/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath = 'http://live.nexstepapps.com:8284/NexstepWebService/mobileLinkResolver.service';
 //var WebServicePath ='http://1.255.255.95:8080/NexstepWebService/mobileLinkResolver.service';
-var WebServicePath = 'http://1.255.255.176:8083/NexstepWebService/mobileLinkResolver.service';
-//var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
+//var WebServicePath = 'http://1.255.255.176:8083/NexstepWebService/mobileLinkResolver.service';
+var WebServicePath = 'https://appservices.expenzing.com/NexstepWebService/mobileLinkResolver.service';
 var clickedFlagCar = false;
 var clickedFlagTicket = false;
 var clickedFlagHotel = false;
@@ -4446,7 +4446,7 @@ function setTravelSettelmentToDetail(headerId, voucherDetailArray, detailBodyLin
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.queryAns+"</div>"
                                             +"<div><br>"
                                             +"<div class='col-md-12' style='text-align: center;'>"
-                                            +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Edit Query</button>"
+                                            +"<button type='button' id = 'QueryTsBtn' class='btn btn-primary' data-toggle='modal' data-id="+ids+" data-target='#myModalTsQuery'>Edit</button>"
                                             +"</div>"
                                             ;
                              }
