@@ -46,7 +46,7 @@ var toLocationWayPoint = "";
 var profileImg = "";
 var enableDivBasedOnStatus = ""; // For Past Voucher = 'V' and For my Approval = 'A'
 var updateAttachment = ""; // For BE Edit
-var MOBILE_APP_VERSION = "12.4";
+var MOBILE_APP_VERSION = "12.5";
 var MOBILE_APP_NAME = "Turbo Mobile App";
 
 j(document).ready(function() {
@@ -147,8 +147,8 @@ function commanLogin() {
     var domainName = userNameValue.split('@')[1];
     var jsonToDomainNameSend = new Object();
     jsonToDomainNameSend["userName"] = domainName;
-    //jsonToDomainNameSend["mobilePlatform"] = device.platform;
-    jsonToDomainNameSend["mobilePlatform"] = "Android";
+    jsonToDomainNameSend["mobilePlatform"] = device.platform;
+    //jsonToDomainNameSend["mobilePlatform"] = "Android";
     jsonToDomainNameSend["appType"] = "NEXGEN_EXPENZING_TNE_APP";
     //var res=JSON.stringify(jsonToDomainNameSend);
     var requestPath = WebServicePath;
