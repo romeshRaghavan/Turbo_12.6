@@ -6270,6 +6270,7 @@ function getPrimaryExpenseIdSB(expMstId,accHeadIdVal) {
 //********************************Query BE COde Added****************************************************//
 
 function queryAnwser(){
+    $('.modal-backdrop').remove();
     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var pageRefSuccess = defaultPagePath + 'success.html';
     var querBEId = j("#QueryBtn").data('id');
@@ -6321,11 +6322,13 @@ function queryAnwser(){
                    
                      successMessage = "Query Answered Successfully";
                      
-                     requestRunning = false;
+                    
                      resetImageData();
-                     j('#loading_Cat').hide();
-                     j('#mainHeader').load(headerBackBtn);
-                     j('#mainContainer').load(pageRefSuccess);
+                       j('#loading_Cat').hide();
+                        j('#mainHeader').load(headerBackBtn);
+                         j('#mainContainer').load(pageRefSuccess);
+                          requestRunning = false;
+
                 } else {
                      j('#loading_Cat').hide();
                     successMessage = "Error: Oops something is wrong, Please Contact System Administer";
@@ -6440,9 +6443,6 @@ function queryAnwser(){
                                  var queryId =  headArray.queryId;
                                  var queryAns =  headArray.queryAns;
                                  var workflowToBeFollowed = headArray.workflowToBeFollowed;
-
-                                 console.log(workflowToBeFollowed);
-
 
                                  t.executeSql("INSERT INTO TravelHeader (headerId ,voucherNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments, iternaryType, toLocation, fromLocation, travelType, query, queryId, queryAns, workflowToBeFollowed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [headerId, voucherNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments , iternaryType, toLocation, fromLocation, travelType, query ,queryId, queryAns, workflowToBeFollowed]);
 
@@ -7451,6 +7451,7 @@ function fetchViewForTravelApproveVouchersHeader() {
 //********************************Query TR Answer COde Added****************************************************//
 
 function queryTrAnwser(){
+    $('.modal-backdrop').remove();
     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var pageRefSuccess = defaultPagePath + 'success.html';
     var querTRId = j("#QueryTrBtn").data('id');
@@ -7526,6 +7527,7 @@ function queryTrAnwser(){
 //********************************Query TS Answer COde Added****************************************************//
 
 function queryTsAnwser(){
+    $('.modal-backdrop').remove();
     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
     var pageRefSuccess = defaultPagePath + 'success.html';
     var querTSId = j("#QueryTsBtn").data('id');
@@ -7751,7 +7753,7 @@ function fetchException(headerId,processId){
 
                     $( "#exceptionMsg" ).toggle();
 
-                    var buttonValue = "<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 100%;'>"+entitlementExceeded+"</div>"
+                    var buttonValue = "<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 100%;'><h5>"+entitlementExceeded+"</h5></div>"
 
                     j('#exceptionMsg').append(buttonValue);
                    

@@ -178,9 +178,15 @@
         "Log Out":"लॉग आउट",
 
         "TR":"टी.आर.",
-        "CityTown":"सिटी टाउन"
-
-
+        "CityTown":"सिटी टाउन",
+        "My Queries":"मेरे प्रश्न",
+        "Advance Required":"एडवांस जरूरी है",
+        "Advance Required?":"एडवांस जरूरी है?",
+        "Advance Amount":"अग्रिम राशि",
+        "Travel Instruction":"यात्रा निर्देश",
+        "Total Amount":"कुल रकम",
+        "Refund Amount":"वापसी राशि",
+        "Recovery Amount":"रिकवरी राशि"
         },
 
 
@@ -204,7 +210,6 @@
 		["Amount cannot be greater than 99999999.99","राशि 99999999.99 से अधिक नहीं हो सकती"],
 		["Add Advance Request","एडवांस अनुरोध जोड़ें"],
 		["Send for Approval","स्वीकृति के लिए भेजें"],
-		["Business Expense","व्यापार व्यय"],
 		["Travel Management","यात्रा प्रबंधन"],
 		["My Receipts Wallet","मेरी रसीद वॉलेट"],
 		["Expenses synchronized successfully.","खर्च को सफलतापूर्वक सिंक्रनाइज़ किया गया"],
@@ -215,5 +220,5 @@
         ["Ticket Instruction","टिकट निर्देश"],
         ["Push to Web","वेब पर पुश करें"],
         ["Please sync your pending expenses before you exit or they will be lost","कृपया बाहर निकलने से पहले अपने लंबित खर्चों को सिंक करें या वे खो जाएंगे"]
-	]
+        ]
 }
