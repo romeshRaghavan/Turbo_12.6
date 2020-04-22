@@ -161,11 +161,11 @@
     <div class="sap_tabs">
             <div id="horizontalTab" style="display: block;">
                 <ul id="tab" class="resp-tabs-list" style="display: flex;">
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-0" role="tab" ><span style="font-size: 14px;">Business Expense</span>
+                    <li class="resp-tab-item " style="width:100%;" aria-controls="tab_item-0" role="tab" ><span lang="en" style="font-size: 14px;">Business Expense</span>
                         <div style="display: inline-flex; margin-top: 5px; margin-bottom: -5px;">(<span style="font-size: 14px;" id="queryCount"></span>)</div></li>
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-1" id="trQueryTab" role="tab" onclick="syncTravelVoucherHeader('Q');"><span style="font-size: 14px;">Travel Request</span>
+                    <li class="resp-tab-item " style="width:100%;" aria-controls="tab_item-1" id="trQueryTab" role="tab" onclick="syncTravelVoucherHeader('Q');"><span lang="en" style="font-size: 14px;">Travel Request</span>
                         <div style="display: inline-flex; margin-top: 5px; margin-bottom: -5px;">(<span style="font-size: 14px;" id="trQueryCount"></span>)</div></li>
-                    <li lang="en" class="resp-tab-item " style="width:100%;" aria-controls="tab_item-2" id="tsQueryTab" role="tab" onclick="syncSettelmentVoucherHeader('Q');"><span style="font-size: 14px;">Travel Settlement</span>
+                    <li class="resp-tab-item " style="width:100%;" aria-controls="tab_item-2" id="tsQueryTab" role="tab" onclick="syncSettelmentVoucherHeader('Q');"><span lang="en" style="font-size: 14px;">Travel Settlement</span>
                         <div style="display: inline-flex; margin-top: 5px; margin-bottom: -5px;">(<span style="font-size: 14px;" id="tsQueryCount"></span>)</div></li>
                 </ul>
 
@@ -224,8 +224,6 @@
 <script type="text/javascript">
       syncVoucherHeader(enableDivBasedOnStatus);
       hideTRQuery();
-      //syncTravelVoucherHeader(enableDivBasedOnStatus);
-      //syncSettelmentVoucherHeader(enableDivBasedOnStatus);
  </script>
 </div>
 </div>
