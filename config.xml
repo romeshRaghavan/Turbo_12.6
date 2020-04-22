@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-    <widget id="com.phonegap.tne.expenzingturbotnev12" version="12.3.3" android-versionCode="106" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <widget id="com.phonegap.tne.expenzingturbotnev12" version="12.5" android-versionCode="106" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
         <!--widget id="com.expenzing.expenzing" version="1.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0"-->
-        <name>Turbo 12.5</name>
+        <name>Demo App 12.5</name>
         <description>
             Expenzing Application
         </description>
