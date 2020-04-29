@@ -46,7 +46,7 @@ var toLocationWayPoint = "";
 var profileImg = "";
 var enableDivBasedOnStatus = ""; // For Past Voucher = 'V' and For my Approval = 'A'
 var updateAttachment = ""; // For BE Edit
-var MOBILE_APP_VERSION = "12.5";
+var MOBILE_APP_VERSION = "12.4";
 var MOBILE_APP_NAME = "Turbo Mobile App";
 
 j(document).ready(function() {
