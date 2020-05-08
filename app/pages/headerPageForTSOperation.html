@@ -38,3 +38,11 @@
     <button lang = "en" class="btn btn-primary btn-lg threebtn1 selectionSubmitTSBtns" id="deleteTS">
         <i class="fa fa-trash"></i> Delete</button>
 </div>
+
+<script type="text/javascript">
+      if (window.localStorage.getItem("APPLICATION_VERSION") == false || window.localStorage.getItem("versionNumber") < 12.4) {
+        document.getElementById('sendTS').style.display = 'none';
+         $("#synchTS").addClass("selectionSubmitTSBtnsWithoutSend");
+         $("#deleteTS").addClass("selectionSubmitTSBtnsWithoutSend");
+    }
+</script>
