@@ -2501,14 +2501,14 @@ function attachMapMyIndiaSearchBox(query, val) {
 function getPlaceData(tokenType, accessToken, queryValue, val) {
     //alert("tokenType,accessToken : "+tokenType + " " + accessToken);
     var authorization = tokenType + " " + accessToken;
-    var tempurl = "https://cors-escape.herokuapp.com/https://atlas.mapmyindia.com/api/places/search/json?query=" + queryValue + "&location=28.6321438802915%2C77.2173553802915";
+    var tempurl = "https://atlas.mapmyindia.com/api/places/search/json?query=" + queryValue + "&location=28.6321438802915%2C77.2173553802915";
     console.log("url :  " + tempurl);
     console.log("authorization : " + authorization);
 
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://cors-anywhere.herokuapp.com/https://atlas.mapmyindia.com/api/places/search/json?query=" + queryValue + "&location=28.6321438802915%2C77.2173553802915",
+        "url": "https://atlas.mapmyindia.com/api/places/search/json?query=" + queryValue + "&location=28.6321438802915%2C77.2173553802915",
         "method": "GET",
         "headers": {
             "authorization": authorization,
@@ -2603,27 +2603,23 @@ function calulateUnitFromLoction() {
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "https://apis.mapmyindia.com/advancedmaps/v1/bemzvgf9d3at3j7rt85bpvmwuhaumd59/distance?center=" + fromLat + "," + fromLong + "&pts=" + toLat + "," + toLong + "",
+                "url": "https://apis.mapmyindia.com/advancedmaps/v1/bemzvgf9d3at3j7rt85bpvmwuhaumd59/distance_matrix/driving/"+fromLong+","+fromLat+";"+toLong+","+toLat+"",
                 "method": "GET",
                 "headers": {
                     "cache-control": "no-cache"
                 }
             }
 
-            $.ajax(settings).done(function(response) {
-                wayPoint = document.getElementById("wayPointunitValue");
-                var data = {};
-                data.start = {
-                    'lat': fromLat + '$' + fromLong
-                }
-                data.end = {
-                    'lat': toLat + '$' + toLong
-                }
-                var str = JSON.stringify(data);
-                wayPoint.value = str;
+	$.ajax(settings).done(function (response) {
+		wayPoint = document.getElementById("wayPointunitValue");
+   var data = {};
+	     data.start = {'lat': fromLat+'$'+fromLong}
+	     data.end = {'lat': toLat+'$'+toLong}
+	     var str = JSON.stringify(data);
+	   	 wayPoint.value=str;
 
-                setUnitBasedOnResponse(response)
-            });
+  		setUnitBasedOnResponse(response)
+});
 
         } else {
             unitValue = document.getElementById("expUnit");
@@ -2635,16 +2631,17 @@ function calulateUnitFromLoction() {
     }
 }
 
-function setUnitBasedOnResponse(response) {
-    console.log(JSON.stringify(response));
+function setUnitBasedOnResponse(response){
+	console.log(JSON.stringify(response));
 
-    $.each(response.results, function(i, obj) {
-        var units = obj.length;
-        var unitKM = parseInt(units) / 1000;
-        unitValue = document.getElementById("expUnit");
-        unitValue.value = unitKM;
-    });
-    returnUnitResult();
+	 $.each(response.results.distances,function(i,obj){
+	var f_units = obj;
+    var units = Math.trunc(f_units[1])
+	var unitKM = parseInt(units)/1000;
+ 	unitValue = document.getElementById("expUnit");
+	unitValue.value = Math.round(unitKM);
+	 });
+	 returnUnitResult();
 }
 
 //************************************** MAPMYINDIA - END **********************************************//
