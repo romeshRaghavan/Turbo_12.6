@@ -4961,7 +4961,7 @@ setTimeout(function() {
 
                  } else if (data.Status == 'SUCCESS_NO_DATA') {
                      requestRunning = false;
-                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D' || statusOfVoucher == 'Q') {
+                     if (statusOfVoucher == 'F' || statusOfVoucher == 'R' || statusOfVoucher == 'P' || statusOfVoucher == 'U' || statusOfVoucher == 'D') {
                          displayPastVoucherPage(data.Status);
                      }  else if(statusOfVoucher == 'Q'){
                         displayQueryPage(data.Status);
