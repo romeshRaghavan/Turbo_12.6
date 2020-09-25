@@ -76,14 +76,14 @@
                      var lenTemp = result.length;
                      pg = result[lenTemp - 1];
                      appPageHistory.pop();
-                     j('#mainHeader').load(headerCatMsg);
+                     j('#mainHeader').load(headerBackBtn);
                      j('#mainContainer').load(pg);
                  }else if(pg == "app/pages/voucherDetails.html"){
                     var result = arrayRemove(appPageHistory, "app/pages/voucherDetails.html");
                      var lenTemp = result.length;
                      pg = result[lenTemp - 1];
                      appPageHistory.pop();
-                     j('#mainHeader').load(headerCatMsg);
+                     j('#mainHeader').load(headerBackBtn);
                      j('#mainContainer').load(pg);
                  }
                  if (!(pg == null)) {
@@ -5455,7 +5455,7 @@ setTimeout(function() {
                                             +"<div><br>"
                                             +"<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" 
                                             + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
-                                           +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                           +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucherWithAdv(" + busExpHeaderId +","+"2)'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -5465,7 +5465,7 @@ setTimeout(function() {
                              buttonValue =  
                                             "<div class='col-md-12' id = 'editButton' style='text-align: center;padding-bottom: 20px;'>" 
                                             + "<button type='submit' class='btn btn-primary' onclick='expPrimaryIdSB()'>Edit</button>&nbsp;" 
-                                         +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucher(" + busExpHeaderId + ")'>Send For Approval</button>&nbsp;" + "</div>";
+                                         +"<button type='submit' id = 'sendForApproveBtn' class='btn btn-primary' onclick='approveVoucherWithAdv(" + busExpHeaderId +","+"1)'>Send For Approval</button>&nbsp;" + "</div>";
 
                              j('#buttonsAttached').append(buttonValue);
                          }
@@ -7774,3 +7774,316 @@ function fetchException(headerId,processId){
 
     }
 }
+
+//------------------------------  Advance For Draft and SendBack -- Start ----------------------------------------//
+function approveVoucherWithAdv(busExpHeaderId,vocherStatus){
+
+    if (window.localStorage.getItem("EaInMobile") == "true" && window.localStorage.getItem("versionNumber") > 12.4) {
+     var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+     var pageRef = defaultPagePath + 'BEadvanceSettelmentPage.html';
+     j(document).ready(function() {
+         j('#mainHeader').load(headerBackBtn);
+        j('#mainContainer').load(pageRef, function() {
+         loadDateForAdvance(busExpHeaderId,vocherStatus);
+        });
+     });
+     appPageHistory.push(pageRef);
+     }else{
+        approveVoucher(busExpHeaderId);
+     }
+}
+
+
+function loadDateForAdvance(busExpHeaderId,vocherStatus){
+     var jsonSentToSync = new Object();
+     jsonSentToSync["employeeId"] = window.localStorage.getItem("EmployeeId");
+     jsonSentToSync["processId"] = "1";
+     if(vocherStatus == 1){
+        jsonSentToSync["vocherStatus"] = 'D';
+    }else{
+        jsonSentToSync["vocherStatus"] = 'R';
+    }
+     
+     jsonSentToSync["versionNumber"] = window.localStorage.getItem("versionNumber");
+
+     if (mydb) {
+         j.ajax({
+             url: window.localStorage.getItem("urlPath") + "SyncVoucherHeaders",
+             type: 'POST',
+             dataType: 'json',
+             crossDomain: true,
+             data: JSON.stringify(jsonSentToSync),
+             success: function(data) {
+
+                 if (data.Status == 'Success') {
+                     
+                     var claimExpArray = data.expenseDetails;
+
+                     mydb.transaction(function(t) {
+                         if (claimExpArray != null && claimExpArray.length > 0) {
+                             for (var i = 0; i < claimExpArray.length; i++) {
+                                 var headArray = new Array();
+                                 headArray = claimExpArray[i];
+
+                                 if(busExpHeaderId == headArray.busExpHeaderId)
+                                 {
+                                 var voucherNumber = headArray.voucherNumber;
+                                 var editorTotalAmt = headArray.editorTotalAmtcurrencyName;
+                                 var empAdvArray = headArray.EmpAdvArray;
+
+                                 document.getElementById("totalAmount").value = editorTotalAmt;
+                                 document.getElementById("busExpHeaderId").value = busExpHeaderId;
+
+                                if (empAdvArray != null && empAdvArray.length > 0) {
+                                    var advAmount = 0;
+                                for (var i = 0; i < empAdvArray.length; i++) {
+                                     var advArray = new Array();
+                                     advArray = empAdvArray[i];
+                                     advAmount = parseFloat(advAmount) + parseFloat(advArray.Amount);
+                                     
+                                    }
+
+                                    if(editorTotalAmt < advAmount){
+                                         document.getElementById("recoverFromEmp").value = parseFloat(advAmount) - parseFloat(editorTotalAmt);
+                                     }else{
+                                         document.getElementById("refundToEmp").value = parseFloat(editorTotalAmt) - parseFloat(advAmount);
+
+                                     }
+
+                                    document.getElementById("isAdvAvailable").value = 'Y';
+                                     document.getElementById("availableAdvAmount").value = advArray.Amount;
+                                     document.getElementById("unsetAdvAmount").value = advArray.Amount;
+
+                                }else{
+                                      document.getElementById("isAdvAvailable").value = 'N';
+                                     document.getElementById("availableAdvAmount").value = 0;
+                                    document.getElementById("unsetAdvAmount").value = 0;
+                                }
+                                 
+                                 }
+                                 
+                             }
+                         }
+                         requestRunning = false;
+
+                     });
+
+                 }
+
+             },
+             error: function(data) {
+                 requestRunning = false;
+             }
+         });
+     }
+ }
+
+ function hideEmployeeAdvanceSB() {
+    if (window.localStorage.getItem("EaInMobile") == "true") {
+        setEmpAdvForSB();
+        document.getElementById('helpimage').style.display = "";
+    }
+}
+
+
+function setEmpAdvForSB(){
+
+    mainTable = j('<table></table>').attr({
+         id: "abc",
+         class: ["table", "table-striped", "table-bordered"].join(' ')
+     });
+     table1 = j('<table></table>').attr({
+         class: ["table", "table1", "table-striped", "table-bordered"].join(' ')
+     }).appendTo(mainTable);
+     var rowThead = j("<thead></thead>").appendTo(table1);
+     var rowTh = j('<tr></tr>').attr({
+         class: ["test"].join(' ')
+     }).appendTo(rowThead);
+
+     j('<th lang=\'en\' ></th>').text("Voucher No.").appendTo(rowTh);
+     //j('<th></th>').text("Title").appendTo(rowTh);
+     j('<th lang=\'en\' ></th>').text("Amount").appendTo(rowTh);
+
+     table2 = j('<table></table>').attr({
+         id: "source1",
+         class: ["table", "table-striped", "table-bordered"].join(' ')
+     }).appendTo(mainTable);
+     var rowThead1 = j("<thead></thead>").appendTo(table2);
+
+     mydb.transaction(function(t) {
+         var headerOprationBtn;
+         t.executeSql('SELECT * FROM employeeAdvanceDetails;', [],
+             function(transaction, result) {
+                 if (result != null && result.rows != null) {
+
+                     for (var i = 0; i < result.rows.length; i++) {
+
+                         var row = result.rows.item(i);
+
+                         var rowss = j('<tr></tr>').attr({
+                             class: ["test"].join(' ')
+                         }).appendTo(rowThead1);
+
+                         j('<td></td>').attr({
+                             class: ["empAdvID", "displayNone"].join(' ')
+                         }).text(row.empAdvID).appendTo(rowss);
+                         j('<td></td>').attr({
+                             class: ["emplAdvVoucherNo"].join(' ')
+                         }).text(row.emplAdvVoucherNo).appendTo(rowss);
+                         j('<td></td>').attr({
+                             class: ["empAdvTitle", "displayNone"].join(' ')
+                         }).text(row.empAdvTitle).appendTo(rowss);
+                         j('<td></td>').attr({
+                             class: ["Amount"].join(' ')
+                         }).text(row.Amount).appendTo(rowss);
+                     }
+                     $("#header tr").click(function() {
+                         $("tr").attr('onclick', '');
+                     });
+
+                     j("#source1 tr").click(function() {
+                         if (j(this).hasClass("selected")) {
+                             j(this).removeClass('selected');
+                             populateEAAmountSB();
+                             calculateAmount();
+                         } else {
+                             j(this).addClass('selected');
+                             populateEAAmountSB();
+                             calculateAmount();
+                         }
+                     });
+                 }
+             });
+     });
+     mainTable.appendTo("#box1");
+ }
+
+ function populateEAAmountSB() {
+    var EAAmount = document.getElementById("availableAdvAmount").value;
+    var advanceAvailable = document.getElementById("availableAdvAmount").value;
+    if (j("#source1 tr.selected").hasClass("selected")) {
+        j("#source1 tr.selected").each(function(index, row) {
+            var Amount = j(this).find('td.Amount').text();
+            //get Amount 
+            EAAmount = parseFloat(EAAmount) + parseFloat(Amount);
+        });
+
+        if (EAAmount != "") {
+            document.getElementById("unsetAdvAmount").value = EAAmount;
+        }
+    } else {
+        alert("advanceAvailable " +advanceAvailable);
+        if(advanceAvailable != ""){
+            document.getElementById("unsetAdvAmount").value = parseFloat(advanceAvailable) ;
+        }else{
+             document.getElementById("unsetAdvAmount").value = "";
+        }
+    }
+}
+
+function submitBEWithAdvance() {
+    var jsonToSaveBE = new Object();
+    var jsonEmplAdvanceArr = [];
+    var emplAdvanceDetailsArr = [];
+    var totalAmount = 0;
+    var unsetAdvAmount = 0;
+    var refundToEmp = 0;
+    var recoverFromEmp = 0;
+
+           if (j("#source1 tr.selected").hasClass("selected")) {
+            j("#source1 tr.selected").each(function(index, row) {
+                var jsonFindEA = new Object();
+                jsonFindEA["empAdvID"] = j(this).find('td.empAdvID').text();
+                jsonFindEA["emplAdvVoucherNo"] = j(this).find('td.emplAdvVoucherNo').text();
+                jsonFindEA["empAdvTitle"] = j(this).find('td.empAdvTitle').text();
+                jsonFindEA["Amount"] = j(this).find('td.Amount').text();
+                emplAdvanceDetailsArr.push(j(this).find('td.empAdvID').text());
+                jsonEmplAdvanceArr.push(jsonFindEA);
+            });
+
+        }
+
+    totalAmount = document.getElementById("totalAmount").value;
+    unsetAdvAmount = document.getElementById("unsetAdvAmount").value;
+    refundToEmp = document.getElementById("refundToEmp").value;
+    recoverFromEmp = document.getElementById("recoverFromEmp").value;
+
+    var busExpHeaderId = document.getElementById("busExpHeaderId").value;
+
+    jsonToSaveBE["employeeId"] = window.localStorage.getItem("EmployeeId");
+    jsonToSaveBE["expenseDetails"] = jsonBEArr;
+    jsonToSaveBE["totalAmount"] = totalAmount;
+    jsonToSaveBE["unsetAdvAmount"] = unsetAdvAmount;
+    jsonToSaveBE["refundToEmp"] = refundToEmp;
+    jsonToSaveBE["recoverFromEmp"] = recoverFromEmp;
+    jsonToSaveBE["employeeAdvDeatils"] = jsonEmplAdvanceArr;
+
+
+        if (jsonToSaveBE != "") {
+                approveVoucherAdvSB(busExpHeaderId,jsonToSaveBE)
+        }
+    }
+
+    function approveVoucherAdvSB(busExpHeaderId,jsonToBeSendForApproval){
+
+    var headerBackBtn = defaultPagePath + 'backbtnPage.html';
+    var pageRefSuccess = 'app/pages/success.html';
+
+    jsonToBeSendForApproval["processId"] = '1';
+    jsonToBeSendForApproval["headerList"] = busExpHeaderId;
+    jsonToBeSendForApproval["employeeId"] = window.localStorage.getItem("EmployeeId");
+    jsonToBeSendForApproval["buttonStatus"] = "A";
+    jsonToBeSendForApproval["rejectionComment"] = "";
+    jsonToBeSendForApproval["versionNumber"] = window.localStorage.getItem("versionNumber");
+
+    j('#loading_Cat').show();
+
+    j.ajax({
+        url: window.localStorage.getItem("urlPath") + "MobileApproveRejectService",
+         type: 'POST',
+         dataType: 'json',
+         crossDomain: true,
+         data: JSON.stringify(jsonToBeSendForApproval),
+         success: function(data) {
+
+             if (data.Status == "Success") {
+                j('#loading_Cat').hide();
+                var claimExpArray = data.expenseDetails;
+
+                    mydb.transaction(function(t) {
+                        if (claimExpArray != null && claimExpArray.length > 0) {
+                            for (var i = 0; i < claimExpArray.length; i++) {
+                                var headArray = new Array();
+                                headArray = claimExpArray[i];
+
+                                var approvalMsg = headArray.message;
+                                successMessage = approvalMsg;
+
+                            }
+                        }
+
+                        if(successMessage != null && successMessage != ""){
+                            j('#loading_Cat').hide();
+                            j('#mainHeader').load(headerBackBtn);
+                            j('#mainContainer').load(pageRefSuccess);
+                        }
+                        console.log("appPageHistory : "+appPageHistory);
+                        requestRunning = false;             
+                    });
+
+             } else {
+                 j('#loading_Cat').hide();
+                 successMessage = "Error: Oops something is wrong, Please Contact System Administer";
+                 requestRunning = false;
+             }
+         },
+         error: function(data) {
+            j('#loading_Cat').hide();
+            successMessage = "Error: Oops something is wrong, Please Contact System Administer";
+            requestRunning = false;
+         }
+     });
+
+ }
+
+//------------------------------  Advance For Draft and SendBack -- End ----------------------------------------//
