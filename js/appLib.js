@@ -7816,58 +7816,60 @@ function loadDateForAdvance(busExpHeaderId,vocherStatus){
              success: function(data) {
 
                  if (data.Status == 'Success') {
-                     
+                     requestRunning = false;
                      var claimExpArray = data.expenseDetails;
+                     var empAdvArray = new Array();
 
-                     mydb.transaction(function(t) {
-                         if (claimExpArray != null && claimExpArray.length > 0) {
+                     if (claimExpArray != null && claimExpArray.length > 0) {
                              for (var i = 0; i < claimExpArray.length; i++) {
-                                 var headArray = new Array();
+                                var headArray = new Array();
                                  headArray = claimExpArray[i];
 
-                                 if(busExpHeaderId == headArray.busExpHeaderId)
+                                  if(busExpHeaderId == headArray.busExpHeaderId)
                                  {
-                                 var voucherNumber = headArray.voucherNumber;
-                                 var editorTotalAmt = headArray.editorTotalAmtcurrencyName;
-                                 var empAdvArray = headArray.EmpAdvArray;
-
-                                 document.getElementById("totalAmount").value = editorTotalAmt;
-                                 document.getElementById("busExpHeaderId").value = busExpHeaderId;
-
-                                if (empAdvArray != null && empAdvArray.length > 0) {
-                                    var advAmount = 0;
-                                for (var i = 0; i < empAdvArray.length; i++) {
-                                     var advArray = new Array();
-                                     advArray = empAdvArray[i];
-                                     advAmount = parseFloat(advAmount) + parseFloat(advArray.Amount);
+                                     var voucherNumber = headArray.voucherNumber;
+                                     var editorTotalAmt = headArray.editorTotalAmtcurrencyName;
                                      
-                                    }
 
-                                    if(editorTotalAmt < advAmount){
-                                         document.getElementById("recoverFromEmp").value = parseFloat(advAmount) - parseFloat(editorTotalAmt);
-                                     }else{
-                                         document.getElementById("refundToEmp").value = parseFloat(editorTotalAmt) - parseFloat(advAmount);
+                                     document.getElementById("totalAmount").value = editorTotalAmt;
+                                     document.getElementById("busExpHeaderId").value = busExpHeaderId;
 
-                                     }
+                                      empAdvArray = headArray.EmpAdvArray;
+
+                                 }
+
+                             }
+
+                             // here
+                             var advAmount = 0;
+                             if (empAdvArray != null && empAdvArray.length > 0) {
+                                       
+
+                                         for (var i = 0; i < empAdvArray.length; i++) {
+                                           
+                                             var advArray = new Array();
+                                             advArray = empAdvArray[i];
+
+                                             advAmount = parseFloat(advAmount) + parseFloat(advArray.Amount);
+                                         }
+
+                                          if(editorTotalAmt < advAmount){
+                                            document.getElementById("recoverFromEmp").value = parseFloat(advAmount) - parseFloat(editorTotalAmt);
+                                         }else{
+                                             document.getElementById("refundToEmp").value = parseFloat(editorTotalAmt) - parseFloat(advAmount);
+
+                                         }
 
                                     document.getElementById("isAdvAvailable").value = 'Y';
-                                     document.getElementById("availableAdvAmount").value = advArray.Amount;
-                                     document.getElementById("unsetAdvAmount").value = advArray.Amount;
+                                     document.getElementById("availableAdvAmount").value = advAmount;
+                                     document.getElementById("unsetAdvAmount").value = advAmount;
 
-                                }else{
-                                      document.getElementById("isAdvAvailable").value = 'N';
-                                     document.getElementById("availableAdvAmount").value = 0;
-                                    document.getElementById("unsetAdvAmount").value = 0;
-                                }
-                                 
-                                 }
-                                 
-                             }
+                                     }else{
+                                         document.getElementById("isAdvAvailable").value = 'N';
+                                         document.getElementById("availableAdvAmount").value = 0;
+                                         document.getElementById("unsetAdvAmount").value = 0;
+                                     }
                          }
-                         requestRunning = false;
-
-                     });
-
                  }
 
              },
@@ -7972,7 +7974,6 @@ function setEmpAdvForSB(){
             document.getElementById("unsetAdvAmount").value = EAAmount;
         }
     } else {
-        alert("advanceAvailable " +advanceAvailable);
         if(advanceAvailable != ""){
             document.getElementById("unsetAdvAmount").value = parseFloat(advanceAvailable) ;
         }else{
